@@ -3,6 +3,32 @@
   
     
     <entry>
+      <title><![CDATA[cs231n学习笔记]]></title>
+      <url>/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      <content type="html"><![CDATA[<p>把cs231n 2017年的课程重新刷一遍，记录相关的笔记</p>
+<a id="more"></a>
+]]></content>
+      
+        <categories>
+            
+            <category> 深度学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> 公开课 </tag>
+            
+            <tag> 计算机视觉 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Daily Reading]]></title>
       <url>/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Daily-Reading/</url>
       <content type="html"><![CDATA[<p>记录一下每天看到的最新研究进展</p>
@@ -85,6 +111,13 @@
 4. 在线深度学习：在数据流中实时学习深度神经网络(机器之心)
 </code></pre><hr>
 <p>2017-12-31</p>
+<hr>
+<p>2018-02-10</p>
+<pre><code>1. *ICCV2017: 基于检测和跟踪的视频中人体姿态估计(专知)
+    和周晓巍那里的课题不知道能不能结合起来
+2. **如何与深度学习服务器优雅的交互(夕小瑶)
+    服务器相关操作，寒假好好学学
+</code></pre><hr>
 ]]></content>
       
         <categories>
