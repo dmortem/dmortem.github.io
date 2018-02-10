@@ -1,38 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[Daily Reading]]></title>
-    <url>%2F2018%2F02%2F10%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2FDaily-Reading%2F</url>
-    <content type="text"><![CDATA[记录一下每天看到的最新研究进展 2017-12-26 1. 十大机器学习Python库(机器之心) 大部分都没见过，可以看看 2017-12-27 1. 如何在NLP领域干成第一件事(AI科技评论) 找开源项目并重现，争取进一步改善； 找如ACL会议论文集，找感兴趣的方向8，了解该方向的方法/数据/团队； 2. *Python相关文章(AI科技评论) 静态代码检查工具Flake； 视频合成器； 从零开始用遗传算法和深度学习演化有机体的生长过程； 破解验证码； Chutes&amp;Ladders游戏模拟； 创建Chatbot； 图像散列； 介绍BP； Memorization技术，加速Python； 分享Python学习技巧 3. Attention模型(机器学习算法与自然语言处理) 各种Attention机制的综述 4. *神经进化策略(机器之心) 可能未来使用神经进化策略替代反向传播，可以了解一下 2017-12-28 1. *CS中的线代(机器之心) 一篇普渡的论文，45页 2. **2018AI研究趋势(机器之心) 汇总资源：开放资源(介绍了DeepMind/OpenAI等的博客，着重推荐Distill)； 机器翻译； 理解视频(预测下一帧等+数据集介绍)； 多任务/多模式学习； 强化学习(游戏Dota/星际争霸)； 解释人工智能(可视化/InterpretNet)； 保护人工智能被对抗样本愚弄； 超越梯度(合成梯度/进化策略/SGD改进/学习优化/不同空间的优化)； 3D和图形的几何深度学习 3. FoolNLTK：一个便捷的中文处理工具(机器之心) 基于BiLSTM的开源中文分词模型 4. NIPS 2017的收获与思考(AI科技评论) 3篇Best paper：博弈论相关，打败德州扑克顶级玩家；随机优化风险最小化问题；提出全新的拟合优度算法。都好高端，不知道讲的是什么 这篇文章作者主要关注了强化学习； *还介绍了4篇MSRA的paper：*有一篇关于机器翻译的论文可能可以用在LipNet项目中？ 5. 如何理解hekaiming的Focal Loss(PaperWeekly) 解决分类问题中类别不平衡、分类难度差异的一个loss 6. **草根学Python(机器学习研究会) 寒假和笨方法学Python一起看 2017-12-29 1. 2017最火的五篇深度学习论文(专知) CycleGAN-图像迁移； Wasserstein GAN-提出更好的用于训练GAN的目标函数； simGAN-产生模拟数据，使用未标记的真实数据来改进模拟数据(无监督的) AlphaGo zero-无人类知识先验的情况下学会下围棋 深度图像先验-理解神经网络模型中先验的作用(没搞懂) 2. **机器学习、NLP、Python和Math最好的150余个教程(AI科技大本营) 资源汇总 2017-12-30 1. *ICCV2017: 基于检测和跟踪的视频中人体姿态估计(专知) 和周晓巍那里的课题不知道能不能结合起来 2. **如何与深度学习服务器优雅的交互(夕小瑶) 服务器相关操作，寒假好好学学 3. 机器之心年度盘点：2017年人工智能领域备受关注的科研成果(机器之心) AlphaGo-无须人类知识标注，自我对抗 德州扑克击败人类-深度学习/纳什均衡的博弈求解 自归一化-比BN更好的归一化 GAN和各种变体 深度神经网络碰上语音合成-WaveNet 大批量数据并行训练ImageNet-分布式同步SGD训练(将ResNet-50在ImageNet上的训练时间缩短到48分钟) Capsule-抛弃反向传播 递归皮质网络-新型概率生成模型，旨在超越神经网络 从TPU到NPU-NPU是华为麒麟970手机端的芯片 3. 机器学习非凸优化技术(机器之心) 4. 在线深度学习：在数据流中实时学习深度神经网络(机器之心) 2017-12-31]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>论文阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Pytorch学习]]></title>
-    <url>%2F2018%2F02%2F10%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2FPytorch%E5%AD%A6%E4%B9%A0%2F</url>
-    <content type="text"><![CDATA[记录一下Pytorch学习过程以及踩过的一些坑]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>Pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Welcome to my blog]]></title>
-    <url>%2F2018%2F02%2F09%2F%E9%9A%8F%E7%AC%94%2FWelcome-to-my-blog%2F</url>
-    <content type="text"><![CDATA[一直想搞个博客，但是一直懒得搞，拖延癌晚期/(ㄒoㄒ)/~~。。之前搞过一个jekyll的，这次想了想还是换hexo了 搭建细节主要参考了http://blog.csdn.net/gdutxiaoxu/article/details/53576018 大致流程如下： 安装node.js 本地安装Hexo 配置Hexo 把Hexo和Github Page联系 随后就是换主题、搞一下私人定制的事情啦，接下来几天慢慢看看官方文档，把这个博客做的好看一点o(￣▽￣)ブ 2018-02-10 update新添站内搜索功能、生成站点地图功能，参考https://www.ezlippi.com/blog/2017/02/hexo-search.html**删除安装的插件直接npm unistall 插件名即可 待添加：评论功能(next继承来必力)；http://blog.csdn.net/qq_33699981/article/details/72716951To be continued…]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Daily Reading]]></title>
+      <url>/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Daily-Reading/</url>
+      <content type="html"><![CDATA[<p>记录一下每天看到的最新研究进展</p>
+<a id="more"></a>
+<hr>
+<p>2017-12-26</p>
+<pre><code>1. 十大机器学习Python库(机器之心)
+    大部分都没见过，可以看看
+</code></pre><hr>
+<p>2017-12-27</p>
+<pre><code>1. 如何在NLP领域干成第一件事(AI科技评论)
+    找开源项目并重现，争取进一步改善；
+    找如ACL会议论文集，找感兴趣的方向8，了解该方向的方法/数据/团队；
+2. *Python相关文章(AI科技评论)
+    静态代码检查工具Flake；
+    视频合成器；
+    从零开始用遗传算法和深度学习演化有机体的生长过程；
+    破解验证码；
+    Chutes&amp;Ladders游戏模拟；
+    创建Chatbot；
+    图像散列；
+    介绍BP；
+    Memorization技术，加速Python；
+    分享Python学习技巧
+3. Attention模型(机器学习算法与自然语言处理)
+    各种Attention机制的综述 
+4. *神经进化策略(机器之心)
+    可能未来使用神经进化策略替代反向传播，可以了解一下
+</code></pre><hr>
+<p>2017-12-28</p>
+<pre><code>1. *CS中的线代(机器之心)
+    一篇普渡的论文，45页
+2. **2018AI研究趋势(机器之心)
+    汇总资源：开放资源(介绍了DeepMind/OpenAI等的博客，着重推荐Distill)；
+    机器翻译；
+    理解视频(预测下一帧等+数据集介绍)；
+    多任务/多模式学习；
+    强化学习(游戏Dota/星际争霸)；
+    解释人工智能(可视化/InterpretNet)；
+    保护人工智能被对抗样本愚弄；
+    超越梯度(合成梯度/进化策略/SGD改进/学习优化/不同空间的优化)；
+    3D和图形的几何深度学习
+3. FoolNLTK：一个便捷的中文处理工具(机器之心)
+    基于BiLSTM的开源中文分词模型
+4. NIPS 2017的收获与思考(AI科技评论)
+    3篇Best paper：博弈论相关，打败德州扑克顶级玩家；随机优化风险最小化问题；提出全新的拟合优度算法。都好高端，不知道讲的是什么
+    这篇文章作者主要关注了强化学习；
+    *还介绍了4篇MSRA的paper：*有一篇关于机器翻译的论文可能可以用在LipNet项目中？
+5. 如何理解hekaiming的Focal Loss(PaperWeekly)
+    解决分类问题中类别不平衡、分类难度差异的一个loss
+6. **草根学Python(机器学习研究会)
+    寒假和笨方法学Python一起看
+</code></pre><hr>
+<p>2017-12-29</p>
+<pre><code>1. 2017最火的五篇深度学习论文(专知)
+    CycleGAN-图像迁移；
+    Wasserstein GAN-提出更好的用于训练GAN的目标函数；
+    simGAN-产生模拟数据，使用未标记的真实数据来改进模拟数据(无监督的)
+    AlphaGo zero-无人类知识先验的情况下学会下围棋
+    深度图像先验-理解神经网络模型中先验的作用(没搞懂)
+2. **机器学习、NLP、Python和Math最好的150余个教程(AI科技大本营)
+    资源汇总
+</code></pre><hr>
+<p>2017-12-30</p>
+<pre><code>1. *ICCV2017: 基于检测和跟踪的视频中人体姿态估计(专知)
+    和周晓巍那里的课题不知道能不能结合起来
+2. **如何与深度学习服务器优雅的交互(夕小瑶)
+    服务器相关操作，寒假好好学学
+3. 机器之心年度盘点：2017年人工智能领域备受关注的科研成果(机器之心)
+    AlphaGo-无须人类知识标注，自我对抗
+    德州扑克击败人类-深度学习/纳什均衡的博弈求解
+    自归一化-比BN更好的归一化
+    GAN和各种变体
+    深度神经网络碰上语音合成-WaveNet
+    大批量数据并行训练ImageNet-分布式同步SGD训练(将ResNet-50在ImageNet上的训练时间缩短到48分钟)
+    Capsule-抛弃反向传播
+    递归皮质网络-新型概率生成模型，旨在超越神经网络
+    从TPU到NPU-NPU是华为麒麟970手机端的芯片
+3. 机器学习非凸优化技术(机器之心)
+4. 在线深度学习：在数据流中实时学习深度神经网络(机器之心)
+</code></pre><hr>
+<p>2017-12-31</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 深度学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> 论文阅读 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Pytorch学习]]></title>
+      <url>/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Pytorch%E5%AD%A6%E4%B9%A0/</url>
+      <content type="html"><![CDATA[<p>记录一下Pytorch学习过程以及踩过的一些坑</p>
+<a id="more"></a>]]></content>
+      
+        <categories>
+            
+            <category> 深度学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> Pytorch </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Welcome to my blog]]></title>
+      <url>/2018/02/09/%E9%9A%8F%E7%AC%94/Welcome-to-my-blog/</url>
+      <content type="html"><![CDATA[<p>一直想搞个博客，但是一直懒得搞，拖延癌晚期/(ㄒoㄒ)/~~。。之前搞过一个jekyll的，这次想了想还是换hexo了</p>
+<a id="more"></a>
+<h3 id="搭建细节"><a href="#搭建细节" class="headerlink" title="搭建细节"></a>搭建细节</h3><p>主要参考了<a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="noopener">http://blog.csdn.net/gdutxiaoxu/article/details/53576018</a></p>
+<p>大致流程如下：</p>
+<ul>
+<li>安装node.js</li>
+<li>本地安装Hexo</li>
+<li>配置Hexo</li>
+<li>把Hexo和Github Page联系</li>
+</ul>
+<p>随后就是换主题、搞一下私人定制的事情啦，接下来几天慢慢看看官方文档，把这个博客做的好看一点o(<em>￣▽￣</em>)ブ</p>
+<hr>
+<h3 id="2018-02-10-update"><a href="#2018-02-10-update" class="headerlink" title="2018-02-10 update"></a>2018-02-10 update</h3><p>新添站内搜索功能、生成站点地图功能，参考<a href="https://www.ezlippi.com/blog/2017/02/hexo-search.html" target="_blank" rel="noopener">https://www.ezlippi.com/blog/2017/02/hexo-search.html</a><br>**删除安装的插件直接npm unistall 插件名即可<br>根据官方文档通过修改_config.yml添加了一系列功能</p>
+<hr>
+<p>待添加：评论功能(next继承来必力)；<a href="http://blog.csdn.net/qq_33699981/article/details/72716951" target="_blank" rel="noopener">http://blog.csdn.net/qq_33699981/article/details/72716951</a><br>To be continued…</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 随笔 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
 </search>
