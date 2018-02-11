@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="深度学习,无监督学习,自编码器," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="dmortem.github.io/tags/index.html">
+<meta name="description" content="关于AE到VAE的介绍">
+<meta name="keywords" content="深度学习,无监督学习,自编码器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自编码器">
+<meta property="og:url" content="dmortem.github.io/2018/02/11/深度学习/自编码器/index.html">
 <meta property="og:site_name" content="Chiyu Wu">
+<meta property="og:description" content="关于AE到VAE的介绍">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-09T16:01:21.979Z">
+<meta property="og:updated_time" content="2018-02-10T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="自编码器">
+<meta name="twitter:description" content="关于AE到VAE的介绍">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="dmortem.github.io/tags/"/>
+  <link rel="canonical" href="dmortem.github.io/2018/02/11/深度学习/自编码器/"/>
 
 
 
 
 
-  <title>tags | Chiyu Wu</title>
+  <title>自编码器 | Chiyu Wu</title>
   
 
 
@@ -301,40 +305,189 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/11/深度学习/自编码器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chiyu Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/image.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chiyu Wu">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                8 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Pytorch/" style="font-size: 12px; color: #ccc">Pytorch</a> <a href="/tags/公开课/" style="font-size: 12px; color: #ccc">公开课</a> <a href="/tags/无监督学习/" style="font-size: 12px; color: #ccc">无监督学习</a> <a href="/tags/深度学习/" style="font-size: 30px; color: #111">深度学习</a> <a href="/tags/自编码器/" style="font-size: 12px; color: #ccc">自编码器</a> <a href="/tags/计算机视觉/" style="font-size: 12px; color: #ccc">计算机视觉</a> <a href="/tags/论文阅读/" style="font-size: 12px; color: #ccc">论文阅读</a> <a href="/tags/随笔/" style="font-size: 12px; color: #ccc">随笔</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">自编码器</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-11T22:07:58+08:00">
+                2018-02-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-11T00:00:00+08:00">
+                2018-02-11
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>关于AE到VAE的介绍</p>
+<a id="more"></a>
+<p>待看：论文、cs231nLet13中的VAE推导</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/无监督学习/" rel="tag"># 无监督学习</a>
+          
+            <a href="/tags/自编码器/" rel="tag"># 自编码器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/11/深度学习/cs231n学习笔记/" rel="next" title="cs231n学习笔记">
+                <i class="fa fa-chevron-left"></i> cs231n学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 

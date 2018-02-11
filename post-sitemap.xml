@@ -7,7 +7,7 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+        <loc>dmortem.github.io/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Daily-Reading/</loc>
         <lastmod>2018-02-10T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -15,7 +15,15 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Daily-Reading/</loc>
+        <loc>dmortem.github.io/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/</loc>
+        <lastmod>2018-02-10T16:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>dmortem.github.io/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2018-02-10T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
