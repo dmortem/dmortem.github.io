@@ -16,6 +16,13 @@
     </url>
 
     <url>
+        <loc>dmortem.github.io/tags/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/</loc>
+        <lastmod>2018-02-10T16:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>dmortem.github.io/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/</loc>
         <lastmod>2018-02-10T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -30,14 +37,14 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/</loc>
-        <lastmod>2018-02-10T16:00:00.000Z</lastmod>
+        <loc>dmortem.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2018-02-11T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+        <loc>dmortem.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
         <lastmod>2018-02-11T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -51,21 +58,14 @@
     </url>
 
     <url>
+        <loc>dmortem.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2018-02-11T16:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>dmortem.github.io/tags/%E8%81%9A%E7%B1%BB/</loc>
-        <lastmod>2018-02-11T16:00:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>dmortem.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2018-02-11T16:00:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>dmortem.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
         <lastmod>2018-02-11T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
