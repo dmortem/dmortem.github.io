@@ -3,6 +3,78 @@
   
     
     <entry>
+      <title><![CDATA[六大聚类算法]]></title>
+      <url>/2018/02/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%85%AD%E5%A4%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>介绍六类主流的聚类算法，并总结了相应的优缺点</p>
+<a id="more"></a>
+<p>原文来自机器之心 <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a></p>
+<ol>
+<li><strong>K-Means</strong></li>
+</ol>
+ <img src="/2018/02/12/深度学习/六大聚类算法/K-Means.png">
+<ul>
+<li>优点：速度快，O(N)</li>
+<li>缺点：类别数需要事先人为估计，无法通过算法来确定类别数；结果有可能不可重复</li>
+<li>变种：K-Medians，每次用中值向量而不是均值来作为中心。对异常值不敏感，对大数据集速度慢，因为需要做排序</li>
+</ul>
+<hr>
+<ol>
+<li><strong>均值漂移聚类</strong><ul>
+<li>算法：随机选择n个中心点，有n个半径为r的圆形滑动窗口，同时开始迭代。每次迭代时，滑动窗口的中心点都不断移向窗口内所有点的均值点，也就是<strong>移向点密度更大的区域</strong>，直到收敛(点密度无法再增加)。收敛时，若多个窗口发生重叠时，保留点数最多的那个窗口。这样就可以得到类别数以及每个类的中心位置。其他各个点属于哪一类则取决于迭代过程中该点在哪一类的窗口中的次数最多</li>
+</ul>
+</li>
+</ol>
+  <img src="/2018/02/12/深度学习/六大聚类算法/Meanshift.png">
+<ul>
+<li>优点：类别数量由算法自动获得；聚类中心朝最大点密度聚集的事实也是非常令人满意的</li>
+<li>缺点：窗口大小/半径「r」的选择可能是不重要的</li>
+</ul>
+<hr>
+<ol>
+<li><strong>基于密度的聚类方法（DBSCAN）</strong><ul>
+<li>算法：每次从一个未被访问过的数据点开始，若该点的邻域(ε 距离内的所有点都是邻域点)内点的数量大于参数minPoints，则该点为一个新类的第一个点，否则该点就是噪声点。若该点成为了一个新类的第一个点，则该点邻域内的所有点也成为了该类的一部分，同时以这些新点再去找它们邻域中的点并加到该类中来，直到收敛。收敛后，在未被访问过的点中再找一个重新开始之前的步骤</li>
+</ul>
+</li>
+</ol>
+  <img src="/2018/02/12/深度学习/六大聚类算法/DBSCAN.png">
+<ul>
+<li>优点：不需要人为确定类别数；能够辨别噪声；能很好地找到任意大小和任意形状的类</li>
+<li>缺点：当簇的密度不同时，它的表现不如其他聚类算法(因为密度不同，参数ε和minPoints的设置也需要不一样，难以估计)</li>
+</ul>
+<hr>
+<ol>
+<li><strong>用高斯混合模型（GMM）的最大期望（EM）聚类</strong><br>K-Means中假设数据点的分布是圆形的(其分类原理是离哪个中心点更近就认为是哪一类)，限制较大。GMM中假设数据点是高斯分布的，意味着类可以是各种类型的形状(二维中为椭圆，因为x和y方向各自有标准差)。于是，任务就变成了<strong>使用EM来找到每个类别的高斯函数</strong>。下图是典型的K-Means不适用的情况：</li>
+</ol>
+  <img src="/2018/02/12/深度学习/六大聚类算法/EM.png">
+<ul>
+<li>算法：和K-Means一样，先选择类别数量，并随机初始化高斯分布参数。随后计算每个数据点属于一个特定类的概率(一个点越靠近高斯的中心，它就越可能属于该类)。基于这些概率，计算一组新的高斯分布参数使得类内数据点的概率最大化。其中，新参数是由数据点位置的加权和得到，权重就是之前提到的概率。重复之前的操作直到收敛</li>
+</ul>
+  <img src="/2018/02/12/深度学习/六大聚类算法/EM2.png">
+<h2 id="优点：类形状任意-K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0-；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率"><a href="#优点：类形状任意-K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0-；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率" class="headerlink" title=" - 优点：类形状任意(K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0)；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率"></a> - 优点：类形状任意(K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0)；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率</h2><ol>
+<li><strong>凝聚层次聚类</strong><br>层次聚类分为自上而下和自下而上。对于自下而上，每个数据点都是单独的一个类，随后<strong>不断合并两个类</strong>，直到所有类最后都合并成一个包含所有数据点的类。自下而上层次聚类又被称为凝聚式层次聚类(HAC)。</li>
+</ol>
+  <img src="/2018/02/12/深度学习/六大聚类算法/HAC.png">]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 无监督学习 </tag>
+            
+            <tag> 聚类 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[自编码器]]></title>
       <url>/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/</url>
       <content type="html"><![CDATA[<p>关于AE到VAE的介绍</p>
@@ -179,11 +251,24 @@
 <hr>
 <p>2018-02-12</p>
 <ol>
-<li>机器学习的经典算法(机器学习算法与自然语言处理) <a href="https://mp.weixin.qq.com/s/CxSG9l_dxA4G-SZKOGI1ng" target="_blank" rel="noopener">链接</a> <blockquote>
-<p>回归算法：线性回归(数值问题，最小二乘法，使用梯度下降逼近求解函数极值问题) &amp; 逻辑回归(分类问题，结果中加一个Sigmoid函数)<br>用于拟合逻辑回归中非线性分类线的两种算法：神经网络(ANN) &amp; <strong>SVM*</strong>(和高斯“核”结合，表达复杂的分类界限。核最典型的特征就是可以将低维的空间映射到高维空间，低维空间的非线性分类线就相当于高维空间的线性分类线)<br>聚类算法：无监督的一种，K-Means<br>降维算法：无监督的一种，<strong>PCA*</strong><br>推荐算法：基于物品内容的推荐(将与用户购买的内容近似的物品推荐给用户) &amp; 基于用户相似度的推荐(将与目标用户兴趣相同的其他用户购买的东西推荐给目标用户)，<strong>协同过滤算法*</strong><br>其他：高斯判别、朴素贝叶斯、决策树</p>
+<li>机器学习的经典算法 <a href="https://mp.weixin.qq.com/s/CxSG9l_dxA4G-SZKOGI1ng" target="_blank" rel="noopener">链接</a> <blockquote>
+<p>回归算法：线性回归(数值问题，最小二乘法，使用梯度下降逼近求解函数极值问题) &amp; 逻辑回归(分类问题，结果中加一个Sigmoid函数)</p>
+<pre><code>用于拟合逻辑回归中非线性分类线的两种算法：神经网络(ANN) &amp; SVM*(和高斯“核”结合，表达复杂的分类界限。核最典型的特征就是可以将低维的空间映射到高维空间，低维空间的非线性分类线就相当于高维空间的线性分类线)
+</code></pre><p>聚类算法：无监督的一种，K-Means。<strong>见3</strong><br>降维算法：无监督的一种，<strong>PCA*</strong><br>推荐算法：基于物品内容的推荐（将与用户购买的内容近似的物品推荐给用户） &amp; 基于用户相似度的推荐（将与目标用户兴趣相同的其他用户购买的东西推荐给目标用户），<strong>协同过滤算法*</strong><br>其他：高斯判别、朴素贝叶斯、决策树</p>
 </blockquote>
 </li>
-<li>​</li>
+<li>​爬虫与反爬虫 <a href="https://mp.weixin.qq.com/s/tO0ArSJK4AFx5E49v7RBqw" target="_blank" rel="noopener">链接</a><blockquote>
+<p>有趣的爬虫与反爬虫工作介绍</p>
+</blockquote>
+</li>
+<li><strong>六大聚类算法*</strong> <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a><blockquote>
+<p>参看博文<a href="">六大聚类算法</a></p>
+</blockquote>
+</li>
+<li>最新云端&amp;单机GPU横评 <a href="https://mp.weixin.qq.com/s/gdDKw-nHdilpB3JfoLAuaA" target="_blank" rel="noopener">链接</a><blockquote>
+<p>Volta性能优于Nvidia 1080Ti（约1.1-1.3倍）和P100（约1.2-1.5倍）<br>成本上，Paperspace Volta性价比高。Google P100比Paperspace Volta贵10%，Amazon Volta比Paperspace Volta贵40%</p>
+</blockquote>
+</li>
 </ol>
 ]]></content>
       
@@ -243,6 +328,8 @@
 <p>随后就是换主题、搞一下私人定制的事情啦，接下来几天慢慢看看官方文档，把这个博客做的好看一点o(<em>￣▽￣</em>)ブ</p>
 <hr>
 <h3 id="2018-02-10-update"><a href="#2018-02-10-update" class="headerlink" title="2018-02-10 update"></a>2018-02-10 update</h3><p>新添站内搜索功能、生成站点地图功能，参考<a href="https://www.ezlippi.com/blog/2017/02/hexo-search.html" target="_blank" rel="noopener">https://www.ezlippi.com/blog/2017/02/hexo-search.html</a><br>**删除安装的插件直接npm unistall 插件名即可<br>根据官方文档通过修改_config.yml添加了一系列功能</p>
+<hr>
+<h3 id="2018-02-12-update"><a href="#2018-02-12-update" class="headerlink" title="2018-02-12 update"></a>2018-02-12 update</h3><p>在博文中添加图片，参考<a href="https://www.jianshu.com/p/cf0628478a4e" target="_blank" rel="noopener">链接</a><br>在博文中的写法：<br>Markdown中写注释，参考<a href="https://www.jianshu.com/p/9be87e7e15bf" target="_blank" rel="noopener">链接</a></p>
 <hr>
 <p>待添加：评论功能(next继承来必力)；<a href="http://blog.csdn.net/qq_33699981/article/details/72716951" target="_blank" rel="noopener">http://blog.csdn.net/qq_33699981/article/details/72716951</a><br>To be continued…</p>
 ]]></content>
