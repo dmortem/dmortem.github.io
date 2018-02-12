@@ -1,354 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[六大聚类算法]]></title>
-      <url>/2018/02/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%85%AD%E5%A4%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/</url>
-      <content type="html"><![CDATA[<p>介绍六类主流的聚类算法，并总结了相应的优缺点</p>
-<a id="more"></a>
-<p>原文来自机器之心 <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a></p>
-<ol>
-<li><strong>K-Means</strong></li>
-</ol>
- <img src="/2018/02/12/深度学习/六大聚类算法/K-Means.png">
-<ul>
-<li>优点：速度快，O(N)</li>
-<li>缺点：类别数需要事先人为估计，无法通过算法来确定类别数；结果有可能不可重复</li>
-<li>变种：K-Medians，每次用中值向量而不是均值来作为中心。对异常值不敏感，对大数据集速度慢，因为需要做排序</li>
-</ul>
-<hr>
-<ol>
-<li><strong>均值漂移聚类</strong><ul>
-<li>算法：随机选择n个中心点，有n个半径为r的圆形滑动窗口，同时开始迭代。每次迭代时，滑动窗口的中心点都不断移向窗口内所有点的均值点，也就是<strong>移向点密度更大的区域</strong>，直到收敛(点密度无法再增加)。收敛时，若多个窗口发生重叠时，保留点数最多的那个窗口。这样就可以得到类别数以及每个类的中心位置。其他各个点属于哪一类则取决于迭代过程中该点在哪一类的窗口中的次数最多</li>
-</ul>
-</li>
-</ol>
-  <img src="/2018/02/12/深度学习/六大聚类算法/Meanshift.png">
-<ul>
-<li>优点：类别数量由算法自动获得；聚类中心朝最大点密度聚集的事实也是非常令人满意的</li>
-<li>缺点：窗口大小/半径「r」的选择可能是不重要的</li>
-</ul>
-<hr>
-<ol>
-<li><strong>基于密度的聚类方法（DBSCAN）</strong><ul>
-<li>算法：每次从一个未被访问过的数据点开始，若该点的邻域(ε 距离内的所有点都是邻域点)内点的数量大于参数minPoints，则该点为一个新类的第一个点，否则该点就是噪声点。若该点成为了一个新类的第一个点，则该点邻域内的所有点也成为了该类的一部分，同时以这些新点再去找它们邻域中的点并加到该类中来，直到收敛。收敛后，在未被访问过的点中再找一个重新开始之前的步骤</li>
-</ul>
-</li>
-</ol>
-  <img src="/2018/02/12/深度学习/六大聚类算法/DBSCAN.png">
-<ul>
-<li>优点：不需要人为确定类别数；能够辨别噪声；能很好地找到任意大小和任意形状的类</li>
-<li>缺点：当簇的密度不同时，它的表现不如其他聚类算法(因为密度不同，参数ε和minPoints的设置也需要不一样，难以估计)</li>
-</ul>
-<hr>
-<ol>
-<li><strong>用高斯混合模型（GMM）的最大期望（EM）聚类</strong><br>K-Means中假设数据点的分布是圆形的(其分类原理是离哪个中心点更近就认为是哪一类)，限制较大。GMM中假设数据点是高斯分布的，意味着类可以是各种类型的形状(二维中为椭圆，因为x和y方向各自有标准差)。于是，任务就变成了<strong>使用EM来找到每个类别的高斯函数</strong>。下图是典型的K-Means不适用的情况：</li>
-</ol>
-  <img src="/2018/02/12/深度学习/六大聚类算法/EM.png">
-<ul>
-<li>算法：和K-Means一样，先选择类别数量，并随机初始化高斯分布参数。随后计算每个数据点属于一个特定类的概率(一个点越靠近高斯的中心，它就越可能属于该类)。基于这些概率，计算一组新的高斯分布参数使得类内数据点的概率最大化。其中，新参数是由数据点位置的加权和得到，权重就是之前提到的概率。重复之前的操作直到收敛</li>
-</ul>
-  <img src="/2018/02/12/深度学习/六大聚类算法/EM2.png">
-<h2 id="优点：类形状任意-K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0-；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率"><a href="#优点：类形状任意-K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0-；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率" class="headerlink" title=" - 优点：类形状任意(K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0)；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率"></a> - 优点：类形状任意(K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0)；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率</h2><ol>
-<li><strong>凝聚层次聚类</strong><br>层次聚类分为自上而下和自下而上。对于自下而上，每个数据点都是单独的一个类，随后<strong>不断合并两个类</strong>，直到所有类最后都合并成一个包含所有数据点的类。自下而上层次聚类又被称为凝聚式层次聚类(HAC)。</li>
-</ol>
-  <img src="/2018/02/12/深度学习/六大聚类算法/HAC.png">]]></content>
-      
-        <categories>
-            
-            <category> 机器学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 机器学习 </tag>
-            
-            <tag> 无监督学习 </tag>
-            
-            <tag> 聚类 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[自编码器]]></title>
-      <url>/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/</url>
-      <content type="html"><![CDATA[<p>关于AE到VAE的介绍</p>
-<a id="more"></a>
-<p>待看：论文、cs231nLet13中的VAE推导</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> 无监督学习 </tag>
-            
-            <tag> 自编码器 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[cs231n学习笔记]]></title>
-      <url>/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-      <content type="html"><![CDATA[<p>把cs231n 2017年的课程重新刷一遍，记录相关的笔记</p>
-<a id="more"></a>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> 公开课 </tag>
-            
-            <tag> 计算机视觉 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Daily Reading]]></title>
-      <url>/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Daily-Reading/</url>
-      <content type="html"><![CDATA[<p>记录一下每天看的公众号和知乎相关内容</p>
-<a id="more"></a>
-<hr>
-<p>2017-12-26</p>
-<ol>
-<li>十大机器学习Python库(机器之心)<blockquote>
-<p>大部分都没见过，可以看看</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<p>2017-12-27</p>
-<ol>
-<li>如何在NLP领域干成第一件事(AI科技评论)<blockquote>
-<p>找开源项目并重现，争取进一步改善；<br>找如ACL会议论文集，找感兴趣的方向8，了解该方向的方法/数据/团队；</p>
-</blockquote>
-</li>
-<li><strong>Python相关文章(AI科技评论)*</strong><blockquote>
-<p>静态代码检查工具Flake；<br>视频合成器；<br>从零开始用遗传算法和深度学习演化有机体的生长过程；<br>破解验证码；<br>Chutes&amp;Ladders游戏模拟；<br>创建Chatbot；<br>图像散列；<br>介绍BP；<br>Memorization技术，加速Python；<br>分享Python学习技巧</p>
-</blockquote>
-</li>
-<li>Attention模型(机器学习算法与自然语言处理)<blockquote>
-<p>各种Attention机制的综述 </p>
-</blockquote>
-</li>
-<li><strong>神经进化策略(机器之心)*</strong><blockquote>
-<p>可能未来使用神经进化策略替代反向传播，了解一下</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<p>2017-12-28</p>
-<ol>
-<li><strong>CS中的线代(机器之心)*</strong><blockquote>
-<p>一篇普渡的论文，45页</p>
-</blockquote>
-</li>
-<li><strong>2018AI研究趋势(机器之心)**</strong><blockquote>
-<p>汇总资源：开放资源(介绍了DeepMind/OpenAI等的博客，着重推荐Distill)；<br>机器翻译；<br>理解视频(预测下一帧等+数据集介绍)；<br>多任务/多模式学习；<br>强化学习(游戏Dota/星际争霸)；<br>解释人工智能(可视化/InterpretNet)；<br>保护人工智能被对抗样本愚弄；<br>超越梯度(合成梯度/进化策略/SGD改进/学习优化/不同空间的优化)；<br>3D和图形的几何深度学习</p>
-</blockquote>
-</li>
-<li>FoolNLTK：一个便捷的中文处理工具(机器之心)<blockquote>
-<p>基于BiLSTM的开源中文分词模型</p>
-</blockquote>
-</li>
-<li>NIPS 2017的收获与思考(AI科技评论)<blockquote>
-<p>3篇Best paper：博弈论相关，打败德州扑克顶级玩家；随机优化风险最小化问题；提出全新的拟合优度算法。都好高端，不知道讲的是什么<br>这篇文章作者主要关注了强化学习；<br> *还介绍了4篇MSRA的paper：有一篇关于机器翻译的论文可能可以用在LipNet项目中？</p>
-</blockquote>
-</li>
-<li>如何理解hekaiming的Focal Loss(PaperWeekly)<blockquote>
-<p>解决分类问题中类别不平衡、分类难度差异的一个loss</p>
-</blockquote>
-</li>
-<li><strong>草根学Python(机器学习研究会)**</strong><blockquote>
-<p>寒假和笨方法学Python一起看</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<p>2017-12-29</p>
-<ol>
-<li>2017最火的五篇深度学习论文(专知)<blockquote>
-<p>CycleGAN-图像迁移；<br>Wasserstein GAN-提出更好的用于训练GAN的目标函数；<br>simGAN-产生模拟数据，使用未标记的真实数据来改进模拟数据(无监督的)<br>AlphaGo zero-无人类知识先验的情况下学会下围棋<br>深度图像先验-理解神经网络模型中先验的作用(没搞懂)</p>
-</blockquote>
-</li>
-<li><strong>机器学习、NLP、Python和Math最好的150余个教程(AI科技大本营)**</strong><blockquote>
-<p>资源汇总</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<p>2017-12-30</p>
-<ol>
-<li><strong>ICCV2017: 基于检测和跟踪的视频中人体姿态估计(专知)*</strong><blockquote>
-<p>人体姿态估计相关</p>
-</blockquote>
-</li>
-<li><strong>如何与深度学习服务器优雅的交互(夕小瑶)**</strong><blockquote>
-<p>服务器相关操作</p>
-</blockquote>
-</li>
-<li>机器之心年度盘点：2017年人工智能领域备受关注的科研成果(机器之心)<blockquote>
-<p>AlphaGo-无须人类知识标注，自我对抗<br>德州扑克击败人类-深度学习/纳什均衡的博弈求解<br>自归一化-比BN更好的归一化<br>GAN和各种变体<br>深度神经网络碰上语音合成-WaveNet<br>大批量数据并行训练ImageNet-分布式同步SGD训练(将ResNet-50在ImageNet上的训练时间缩短到48分钟)<br>Capsule-抛弃反向传播<br>递归皮质网络-新型概率生成模型，旨在超越神经网络<br>从TPU到NPU-NPU是华为麒麟970手机端的芯片</p>
-</blockquote>
-</li>
-<li>机器学习非凸优化技术(机器之心)</li>
-<li>在线深度学习：在数据流中实时学习深度神经网络(机器之心)</li>
-</ol>
-<hr>
-<p>2017-12-31</p>
-<hr>
-<p>2018-02-10</p>
-<ol>
-<li>想要实现深度神经网络？一张 Excel 表格就够了(机器之心) <a href="https://mp.weixin.qq.com/s/Gdqo4XKkq6UG0aS4KF2MXg" target="_blank" rel="noopener">链接</a><blockquote>
-<p>有一个比较完整的CNN流程，关于CNN的一些理解：<a href="https://docs.google.com/spreadsheets/d/1SwfVctd4TjdN2S8BL09ktpQN_41sARYzD3NEHyr-8Z0/edit?usp=sharing" target="_blank" rel="noopener">链接</a>    </p>
-</blockquote>
-</li>
-<li><strong>Facebook提出DensePose数据集和网络架构：可实现实时的人体姿态估计(机器之心)*</strong> <a href="https://mp.weixin.qq.com/s/sFd9hrMrKDl5UJwlY6N7mw" target="_blank" rel="noopener">链接</a><blockquote>
-<p>人体姿态估计相关</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<p>2018-02-11</p>
-<ol>
-<li><strong>从语义上理解卷积核行为，UCLA朱松纯等人使用决策树量化解释CNN(机器之心)*</strong> <a href="https://mp.weixin.qq.com/s/t9ZHW8fkWtnvpM7ynJOTDw" target="_blank" rel="noopener">链接</a><blockquote>
-<p>解释CNN模型：借助决策树在语义层面上解释 CNN 做出的每一个特定预测，即哪个卷积核（或物体部位）被用于预测最终的类别，以及其在预测中贡献了多少。<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650735975&amp;idx=1&amp;sn=af91c24d8b0d058f35ac8b1ea65a0ea9&amp;chksm=871ac119b06d480f573675a7a60c6653fe8bcd09e2e5627b15ce1a2c704acecb8d857cde60fe&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">斯坦福也有类似的工作</a>。</p>
-</blockquote>
-</li>
-<li>李沐《动手学深度学习》课程视频汇总(机器之心) <a href="https://mp.weixin.qq.com/s/_6ewS7kzUC5TK71rjGOSAA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>使用Apache MXNet的最新前端Gluon作为开发工具。<a href="https://discuss.gluon.ai/t/topic/753" target="_blank" rel="noopener">视频链接</a>；<a href="http://zh.gluon.ai/" target="_blank" rel="noopener">中文文档</a></p>
-</blockquote>
-</li>
-<li>一文读懂什么是变分自编码器(专知) <a href="https://mp.weixin.qq.com/s/mtZ4_pwl8_GhitgImAU0VA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>AE到VAE</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<p>2018-02-12</p>
-<ol>
-<li>机器学习的经典算法 <a href="https://mp.weixin.qq.com/s/CxSG9l_dxA4G-SZKOGI1ng" target="_blank" rel="noopener">链接</a> <blockquote>
-<p>回归算法：线性回归(数值问题，最小二乘法，使用梯度下降逼近求解函数极值问题) &amp; 逻辑回归(分类问题，结果中加一个Sigmoid函数)</p>
-<pre><code>用于拟合逻辑回归中非线性分类线的两种算法：神经网络(ANN) &amp; SVM*(和高斯“核”结合，表达复杂的分类界限。核最典型的特征就是可以将低维的空间映射到高维空间，低维空间的非线性分类线就相当于高维空间的线性分类线)
-</code></pre><p>聚类算法：无监督的一种，K-Means。<strong>见3</strong><br>降维算法：无监督的一种，<strong>PCA*</strong><br>推荐算法：基于物品内容的推荐（将与用户购买的内容近似的物品推荐给用户） &amp; 基于用户相似度的推荐（将与目标用户兴趣相同的其他用户购买的东西推荐给目标用户），<strong>协同过滤算法*</strong><br>其他：高斯判别、朴素贝叶斯、决策树</p>
-</blockquote>
-</li>
-<li>​爬虫与反爬虫 <a href="https://mp.weixin.qq.com/s/tO0ArSJK4AFx5E49v7RBqw" target="_blank" rel="noopener">链接</a><blockquote>
-<p>有趣的爬虫与反爬虫工作介绍</p>
-</blockquote>
-</li>
-<li><strong>六大聚类算法*</strong> <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>参看博文<a href="">六大聚类算法</a></p>
-</blockquote>
-</li>
-<li>最新云端&amp;单机GPU横评 <a href="https://mp.weixin.qq.com/s/gdDKw-nHdilpB3JfoLAuaA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>Volta性能优于Nvidia 1080Ti（约1.1-1.3倍）和P100（约1.2-1.5倍）<br>成本上，Paperspace Volta性价比高。Google P100比Paperspace Volta贵10%，Amazon Volta比Paperspace Volta贵40%</p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> 论文阅读 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Pytorch学习]]></title>
-      <url>/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Pytorch%E5%AD%A6%E4%B9%A0/</url>
-      <content type="html"><![CDATA[<p>记录一下Pytorch学习过程以及踩过的一些坑</p>
-<a id="more"></a>]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> Pytorch </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Welcome to my blog]]></title>
-      <url>/2018/02/09/%E9%9A%8F%E7%AC%94/Welcome-to-my-blog/</url>
-      <content type="html"><![CDATA[<p>一直想搞个博客，但是一直懒得搞，拖延癌晚期/(ㄒoㄒ)/~~。。之前搞过一个jekyll的，这次想了想还是换hexo了</p>
-<a id="more"></a>
-<h3 id="搭建细节"><a href="#搭建细节" class="headerlink" title="搭建细节"></a>搭建细节</h3><p>主要参考了<a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="noopener">http://blog.csdn.net/gdutxiaoxu/article/details/53576018</a></p>
-<p>大致流程如下：</p>
-<ul>
-<li>安装node.js</li>
-<li>本地安装Hexo</li>
-<li>配置Hexo</li>
-<li>把Hexo和Github Page联系</li>
-</ul>
-<p>随后就是换主题、搞一下私人定制的事情啦，接下来几天慢慢看看官方文档，把这个博客做的好看一点o(<em>￣▽￣</em>)ブ</p>
-<hr>
-<h3 id="2018-02-10-update"><a href="#2018-02-10-update" class="headerlink" title="2018-02-10 update"></a>2018-02-10 update</h3><p>新添站内搜索功能、生成站点地图功能，参考<a href="https://www.ezlippi.com/blog/2017/02/hexo-search.html" target="_blank" rel="noopener">https://www.ezlippi.com/blog/2017/02/hexo-search.html</a><br>**删除安装的插件直接npm unistall 插件名即可<br>根据官方文档通过修改_config.yml添加了一系列功能</p>
-<hr>
-<h3 id="2018-02-12-update"><a href="#2018-02-12-update" class="headerlink" title="2018-02-12 update"></a>2018-02-12 update</h3><p>在博文中添加图片，参考<a href="https://www.jianshu.com/p/cf0628478a4e" target="_blank" rel="noopener">链接</a><br>在博文中的写法：<br>Markdown中写注释，参考<a href="https://www.jianshu.com/p/9be87e7e15bf" target="_blank" rel="noopener">链接</a></p>
-<hr>
-<p>待添加：评论功能(next继承来必力)；<a href="http://blog.csdn.net/qq_33699981/article/details/72716951" target="_blank" rel="noopener">http://blog.csdn.net/qq_33699981/article/details/72716951</a><br>To be continued…</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 随笔 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 随笔 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[六大聚类算法]]></title>
+    <url>%2F2018%2F02%2F12%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2F%E5%85%AD%E5%A4%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[介绍六类主流的聚类算法，并总结了相应的优缺点 原文来自机器之心 链接 K-Means 优点：速度快，O(N) 缺点：类别数需要事先人为估计，无法通过算法来确定类别数；结果有可能不可重复 变种：K-Medians，每次用中值向量而不是均值来作为中心。对异常值不敏感，对大数据集速度慢，因为需要做排序 均值漂移聚类 算法：随机选择n个中心点，有n个半径为r的圆形滑动窗口，同时开始迭代。每次迭代时，滑动窗口的中心点都不断移向窗口内所有点的均值点，也就是移向点密度更大的区域，直到收敛(点密度无法再增加)。收敛时，若多个窗口发生重叠时，保留点数最多的那个窗口。这样就可以得到类别数以及每个类的中心位置。其他各个点属于哪一类则取决于迭代过程中该点在哪一类的窗口中的次数最多 优点：类别数量由算法自动获得；聚类中心朝最大点密度聚集的事实也是非常令人满意的 缺点：窗口大小/半径「r」的选择可能是不重要的 基于密度的聚类方法（DBSCAN） 算法：每次从一个未被访问过的数据点开始，若该点的邻域(ε 距离内的所有点都是邻域点)内点的数量大于参数minPoints，则该点为一个新类的第一个点，否则该点就是噪声点。若该点成为了一个新类的第一个点，则该点邻域内的所有点也成为了该类的一部分，同时以这些新点再去找它们邻域中的点并加到该类中来，直到收敛。收敛后，在未被访问过的点中再找一个重新开始之前的步骤 优点：不需要人为确定类别数；能够辨别噪声；能很好地找到任意大小和任意形状的类 缺点：当簇的密度不同时，它的表现不如其他聚类算法(因为密度不同，参数ε和minPoints的设置也需要不一样，难以估计) 用高斯混合模型（GMM）的最大期望（EM）聚类K-Means中假设数据点的分布是圆形的(其分类原理是离哪个中心点更近就认为是哪一类)，限制较大。GMM中假设数据点是高斯分布的，意味着类可以是各种类型的形状(二维中为椭圆，因为x和y方向各自有标准差)。于是，任务就变成了使用EM来找到每个类别的高斯函数。下图是典型的K-Means不适用的情况： 算法：和K-Means一样，先选择类别数量，并随机初始化高斯分布参数。随后计算每个数据点属于一个特定类的概率(一个点越靠近高斯的中心，它就越可能属于该类)。基于这些概率，计算一组新的高斯分布参数使得类内数据点的概率最大化。其中，新参数是由数据点位置的加权和得到，权重就是之前提到的概率。重复之前的操作直到收敛 优点：类形状任意(K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0)；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率 凝聚层次聚类层次聚类分为自上而下和自下而上。对于自下而上，每个数据点都是单独的一个类，随后不断合并两个类，直到所有类最后都合并成一个包含所有数据点的类。自下而上层次聚类又被称为凝聚式层次聚类(HAC)。]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>无监督学习</tag>
+        <tag>聚类</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[自编码器]]></title>
+    <url>%2F2018%2F02%2F11%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2F%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[关于AE到VAE的介绍 待看：论文、cs231nLet13中的VAE推导]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>无监督学习</tag>
+        <tag>深度学习</tag>
+        <tag>自编码器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[cs231n学习笔记]]></title>
+    <url>%2F2018%2F02%2F11%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2Fcs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[把cs231n 2017年的课程重新刷一遍，记录相关的笔记]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>公开课</tag>
+        <tag>计算机视觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Daily Reading]]></title>
+    <url>%2F2018%2F02%2F10%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2FDaily-Reading%2F</url>
+    <content type="text"><![CDATA[记录一下每天看的公众号和知乎相关内容 2017-12-26 十大机器学习Python库(机器之心) 大部分都没见过，可以看看 2017-12-27 如何在NLP领域干成第一件事(AI科技评论) 找开源项目并重现，争取进一步改善；找如ACL会议论文集，找感兴趣的方向8，了解该方向的方法/数据/团队； Python相关文章(AI科技评论)* 静态代码检查工具Flake；视频合成器；从零开始用遗传算法和深度学习演化有机体的生长过程；破解验证码；Chutes&amp;Ladders游戏模拟；创建Chatbot；图像散列；介绍BP；Memorization技术，加速Python；分享Python学习技巧 Attention模型(机器学习算法与自然语言处理) 各种Attention机制的综述 神经进化策略(机器之心)* 可能未来使用神经进化策略替代反向传播，了解一下 2017-12-28 CS中的线代(机器之心)* 一篇普渡的论文，45页 2018AI研究趋势(机器之心)** 汇总资源：开放资源(介绍了DeepMind/OpenAI等的博客，着重推荐Distill)；机器翻译；理解视频(预测下一帧等+数据集介绍)；多任务/多模式学习；强化学习(游戏Dota/星际争霸)；解释人工智能(可视化/InterpretNet)；保护人工智能被对抗样本愚弄；超越梯度(合成梯度/进化策略/SGD改进/学习优化/不同空间的优化)；3D和图形的几何深度学习 FoolNLTK：一个便捷的中文处理工具(机器之心) 基于BiLSTM的开源中文分词模型 NIPS 2017的收获与思考(AI科技评论) 3篇Best paper：博弈论相关，打败德州扑克顶级玩家；随机优化风险最小化问题；提出全新的拟合优度算法。都好高端，不知道讲的是什么这篇文章作者主要关注了强化学习； *还介绍了4篇MSRA的paper：有一篇关于机器翻译的论文可能可以用在LipNet项目中？ 如何理解hekaiming的Focal Loss(PaperWeekly) 解决分类问题中类别不平衡、分类难度差异的一个loss 草根学Python(机器学习研究会)** 寒假和笨方法学Python一起看 2017-12-29 2017最火的五篇深度学习论文(专知) CycleGAN-图像迁移；Wasserstein GAN-提出更好的用于训练GAN的目标函数；simGAN-产生模拟数据，使用未标记的真实数据来改进模拟数据(无监督的)AlphaGo zero-无人类知识先验的情况下学会下围棋深度图像先验-理解神经网络模型中先验的作用(没搞懂) 机器学习、NLP、Python和Math最好的150余个教程(AI科技大本营)** 资源汇总 2017-12-30 ICCV2017: 基于检测和跟踪的视频中人体姿态估计(专知)* 人体姿态估计相关 如何与深度学习服务器优雅的交互(夕小瑶)** 服务器相关操作 机器之心年度盘点：2017年人工智能领域备受关注的科研成果(机器之心) AlphaGo-无须人类知识标注，自我对抗德州扑克击败人类-深度学习/纳什均衡的博弈求解自归一化-比BN更好的归一化GAN和各种变体深度神经网络碰上语音合成-WaveNet大批量数据并行训练ImageNet-分布式同步SGD训练(将ResNet-50在ImageNet上的训练时间缩短到48分钟)Capsule-抛弃反向传播递归皮质网络-新型概率生成模型，旨在超越神经网络从TPU到NPU-NPU是华为麒麟970手机端的芯片 机器学习非凸优化技术(机器之心) 在线深度学习：在数据流中实时学习深度神经网络(机器之心) 2017-12-31 2018-02-10 想要实现深度神经网络？一张 Excel 表格就够了(机器之心) 链接 有一个比较完整的CNN流程，关于CNN的一些理解：链接 Facebook提出DensePose数据集和网络架构：可实现实时的人体姿态估计(机器之心)* 链接 人体姿态估计相关 2018-02-11 从语义上理解卷积核行为，UCLA朱松纯等人使用决策树量化解释CNN(机器之心)* 链接 解释CNN模型：借助决策树在语义层面上解释 CNN 做出的每一个特定预测，即哪个卷积核（或物体部位）被用于预测最终的类别，以及其在预测中贡献了多少。斯坦福也有类似的工作。 李沐《动手学深度学习》课程视频汇总(机器之心) 链接 使用Apache MXNet的最新前端Gluon作为开发工具。视频链接；中文文档 一文读懂什么是变分自编码器(专知) 链接 AE到VAE 2018-02-12 机器学习的经典算法 链接 回归算法：线性回归(数值问题，最小二乘法，使用梯度下降逼近求解函数极值问题) &amp; 逻辑回归(分类问题，结果中加一个Sigmoid函数) 用于拟合逻辑回归中非线性分类线的两种算法：神经网络(ANN) &amp; SVM*(和高斯“核”结合，表达复杂的分类界限。核最典型的特征就是可以将低维的空间映射到高维空间，低维空间的非线性分类线就相当于高维空间的线性分类线) 聚类算法：无监督的一种，K-Means。见3降维算法：无监督的一种，PCA*推荐算法：基于物品内容的推荐（将与用户购买的内容近似的物品推荐给用户） &amp; 基于用户相似度的推荐（将与目标用户兴趣相同的其他用户购买的东西推荐给目标用户），协同过滤算法*其他：高斯判别、朴素贝叶斯、决策树 ​爬虫与反爬虫 链接 有趣的爬虫与反爬虫工作介绍 六大聚类算法* 链接 参看博文六大聚类算法 最新云端&amp;单机GPU横评 链接 Volta性能优于Nvidia 1080Ti（约1.1-1.3倍）和P100（约1.2-1.5倍）成本上，Paperspace Volta性价比高。Google P100比Paperspace Volta贵10%，Amazon Volta比Paperspace Volta贵40%]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>论文阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Pytorch学习]]></title>
+    <url>%2F2018%2F02%2F10%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2FPytorch%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[记录一下Pytorch学习过程以及踩过的一些坑]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>Pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Welcome to my blog]]></title>
+    <url>%2F2018%2F02%2F09%2F%E9%9A%8F%E7%AC%94%2FWelcome-to-my-blog%2F</url>
+    <content type="text"><![CDATA[一直想搞个博客，但是一直懒得搞，拖延癌晚期/(ㄒoㄒ)/~~。。之前搞过一个jekyll的，这次想了想还是换hexo了 搭建细节主要参考了http://blog.csdn.net/gdutxiaoxu/article/details/53576018 大致流程如下： 安装node.js 本地安装Hexo 配置Hexo 把Hexo和Github Page联系 随后就是换主题、搞一下私人定制的事情啦，接下来几天慢慢看看官方文档，把这个博客做的好看一点o(￣▽￣)ブ 2018-02-10 update新添站内搜索功能、生成站点地图功能，参考https://www.ezlippi.com/blog/2017/02/hexo-search.html**删除安装的插件直接npm unistall 插件名即可根据官方文档通过修改_config.yml添加了一系列功能 2018-02-12 update在博文中添加图片，参考链接在博文中的写法：Markdown中写注释，参考链接 待添加：评论功能(next继承来必力)；http://blog.csdn.net/qq_33699981/article/details/72716951To be continued…]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
 </search>
