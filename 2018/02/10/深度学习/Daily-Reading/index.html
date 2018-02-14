@@ -577,31 +577,10 @@
 <p><strong>模型解释性。</strong>这篇<a href="https://papers.nips.cc/paper/7270-kernel-feature-selection-via-conditional-covariance-minimization.pdf" target="_blank" rel="noopener">论文</a>的综述部分可以看一下，论文本身数学性比较强，<a href="https://github.com/Jianbo-Lab/CCM" target="_blank" rel="noopener">Github</a><br><strong>降维可以增强模型的可解释性，特征选择则是常用的降维方法。</strong>特征选择算法通常可分为：滤波器（filter）、封装（wrapper）以及嵌入（embedded）。<br><strong>滤波器</strong>方法基于数据的本质属性选择特征，与所用的学习算法无关。如可以计算每个特征和响应变量之间的相关性，然后选择相关性最高的变量<br><strong>封装</strong>方法的目标是寻找能够使某个预测器的性能最优化的特征。如可以训练多个支持向量机，每个支持向量机使用不同的特征子集，然后选择在训练数据上损失最小的特征子集。因为特征子集的数量是指数规模的，所以封装方法通常会使用贪心算法<br><strong>嵌入</strong>方法将特征选择和预测结合成一个问题。它通常会优化一个目标函数，这个目标函数结合了拟合优度和对参数数量的惩罚。一个例子就是构建线性模型的LASSO方法，它用L1 penalty来表征对参数数目的惩罚<br><strong>本文</strong>提出了条件协方差最小化（CCM）方法，这是一个统一前两个观点的特征选择方法。这个方法基于最小化条件协方差算子的迹来进行特征选择。思想是选择能够最大化预测基于协变量响应依赖的特征。</p>
 </blockquote>
 </li>
-<li><p><strong>深度学习的7大实用技巧*</strong> <a href="https://mp.weixin.qq.com/s/geCFcJDvOAw2Jaf2_nWsrg" target="_blank" rel="noopener">链接</a> </p>
-<blockquote>
-<p><strong>数据</strong>：有标签的数据越多，模型的性能越好。<a href="https://arxiv.org/abs/1707.02968" target="_blank" rel="noopener">重温深度学习时代数据不可思议的有效性</a><br><strong>优化器</strong>：RMSprop，Adadelta和Adam法都是自适应优化算法，会自动更新学习率。普通的随机梯度下降法需要手动选择学习率和动量参数。</p>
-<ul>
-<li>在实践中，自适应优化器往往比普通的梯度下降法<strong>更快地让模型达到收敛状态</strong>。然而，选择这些优化器的模型<strong>最终性能都不太好</strong>，而普通的梯度下降法通常能够达到更好的收敛最小值，从而获得<strong>更好的模型性能</strong>，但这可能比某些优化程序<strong>需要更多的收敛时间</strong>。此外，随机梯度下降法也更依赖于有效的初始化方法和学习速率衰减指数的设置，这在实践中是很难确定的。</li>
-<li>可以混合使用两类优化器：由Adam优化器过渡到随机梯度下降法来优化模型。在训练的早期阶段，使用Adam优化器来启动模型的训练，这将为模型的训练节省很多参数初始化和微调的时间。一旦模型的性能有所起伏，我们就可以切换到带动量的随机梯度下降法来进一步优化模型，以达到最佳的性能</li>
-</ul>
-<p><strong>处理数据不平衡</strong>：不同类的训练数据数量差异较大，会使得预测结果倾向于数量大的类别。</p>
-<ul>
-<li>对损失函数使用类别权重：对于数据量小的类别，损失函数中使用较高的权重值。这样对该类的任何错误都将导致非常大的损失值，以此来惩罚错误分类</li>
-<li>过度抽样：对于小样本类别，重复进行采样</li>
-<li>欠采样：对于大样本类别，跳过不选择部分数据</li>
-<li>数据增强：对于小样本类别进行数据增强，生成更多训练样本  </li>
-</ul>
-<p><strong>迁移学习</strong><br><strong>数据增强</strong>：保证数据原始类别标签的同时，对一些原始图像进行非线性的图像变换，来生成/合成新的训练样本。即对图像进行任何操作，改变图像的外观，但不能改变整体的内容</p>
-<ul>
-<li>水平或垂直旋转/翻转图像</li>
-<li>随机改变图像的亮度和颜色</li>
-<li>随机模糊图像</li>
-<li>随机裁剪图像</li>
-</ul>
-<p><strong>集成模型</strong>：</p>
-</blockquote>
-</li>
+<li><strong>深度学习的7大实用技巧*</strong> <a href="https://mp.weixin.qq.com/s/geCFcJDvOAw2Jaf2_nWsrg" target="_blank" rel="noopener">链接</a><br>参看博文<a href="https://dmortem.github.io/2018/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/">深度学习技巧</a></li>
 </ol>
+<hr>
+<p>2018-02-13</p>
 
       
     </div>
