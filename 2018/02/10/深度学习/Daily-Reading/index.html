@@ -529,7 +529,7 @@
 <p>2018-02-11</p>
 <ol>
 <li><strong>从语义上理解卷积核行为，UCLA朱松纯等人使用决策树量化解释CNN(机器之心)*</strong> <a href="https://mp.weixin.qq.com/s/t9ZHW8fkWtnvpM7ynJOTDw" target="_blank" rel="noopener">链接</a><blockquote>
-<p>解释CNN模型：借助决策树在语义层面上解释 CNN 做出的每一个特定预测，即哪个卷积核（或物体部位）被用于预测最终的类别，以及其在预测中贡献了多少。<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650735975&amp;idx=1&amp;sn=af91c24d8b0d058f35ac8b1ea65a0ea9&amp;chksm=871ac119b06d480f573675a7a60c6653fe8bcd09e2e5627b15ce1a2c704acecb8d857cde60fe&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">斯坦福也有类似的工作</a>。</p>
+<p><strong>解释CNN模型</strong>：借助<strong>决策树</strong>在语义层面上解释 CNN 做出的每一个特定预测，即哪个卷积核（或物体部位）被用于预测最终的类别，以及其在预测中贡献了多少。<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650735975&amp;idx=1&amp;sn=af91c24d8b0d058f35ac8b1ea65a0ea9&amp;chksm=871ac119b06d480f573675a7a60c6653fe8bcd09e2e5627b15ce1a2c704acecb8d857cde60fe&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">斯坦福也有类似的工作</a>。</p>
 </blockquote>
 </li>
 <li>李沐《动手学深度学习》课程视频汇总(机器之心) <a href="https://mp.weixin.qq.com/s/_6ewS7kzUC5TK71rjGOSAA" target="_blank" rel="noopener">链接</a><blockquote>
@@ -555,11 +555,42 @@
 </blockquote>
 </li>
 <li><strong>六大聚类算法*</strong> <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>参看博文<a href="">六大聚类算法</a></p>
+<p>参看博文<a href="https://dmortem.github.io/2018/02/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%85%AD%E5%A4%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/#more">六大聚类算法</a></p>
 </blockquote>
 </li>
 <li>最新云端&amp;单机GPU横评 <a href="https://mp.weixin.qq.com/s/gdDKw-nHdilpB3JfoLAuaA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>Volta性能优于Nvidia 1080Ti（约1.1-1.3倍）和P100（约1.2-1.5倍）<br>成本上，Paperspace Volta性价比高。Google P100比Paperspace Volta贵10%，Amazon Volta比Paperspace Volta贵40%</p>
+<p><strong>性能</strong>：Volta性能优于Nvidia 1080Ti（约1.1-1.3倍）和P100（约1.2-1.5倍）<br><strong>成本</strong>：Paperspace Volta性价比高。Google P100比Paperspace Volta贵10%，Amazon Volta比Paperspace Volta贵40%</p>
+<pre><code>- Paperspace Volta适合只需要1个GPU的用户，性能好
+- Google P100最为灵活，它允许用户在任意实例上使用1、2、4个P100 GPU（或最多 8个K80 GPU），允许用户自定义CPU和GPU配置来满足计算需求。尽管由于架构所限，Tesla P100的性能略显落后，但从成本角度考虑，其性价比很有优势
+- Amazon Volta性能优于Google P100，也可以连接1、4或8个GPU。但用户无法自定义基础实例类型。性价比比较低。如果迫切需要用8个GPU或在EC2上搭建模型，那么目前仍推荐使用Amazon Volta
+</code></pre></blockquote>
+</li>
+<li><strong>理解深度学习中的矩阵运算*</strong> <a href="https://mp.weixin.qq.com/s/703Lb9jO0r7biA91ddV2Bg" target="_blank" rel="noopener">链接</a><blockquote>
+<p><a href="http://parrt.cs.usfca.edu/doc/matrix-calculus/index.html" target="_blank" rel="noopener">论文链接</a></p>
+</blockquote>
+</li>
+<li>最新7篇VAE相关论文 <a href="https://mp.weixin.qq.com/s/oTF8xiLoKpPm_n-iF2rXIQ" target="_blank" rel="noopener">链接</a><blockquote>
+<p>利用带混合解码器的条件变分自编码器生成主题汉语诗歌<br>一种使用条件变分自编码器的Zero Shot Learning的生成模型<br>变分自编码器在不同模态之间的双向生成<br>使用深度密度先验的MR图像重建<br>变分递归神经机器翻译<br>变分自编码器的推断次优性<br>使用条件VAEs和GANs从视觉属性中合成人脸</p>
+</blockquote>
+</li>
+<li><strong>UC Berkeley提出特征选择新方法：条件协方差最小化*</strong> <a href="https://mp.weixin.qq.com/s/LbXHpnC19euqriCtSHeg1Q" target="_blank" rel="noopener">链接</a><blockquote>
+<p><strong>模型解释性。</strong>这篇<a href="https://papers.nips.cc/paper/7270-kernel-feature-selection-via-conditional-covariance-minimization.pdf" target="_blank" rel="noopener">论文</a>的综述部分可以看一下，论文本身数学性比较强，<a href="https://github.com/Jianbo-Lab/CCM" target="_blank" rel="noopener">Github</a><br><strong>降维可以增强模型的可解释性，特征选择则是常用的降维方法。</strong>特征选择算法通常可分为：滤波器（filter）、封装（wrapper）以及嵌入（embedded）。<br><strong>滤波器</strong>方法基于数据的本质属性选择特征，与所用的学习算法无关。如可以计算每个特征和响应变量之间的相关性，然后选择相关性最高的变量<br><strong>封装</strong>方法的目标是寻找能够使某个预测器的性能最优化的特征。如可以训练多个支持向量机，每个支持向量机使用不同的特征子集，然后选择在训练数据上损失最小的特征子集。因为特征子集的数量是指数规模的，所以封装方法通常会使用贪心算法<br><strong>嵌入</strong>方法将特征选择和预测结合成一个问题。它通常会优化一个目标函数，这个目标函数结合了拟合优度和对参数数量的惩罚。一个例子就是构建线性模型的LASSO方法，它用L1 penalty来表征对参数数目的惩罚<br><strong>本文</strong>提出了条件协方差最小化（CCM）方法，这是一个统一前两个观点的特征选择方法。这个方法基于最小化条件协方差算子的迹来进行特征选择。思想是选择能够最大化预测基于协变量响应依赖的特征。</p>
+</blockquote>
+</li>
+<li><strong>深度学习的7大实用技巧*</strong> <a href="https://mp.weixin.qq.com/s/geCFcJDvOAw2Jaf2_nWsrg" target="_blank" rel="noopener">链接</a> <blockquote>
+<p><strong>数据</strong>：有标签的数据越多，模型的性能越好。<a href="https://arxiv.org/abs/1707.02968" target="_blank" rel="noopener">重温深度学习时代数据不可思议的有效性</a><br><strong>优化器</strong>：RMSprop，Adadelta和Adam法都是自适应优化算法，会自动更新学习率。普通的随机梯度下降法需要手动选择学习率和动量参数。</p>
+<ul>
+<li>在实践中，自适应优化器往往比普通的梯度下降法<strong>更快地让模型达到收敛状态</strong>。然而，选择这些优化器的模型<strong>最终性能都不太好</strong>，而普通的梯度下降法通常能够达到更好的收敛最小值，从而获得<strong>更好的模型性能</strong>，但这可能比某些优化程序<strong>需要更多的收敛时间</strong>。此外，随机梯度下降法也更依赖于有效的初始化方法和学习速率衰减指数的设置，这在实践中是很难确定的。</li>
+<li>可以混合使用两类优化器：由Adam优化器过渡到随机梯度下降法来优化模型。在训练的早期阶段，使用Adam优化器来启动模型的训练，这将为模型的训练节省很多参数初始化和微调的时间。一旦模型的性能有所起伏，我们就可以切换到带动量的随机梯度下降法来进一步优化模型，以达到最佳的性能</li>
+</ul>
+<p><strong>处理数据不平衡</strong>：不同类的训练数据数量差异较大，会使得预测结果倾向于数量大的类别。</p>
+<ul>
+<li>对损失函数使用类别权重：对于数据量小的类别，损失函数中使用较高的权重值。这样对该类的任何错误都将导致非常大的损失值，以此来惩罚错误分类</li>
+<li>过度抽样：对于小样本类别，重复进行采样</li>
+<li>欠采样：对于大样本类别，跳过不选择部分数据</li>
+<li>数据增强：对于小样本类别进行数据增强，生成更多训练样本</li>
+</ul>
+<p><strong>迁移学习</strong></p>
 </blockquote>
 </li>
 </ol>
