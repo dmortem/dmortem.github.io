@@ -274,9 +274,9 @@ X /= np.std(X, axis = 0) # normalize
         
         <tags>
             
-            <tag> 无监督学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 无监督学习 </tag>
             
             <tag> 自编码器 </tag>
             
@@ -461,9 +461,7 @@ X /= np.std(X, axis = 0) # normalize
 </ol>
 <hr>
 <h5 id="2018-02-13"><a href="#2018-02-13" class="headerlink" title="2018-02-13"></a>2018-02-13</h5><ol>
-<li>机器学习中的模型评价、模型选择及算法选择 <a href="https://mp.weixin.qq.com/s/zs9ihUFI-ixP4EgMTvnFBg" target="_blank" rel="noopener">链接</a><blockquote>
-</blockquote>
-</li>
+<li><strong>机器学习中的模型评价、模型选择及算法选择*</strong> <a href="https://mp.weixin.qq.com/s/zs9ihUFI-ixP4EgMTvnFBg" target="_blank" rel="noopener">链接</a><br>参看博文<a href="https://dmortem.github.io/2018/02/16/深度学习/机器学习中的模型评价与选择/">机器学习中的模型评价与选择</a></li>
 <li>波士顿动力的机器人会开门了，中国尚需奋力追赶 <a href="https://mp.weixin.qq.com/s/mEd0sClnv8bFuYZ7_A0r5Q" target="_blank" rel="noopener">链接</a><blockquote>
 <p>里面的几个视频非常有趣</p>
 </blockquote>
@@ -472,11 +470,33 @@ X /= np.std(X, axis = 0) # normalize
 <p>比较细比较初级的教程</p>
 </blockquote>
 </li>
-<li>谷歌云TPU服务正式全面开放 <a href="https://mp.weixin.qq.com/s/CPmSTWhnrCMAokt-nCh9nA" target="_blank" rel="noopener">链接</a></li>
+<li>谷歌云TPU服务正式全面开放 <a href="https://mp.weixin.qq.com/s/CPmSTWhnrCMAokt-nCh9nA" target="_blank" rel="noopener">链接</a><blockquote>
+<p>张量处理器（Tensor Processing Unit，TPU）是机器学习专属芯片，去年又推出了第二代产品（Cloud TPU）。<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650725188&amp;idx=1&amp;sn=98b6e447704a5797989f3200c47a5f6e&amp;chksm=871b1f3ab06c962c4087eff5fc8e35cb32e6a7964d086b377314f0373d08d4c8adad766183e3&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">TPU论文</a><br>谷歌云平台（GCP）提供Cloud TPU beta版自2018年2月12日起用，旨在帮助机器学习专家更快地训练和运行ML模型<br>云TPU如今在数量受限的情况下可用，价格以秒计费，大约为每云TPU每小时6.50美元</p>
+</blockquote>
+</li>
 </ol>
 <hr>
 <h5 id="2018-02-14"><a href="#2018-02-14" class="headerlink" title="2018-02-14"></a>2018-02-14</h5><ol>
 <li>多维数据可视化策略 <a href="https://mp.weixin.qq.com/s/mD732PqDtqYdFZSxZWtvvg" target="_blank" rel="noopener">链接</a></li>
+</ol>
+<hr>
+<h5 id="2018-02-15"><a href="#2018-02-15" class="headerlink" title="2018-02-15"></a>2018-02-15</h5><ol>
+<li><strong>从LeNet到SENet——卷积神经网络回顾**</strong> <a href="https://mp.weixin.qq.com/s/2wfwe_d0_moKYDjV-WM7Jw" target="_blank" rel="noopener">链接</a></li>
+</ol>
+<hr>
+<h5 id="2018-02-16"><a href="#2018-02-16" class="headerlink" title="2018-02-16"></a>2018-02-16</h5><ol>
+<li><p><strong>2017年机器之心AI高分概述文章全集**</strong> <a href="https://mp.weixin.qq.com/s/wDWF1RFaW9EOEoctyJvopQ" target="_blank" rel="noopener">链接</a></p>
+</li>
+<li><p>谷歌大脑Wasserstein自编码器：新一代生成模型算法 <a href="https://mp.weixin.qq.com/s/Ci0HPy3ENz1ZooB784aMcA" target="_blank" rel="noopener">链接</a></p>
+<blockquote>
+<p>ICLR 2018. 具有VAE的一些优点，也结合了GAN结构的特性，可以实现更好的性能</p>
+</blockquote>
+</li>
+<li><p>Pedro Domingos总结机器学习研究的12个宝贵经验 <a href="https://mp.weixin.qq.com/s/HnJ2GfslrMcLc04eJ35qHQ" target="_blank" rel="noopener">链接</a></p>
+<blockquote>
+<p>关于机器学习的一些经验分享，非调参经验</p>
+</blockquote>
+</li>
 </ol>
 ]]></content>
       
