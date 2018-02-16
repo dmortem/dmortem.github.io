@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="机器学习,模型评估," />
 
 
 
@@ -79,13 +79,26 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chiyu Wu">
-<meta property="og:url" content="dmortem.github.io/tags/炼丹技巧/index.html">
+<meta name="description" content="介绍机器学习中如何评估、选择模型  Holdout方法和正态逼近置信区间 重复Holdout和Bootstrap 交叉验证和超参数优化 结论">
+<meta name="keywords" content="机器学习,模型评估">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习中的模型评价与选择">
+<meta property="og:url" content="dmortem.github.io/2018/02/16/深度学习/机器学习中的模型评价与选择/index.html">
 <meta property="og:site_name" content="Chiyu Wu">
+<meta property="og:description" content="介绍机器学习中如何评估、选择模型  Holdout方法和正态逼近置信区间 重复Holdout和Bootstrap 交叉验证和超参数优化 结论">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="/2018/02/16/深度学习/机器学习中的模型评价与选择/Model.png">
+<meta property="og:image" content="/2018/02/16/深度学习/机器学习中的模型评价与选择/boot.png">
+<meta property="og:image" content="/2018/02/16/深度学习/机器学习中的模型评价与选择/boot1.png">
+<meta property="og:image" content="/2018/02/16/深度学习/机器学习中的模型评价与选择/超参.png">
+<meta property="og:image" content="/2018/02/16/深度学习/机器学习中的模型评价与选择/K-Fold.png">
+<meta property="og:image" content="/2018/02/16/深度学习/机器学习中的模型评价与选择/K-fold选择.png">
+<meta property="og:image" content="/2018/02/16/深度学习/机器学习中的模型评价与选择/2-fold.png">
+<meta property="og:updated_time" content="2018-02-15T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chiyu Wu">
+<meta name="twitter:title" content="机器学习中的模型评价与选择">
+<meta name="twitter:description" content="介绍机器学习中如何评估、选择模型  Holdout方法和正态逼近置信区间 重复Holdout和Bootstrap 交叉验证和超参数优化 结论">
+<meta name="twitter:image" content="/2018/02/16/深度学习/机器学习中的模型评价与选择/Model.png">
 
 
 
@@ -115,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="dmortem.github.io/tags/炼丹技巧/"/>
+  <link rel="canonical" href="dmortem.github.io/2018/02/16/深度学习/机器学习中的模型评价与选择/"/>
 
 
 
 
 
-  <title>Tag: 炼丹技巧 | Chiyu Wu</title>
+  <title>机器学习中的模型评价与选择 | Chiyu Wu</title>
   
 
 
@@ -150,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -298,54 +311,233 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>炼丹技巧<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/16/深度学习/机器学习中的模型评价与选择/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chiyu Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/image.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chiyu Wu">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/02/14/深度学习/深度学习技巧/" itemprop="url">
-              
-                <span itemprop="name">深度学习技巧</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">机器学习中的模型评价与选择</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-14T20:58:55+08:00"
-              content="2018-02-14" >
-          02-14
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-16T14:57:17+08:00">
+                2018-02-16
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-16T00:00:00+08:00">
+                2018-02-16
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>介绍机器学习中如何评估、选择模型</p>
+<ul>
+<li>Holdout方法和正态逼近置信区间</li>
+<li>重复Holdout和Bootstrap</li>
+<li>交叉验证和超参数优化</li>
+<li>结论</li>
+</ul>
+<a id="more"></a>
+<p>节选自机器之心 <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a>，原文还涉及很多偏数学、理论方面的东西<br>英文原文 <a href="https://sebastianraschka.com/pdf/manuscripts/model-eval.pdf" target="_blank" rel="noopener">链接</a></p>
+<hr>
+<h3 id="机器学习模型的性能估计主要分为以下三步"><a href="#机器学习模型的性能估计主要分为以下三步" class="headerlink" title="机器学习模型的性能估计主要分为以下三步"></a><strong>机器学习模型的性能估计主要分为以下三步</strong></h3><ul>
+<li>使用训练集训练模型</li>
+<li>用模型预测测试集的分类</li>
+<li>计算在测试集上的错误率</li>
+</ul>
+<h3 id="Holdout方法"><a href="#Holdout方法" class="headerlink" title="Holdout方法"></a><strong>Holdout方法</strong></h3><ul>
+<li><strong>Holdout</strong>是最简单的模型评估技术，把数据集随机拆分成训练集和测试集</li>
+<li><strong>Resubstitution验证</strong>或<strong>Resubstitution评估</strong>指的是在同一个训练数据集上训练和评估一个模型</li>
+<li>随机抽样可能导致训练集和测试集分布不平衡，甚至测试集中可能不包含少数类的样本。因此，可以使用<strong>层次化</strong>的方式划分数据集，保证划分得到的训练集和测试集保持原始比例</li>
+<li>在数据量大、类别较平衡的数据集上，非层次化的随机抽样不是一个大问题，但最好还是使用层次化抽样</li>
+<li><strong>正态逼近置信区间</strong>：计算模型预测精度或计算误差置信区间。假设预测结果会遵循一个正态分布，然后根据中心极限定理计算单次训练-测试划分的平均值的置信区间。通过正态逼近计算出基于单个测试集的性能估计的不确定性。详细推导见原文</li>
+</ul>
+<h3 id="重复Holdout和Bootstrap"><a href="#重复Holdout和Bootstrap" class="headerlink" title="重复Holdout和Bootstrap"></a><strong>重复Holdout和Bootstrap</strong></h3><ul>
+<li><strong>模型评估的偏差与方差</strong>：将数据集的较多数据作为测试集容易给评估带来悲观偏差。随着测试集样本数量的减少，悲观偏差降低，性能估计的方差增加<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/Model.png"></li>
+<li><strong>重复Holdout验证</strong>：多次随机划分训练集和测试集，重复Holdout方法估计模型性能然后取平均值的方法获得更具鲁棒性的评估，又称为蒙特卡洛交叉验证</li>
+<li><strong>Bootstrap方法</strong>：从经验分布中采样生成新样本，衡量性能估计的不确定性。如果把Holdout方法理解为不放回采样，那么bootstrap就可以理解为通过有放回重采样产生新数据<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/boot.png"></li>
+<li><strong>Leave-one-out Bootstrap（LOOB）方法</strong>：这种方法测试集数据和训练集数据没有重叠<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/boot1.png">
+</li>
+</ul>
+<h3 id="交叉验证和超参数优化"><a href="#交叉验证和超参数优化" class="headerlink" title="交叉验证和超参数优化"></a><strong>交叉验证和超参数优化</strong></h3><ul>
+<li><strong>three-way Holdout方法</strong>：将数据集划分为训练、验证和测试集三部分，用于超参数调优<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/超参.png"></li>
+<li><strong>K-Fold交叉验证</strong>：数据集中的每个样本都有被测试的机会。与重复holdout方法相比，k-fold交叉验证的测试数据没有重叠，而重复holdout是重复使用样本进行测试<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/K-Fold.png">
+<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/K-fold选择.png"></li>
+<li><strong>2-fold和留一法（Leave-One-Out）交叉验证</strong>：分别是K-Fold交叉验证中k=2和k=n的特殊情况。留一交叉验证法中，每次迭代中，模型都在其中n-1个样本上进行拟合，然后在剩余的一个样本上进行评估。这种方法对<strong>小数据集</strong>特别有用<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/2-fold.png"></li>
+<li>在计算可行的情况下，留一法交叉验证更值得推荐，近似无偏，但方差大；当数据集很大的时候，出于计算效率的考虑我们就会更倾向于holdout方法（相当于分成2部分，迭代2次即可），<strong>我们在深度学习中使用的就是Holdout方法而不是交叉验证</strong></li>
+<li>在k-fold交叉验证中，随着k的增加有如下趋势：<blockquote>
+<p>性能估计偏差减小（更准确）<br>性能估计方差增大（更大的变化性）<br>计算成本增加（在拟合过程中训练集更大，需要的迭代次数更多）<br>在k-fold交叉验证中将k的值降到最小（如2或3）也会增加小数据集上模型估计的方差，因为随机抽样变化较大<br>推荐用<strong>10折交叉验证</strong></p>
+</blockquote>
+</li>
+<li><strong>如果我们对数据归一化或进行特征选择，我们通常会在k-fold交叉验证循环中执行这些操作</strong>，即做归一化时不考虑测试集部分的数据，但可能效果不好。关于这一选择可参考<a href="http://www.aaai.org/Papers/Workshops/2007/WS-07-05/WS07-05-007.pdf" target="_blank" rel="noopener">链接</a>。看了以后感觉不是很有所谓，差异不大(“for the greater majority of cases, IN and OUT are not significantly different”)</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h3><ul>
+<li>当处理的样本量较大时，使用holdout方法进行模型评价非常合适</li>
+<li>对于超参数优化，推荐10折交叉验证</li>
+<li>对于小样本，留一法交叉验证则是一个不错的选择</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/模型评估/" rel="tag"># 模型评估</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/14/深度学习/深度学习技巧/" rel="next" title="深度学习技巧">
+                <i class="fa fa-chevron-left"></i> 深度学习技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -353,6 +545,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -373,8 +569,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -472,6 +677,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#机器学习模型的性能估计主要分为以下三步"><span class="nav-number">1.</span> <span class="nav-text">机器学习模型的性能估计主要分为以下三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Holdout方法"><span class="nav-number">2.</span> <span class="nav-text">Holdout方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复Holdout和Bootstrap"><span class="nav-number">3.</span> <span class="nav-text">重复Holdout和Bootstrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交叉验证和超参数优化"><span class="nav-number">4.</span> <span class="nav-text">交叉验证和超参数优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -634,6 +855,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

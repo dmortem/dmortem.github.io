@@ -443,44 +443,39 @@
 </ul>
 <a id="more"></a>
 <p>原文来自机器之心 <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a><br>序号写成”.”格式全部崩了。。把分隔符去掉又显得太挤了。。。以后找到办法了再回来改TAT</p>
-<p>1、 <strong>K-Means</strong><br> <img src="/2018/02/12/深度学习/六大聚类算法/K-Means.png"></p>
+<h3 id="K-Means"><a href="#K-Means" class="headerlink" title="K-Means"></a><strong>K-Means</strong></h3> <img src="/2018/02/12/深度学习/六大聚类算法/K-Means.png">
 <ul>
 <li>优点：速度快，O(N)</li>
 <li>缺点：类别数需要事先人为估计，无法通过算法来确定类别数；结果有可能不可重复</li>
 <li>变种：K-Medians，每次用中值向量而不是均值来作为中心。对异常值不敏感，对大数据集速度慢，因为需要做排序</li>
 </ul>
 <hr>
-<p>2、 <strong>均值漂移聚类</strong></p>
-<ul>
+<h3 id="均值漂移聚类"><a href="#均值漂移聚类" class="headerlink" title="均值漂移聚类"></a><strong>均值漂移聚类</strong></h3><ul>
 <li>算法：随机选择n个中心点，有n个半径为r的圆形滑动窗口，同时开始迭代。每次迭代时，滑动窗口的中心点都不断移向窗口内所有点的均值点，也就是<strong>移向点密度更大的区域</strong>，直到收敛(点密度无法再增加)。收敛时，若多个窗口发生重叠时，保留点数最多的那个窗口。这样就可以得到类别数以及每个类的中心位置。其他各个点属于哪一类则取决于迭代过程中该点在哪一类的窗口中的次数最多<img src="/2018/02/12/深度学习/六大聚类算法/Meanshift.png"></li>
 <li>优点：类别数量由算法自动获得；聚类中心朝最大点密度聚集的事实也是非常令人满意的</li>
 <li>缺点：窗口大小/半径「r」的选择可能是不重要的</li>
 </ul>
 <hr>
-<p>3、 <strong>基于密度的聚类方法（DBSCAN）</strong></p>
-<ul>
+<h3 id="基于密度的聚类方法（DBSCAN）"><a href="#基于密度的聚类方法（DBSCAN）" class="headerlink" title="基于密度的聚类方法（DBSCAN）"></a><strong>基于密度的聚类方法（DBSCAN）</strong></h3><ul>
 <li>算法：每次从一个未被访问过的数据点开始，若该点的邻域(ε 距离内的所有点都是邻域点)内点的数量大于参数minPoints，则该点为一个新类的第一个点，否则该点就是噪声点。若该点成为了一个新类的第一个点，则该点邻域内的所有点也成为了该类的一部分，同时以这些新点再去找它们邻域中的点并加到该类中来，直到收敛。收敛后，在未被访问过的点中再找一个重新开始之前的步骤<img src="/2018/02/12/深度学习/六大聚类算法/DBSCAN.png"></li>
 <li>优点：不需要人为确定类别数；能够辨别噪声；能很好地找到任意大小和任意形状的类</li>
 <li>缺点：当簇的密度不同时，它的表现不如其他聚类算法(因为密度不同，参数ε和minPoints的设置也需要不一样，难以估计)</li>
 </ul>
 <hr>
-<p>4、 <strong>用高斯混合模型（GMM）的最大期望（EM）聚类</strong></p>
-<ul>
+<h3 id="用高斯混合模型（GMM）的最大期望（EM）聚类"><a href="#用高斯混合模型（GMM）的最大期望（EM）聚类" class="headerlink" title="用高斯混合模型（GMM）的最大期望（EM）聚类"></a><strong>用高斯混合模型（GMM）的最大期望（EM）聚类</strong></h3><ul>
 <li>K-Means中假设数据点的分布是圆形的(其分类原理是离哪个中心点更近就认为是哪一类)，限制较大。GMM中假设数据点是高斯分布的，意味着类可以是各种类型的形状(二维中为椭圆，因为x和y方向各自有标准差)。于是，任务就变成了<strong>使用EM来找到每个类别的高斯函数</strong>。下图是典型的K-Means不适用的情况：<img src="/2018/02/12/深度学习/六大聚类算法/EM.png"></li>
 <li>算法：和K-Means一样，先选择类别数量，并随机初始化高斯分布参数。随后计算每个数据点属于一个特定类的概率(一个点越靠近高斯的中心，它就越可能属于该类)。基于这些概率，计算一组新的高斯分布参数使得类内数据点的概率最大化。其中，新参数是由数据点位置的加权和得到，权重就是之前提到的概率。重复之前的操作直到收敛<img src="/2018/02/12/深度学习/六大聚类算法/EM2.png"></li>
 <li>优点：类形状任意(K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0)；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率</li>
 </ul>
 <hr>
-<p>5、 <strong>凝聚层次聚类</strong></p>
-<ul>
+<h3 id="凝聚层次聚类"><a href="#凝聚层次聚类" class="headerlink" title="凝聚层次聚类"></a><strong>凝聚层次聚类</strong></h3><ul>
 <li>层次聚类分为自上而下和自下而上。对于自下而上，每个数据点都是单独的一个类，随后<strong>不断合并两个类</strong>，直到所有类最后都合并成一个包含所有数据点的类。自下而上层次聚类又被称为凝聚式层次聚类(HAC)。<img src="/2018/02/12/深度学习/六大聚类算法/HAC.png"></li>
 <li>算法：一开始有N个数据点，也就是N个类。随后自行定义一种距离度量标准如平均距离等，每次迭代时选择将两个距离最近的类合并在一起，直到只剩下一个类。我们只需要选择何时停止合并，就可以选择最终需要多少个类</li>
 <li>优点：不需要指定类个数，我们可以自由选择看起来最好的类个数；对距离度量标准不敏感；</li>
 <li>缺点：效率低，O(N^2)</li>
 </ul>
 <hr>
-<p>6、图团体检测（Graph Community Detection）</p>
-<ul>
+<h3 id="图团体检测（Graph-Community-Detection）"><a href="#图团体检测（Graph-Community-Detection）" class="headerlink" title="图团体检测（Graph Community Detection）"></a>图团体检测（Graph Community Detection）</h3><ul>
 <li>当我们的数据可以被表示为一个网络或图（graph）时，我们可以使用图团体检测方法完成聚类。聚类的质量由<strong>模块性分数</strong>进行评估，模块性越高，该网络聚类成不同团体的程度就越好。因此通过最优化方法寻找最大模块性就能发现聚类该网络的最佳方法。<img src="/2018/02/12/深度学习/六大聚类算法/Graph.png"></li>
 <li>模块性可以使用以下公式进行计算：<img src="/2018/02/12/深度学习/六大聚类算法/Graph1.png"></li>
 <li>其中L代表网络中边的数量，k_i和k_j是指每个顶点的degree，它可以通过将每一行和每一列的项加起来而得到。两者相乘再除以2L表示当该网络是随机分配的时候顶点i和j之间的预期边数。括号中的项表示了该网络的真实结构和随机组合时的预期结构之间的差。当A_ij==1且(k_i*k_j)/2L很小时，其返回的值最高。即当在定点i和j之间存在一个「非预期」的边时，得到的值更高。最后的δc_i, c_j是克罗内克δ函数（Kronecker-delta function）。</li>
@@ -585,8 +580,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -605,7 +609,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -627,7 +631,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -684,6 +688,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#K-Means"><span class="nav-number">1.</span> <span class="nav-text">K-Means</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#均值漂移聚类"><span class="nav-number">2.</span> <span class="nav-text">均值漂移聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于密度的聚类方法（DBSCAN）"><span class="nav-number">3.</span> <span class="nav-text">基于密度的聚类方法（DBSCAN）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用高斯混合模型（GMM）的最大期望（EM）聚类"><span class="nav-number">4.</span> <span class="nav-text">用高斯混合模型（GMM）的最大期望（EM）聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#凝聚层次聚类"><span class="nav-number">5.</span> <span class="nav-text">凝聚层次聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图团体检测（Graph-Community-Detection）"><span class="nav-number">6.</span> <span class="nav-text">图团体检测（Graph Community Detection）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

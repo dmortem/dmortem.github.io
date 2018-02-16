@@ -430,8 +430,7 @@
       
         <p>在这里总结一下看到过的各路炼丹技巧</p>
 <a id="more"></a>
-<p>1、 <strong>深度学习的7大实用技巧*</strong> <a href="https://mp.weixin.qq.com/s/geCFcJDvOAw2Jaf2_nWsrg" target="_blank" rel="noopener">链接</a> </p>
-<ul>
+<h3 id="深度学习的7大实用技巧-链接"><a href="#深度学习的7大实用技巧-链接" class="headerlink" title="深度学习的7大实用技巧* 链接"></a><strong>深度学习的7大实用技巧*</strong> <a href="https://mp.weixin.qq.com/s/geCFcJDvOAw2Jaf2_nWsrg" target="_blank" rel="noopener">链接</a></h3><ul>
 <li><strong>数据</strong>：有标签的数据越多，模型的性能越好。<a href="https://arxiv.org/abs/1707.02968" target="_blank" rel="noopener">重温深度学习时代数据不可思议的有效性</a><img src="/2018/02/14/深度学习/深度学习技巧/data.png"></li>
 <li><p><strong>优化器</strong>：RMSprop，Adadelta和Adam法都是自适应优化算法，会自动更新学习率。普通的随机梯度下降法需要手动选择学习率和动量参数。</p>
 <blockquote>
@@ -457,8 +456,7 @@
 </li>
 </ul>
 <hr>
-<p> 2、 <a href="https://zhuanlan.zhihu.com/easyml" target="_blank" rel="noopener">知乎专栏</a></p>
-<ul>
+<h3 id="知乎专栏"><a href="#知乎专栏" class="headerlink" title="知乎专栏"></a><a href="https://zhuanlan.zhihu.com/easyml" target="_blank" rel="noopener">知乎专栏</a></h3><ul>
 <li><strong>参数初始化</strong>：<a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf" target="_blank" rel="noopener">Xavier</a>和<a href="https://arxiv.org/abs/1502.01852" target="_blank" rel="noopener">He</a>随便选一个，但一定要做<blockquote>
 <p>uniform均匀分布初始化：w = np.random.uniform(low=-scale, high=scale, size=[n_in,n_out])</p>
 <pre><code>Xavier初始法，适用于普通激活函数(tanh,sigmoid)：scale = np.sqrt(3/n)
@@ -505,8 +503,7 @@ X /= np.std(X, axis = 0) # normalize
 </li>
 </ul>
 <hr>
-<p> 3、 <a href="https://www.zhihu.com/question/41631631" target="_blank" rel="noopener">知乎回答</a></p>
-<ul>
+<h3 id="知乎回答"><a href="#知乎回答" class="headerlink" title="知乎回答"></a><a href="https://www.zhihu.com/question/41631631" target="_blank" rel="noopener">知乎回答</a></h3><ul>
 <li><strong>Relu+Bn</strong>可以满足95%的情况，除非有些特殊情况会用identity，比如回归问题，比如resnet的shortcut支路</li>
 <li><strong>Dropout</strong>，分类问题用dropout ，只需要最后一层softmax 前用基本就可以了，能够防止过拟合，可能对accuracy提高不大，但是dropout 前面的那层如果是之后要使用的feature的话，性能会大大提升</li>
 <li><strong>数据的shuffle和augmentation</strong>，aug不能瞎加，比如行人识别一般就不会加上下翻转的，因为不会碰到头朝下的异型种</li>
@@ -522,8 +519,7 @@ X /= np.std(X, axis = 0) # normalize
 <li>针对于metric learning，对feature加个classification 的约束通常可以提高性能加快收敛</li>
 </ul>
 <hr>
-<p>4、<a href="https://www.zhihu.com/question/27962483" target="_blank" rel="noopener">链接</a>和<a href="https://www.zhihu.com/question/25097993" target="_blank" rel="noopener">链接</a></p>
-
+<h3 id="链接和链接"><a href="#链接和链接" class="headerlink" title="链接和链接"></a><a href="https://www.zhihu.com/question/27962483" target="_blank" rel="noopener">链接</a>和<a href="https://www.zhihu.com/question/25097993" target="_blank" rel="noopener">链接</a></h3>
       
     </div>
     
@@ -564,6 +560,10 @@ X /= np.std(X, axis = 0) # normalize
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/16/深度学习/机器学习中的模型评价与选择/" rel="prev" title="机器学习中的模型评价与选择">
+                机器学习中的模型评价与选择 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -615,8 +615,17 @@ X /= np.std(X, axis = 0) # normalize
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -635,7 +644,7 @@ X /= np.std(X, axis = 0) # normalize
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -657,7 +666,7 @@ X /= np.std(X, axis = 0) # normalize
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -714,6 +723,22 @@ X /= np.std(X, axis = 0) # normalize
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深度学习的7大实用技巧-链接"><span class="nav-number">1.</span> <span class="nav-text">深度学习的7大实用技巧* 链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知乎专栏"><span class="nav-number">2.</span> <span class="nav-text">知乎专栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知乎回答"><span class="nav-number">3.</span> <span class="nav-text">知乎回答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接和链接"><span class="nav-number">4.</span> <span class="nav-text">链接和链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
