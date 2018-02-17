@@ -16,6 +16,13 @@
     </url>
 
     <url>
+        <loc>dmortem.github.io/tags/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/</loc>
+        <lastmod>2018-02-10T16:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>dmortem.github.io/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/</loc>
         <lastmod>2018-02-10T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -24,13 +31,6 @@
 
     <url>
         <loc>dmortem.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/</loc>
-        <lastmod>2018-02-10T16:00:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>dmortem.github.io/tags/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/</loc>
         <lastmod>2018-02-10T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

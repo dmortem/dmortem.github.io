@@ -1,582 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[机器学习中的模型评价与选择]]></title>
-      <url>/2018/02/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7%E4%B8%8E%E9%80%89%E6%8B%A9/</url>
-      <content type="html"><![CDATA[<p>介绍机器学习中如何评估、选择模型</p>
-<ul>
-<li>Holdout方法和正态逼近置信区间</li>
-<li>重复Holdout和Bootstrap</li>
-<li>交叉验证和超参数优化</li>
-<li>结论</li>
-</ul>
-<a id="more"></a>
-<p>节选自机器之心 <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a>，原文还涉及很多偏数学、理论方面的东西<br>英文原文 <a href="https://sebastianraschka.com/pdf/manuscripts/model-eval.pdf" target="_blank" rel="noopener">链接</a></p>
-<hr>
-<h3 id="机器学习模型的性能估计主要分为以下三步"><a href="#机器学习模型的性能估计主要分为以下三步" class="headerlink" title="机器学习模型的性能估计主要分为以下三步"></a><strong>机器学习模型的性能估计主要分为以下三步</strong></h3><ul>
-<li>使用训练集训练模型</li>
-<li>用模型预测测试集的分类</li>
-<li>计算在测试集上的错误率</li>
-</ul>
-<h3 id="Holdout方法"><a href="#Holdout方法" class="headerlink" title="Holdout方法"></a><strong>Holdout方法</strong></h3><ul>
-<li><strong>Holdout</strong>是最简单的模型评估技术，把数据集随机拆分成训练集和测试集</li>
-<li><strong>Resubstitution验证</strong>或<strong>Resubstitution评估</strong>指的是在同一个训练数据集上训练和评估一个模型</li>
-<li>随机抽样可能导致训练集和测试集分布不平衡，甚至测试集中可能不包含少数类的样本。因此，可以使用<strong>层次化</strong>的方式划分数据集，保证划分得到的训练集和测试集保持原始比例</li>
-<li>在数据量大、类别较平衡的数据集上，非层次化的随机抽样不是一个大问题，但最好还是使用层次化抽样</li>
-<li><strong>正态逼近置信区间</strong>：计算模型预测精度或计算误差置信区间。假设预测结果会遵循一个正态分布，然后根据中心极限定理计算单次训练-测试划分的平均值的置信区间。通过正态逼近计算出基于单个测试集的性能估计的不确定性。详细推导见原文</li>
-</ul>
-<h3 id="重复Holdout和Bootstrap"><a href="#重复Holdout和Bootstrap" class="headerlink" title="重复Holdout和Bootstrap"></a><strong>重复Holdout和Bootstrap</strong></h3><ul>
-<li><strong>模型评估的偏差与方差</strong>：将数据集的较多数据作为测试集容易给评估带来悲观偏差。随着测试集样本数量的减少，悲观偏差降低，性能估计的方差增加<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/Model.png"></li>
-<li><strong>重复Holdout验证</strong>：多次随机划分训练集和测试集，重复Holdout方法估计模型性能然后取平均值的方法获得更具鲁棒性的评估，又称为蒙特卡洛交叉验证</li>
-<li><strong>Bootstrap方法</strong>：从经验分布中采样生成新样本，衡量性能估计的不确定性。如果把Holdout方法理解为不放回采样，那么bootstrap就可以理解为通过有放回重采样产生新数据<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/boot.png"></li>
-<li><strong>Leave-one-out Bootstrap（LOOB）方法</strong>：这种方法测试集数据和训练集数据没有重叠<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/boot1.png">
-</li>
-</ul>
-<h3 id="交叉验证和超参数优化"><a href="#交叉验证和超参数优化" class="headerlink" title="交叉验证和超参数优化"></a><strong>交叉验证和超参数优化</strong></h3><ul>
-<li><strong>three-way Holdout方法</strong>：将数据集划分为训练、验证和测试集三部分，用于超参数调优<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/超参.png"></li>
-<li><strong>K-Fold交叉验证</strong>：数据集中的每个样本都有被测试的机会。与重复holdout方法相比，k-fold交叉验证的测试数据没有重叠，而重复holdout是重复使用样本进行测试<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/K-Fold.png">
-<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/K-fold选择.png"></li>
-<li><strong>2-fold和留一法（Leave-One-Out）交叉验证</strong>：分别是K-Fold交叉验证中k=2和k=n的特殊情况。留一交叉验证法中，每次迭代中，模型都在其中n-1个样本上进行拟合，然后在剩余的一个样本上进行评估。这种方法对<strong>小数据集</strong>特别有用<img src="/2018/02/16/深度学习/机器学习中的模型评价与选择/2-fold.png"></li>
-<li>在计算可行的情况下，留一法交叉验证更值得推荐，近似无偏，但方差大；当数据集很大的时候，出于计算效率的考虑我们就会更倾向于holdout方法（相当于分成2部分，迭代2次即可），<strong>我们在深度学习中使用的就是Holdout方法而不是交叉验证</strong></li>
-<li>在k-fold交叉验证中，随着k的增加有如下趋势：<blockquote>
-<p>性能估计偏差减小（更准确）<br>性能估计方差增大（更大的变化性）<br>计算成本增加（在拟合过程中训练集更大，需要的迭代次数更多）<br>在k-fold交叉验证中将k的值降到最小（如2或3）也会增加小数据集上模型估计的方差，因为随机抽样变化较大<br>推荐用<strong>10折交叉验证</strong></p>
-</blockquote>
-</li>
-<li><strong>如果我们对数据归一化或进行特征选择，我们通常会在k-fold交叉验证循环中执行这些操作</strong>，即做归一化时不考虑测试集部分的数据，但可能效果不好。关于这一选择可参考<a href="http://www.aaai.org/Papers/Workshops/2007/WS-07-05/WS07-05-007.pdf" target="_blank" rel="noopener">链接</a>。看了以后感觉不是很有所谓，差异不大(“for the greater majority of cases, IN and OUT are not significantly different”)</li>
-</ul>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h3><ul>
-<li>当处理的样本量较大时，使用holdout方法进行模型评价非常合适</li>
-<li>对于超参数优化，推荐10折交叉验证</li>
-<li>对于小样本，留一法交叉验证则是一个不错的选择</li>
-</ul>
-]]></content>
-      
-        <categories>
-            
-            <category> 机器学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 机器学习 </tag>
-            
-            <tag> 模型评估 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[深度学习技巧]]></title>
-      <url>/2018/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/</url>
-      <content type="html"><![CDATA[<p>在这里总结一下看到过的各路炼丹技巧</p>
-<a id="more"></a>
-<h3 id="深度学习的7大实用技巧-链接"><a href="#深度学习的7大实用技巧-链接" class="headerlink" title="深度学习的7大实用技巧* 链接"></a><strong>深度学习的7大实用技巧*</strong> <a href="https://mp.weixin.qq.com/s/geCFcJDvOAw2Jaf2_nWsrg" target="_blank" rel="noopener">链接</a></h3><ul>
-<li><strong>数据</strong>：有标签的数据越多，模型的性能越好。<a href="https://arxiv.org/abs/1707.02968" target="_blank" rel="noopener">重温深度学习时代数据不可思议的有效性</a><img src="/2018/02/14/深度学习/深度学习技巧/data.png"></li>
-<li><p><strong>优化器</strong>：RMSprop，Adadelta和Adam法都是自适应优化算法，会自动更新学习率。普通的随机梯度下降法需要手动选择学习率和动量参数。</p>
-<blockquote>
-<p>在实践中，自适应优化器往往比普通的梯度下降法<strong>更快地让模型达到收敛状态</strong>。然而，选择这些优化器的模型<strong>最终性能都不太好</strong>，而普通的梯度下降法通常能够达到更好的收敛最小值，从而获得<strong>更好的模型性能</strong>，但这可能比某些优化程序<strong>需要更多的收敛时间</strong>。此外，随机梯度下降法也更依赖于有效的初始化方法和学习速率衰减指数的设置，这在实践中是很难确定的。如下图，Adam初期效果好，但SGD在训练结束后可以获得更好的全局最小值</p>
-<img src="/2018/02/14/深度学习/深度学习技巧/SGD.png">
-<p>可以混合使用两类优化器：由Adam优化器过渡到随机梯度下降法来优化模型。在训练的早期阶段，使用Adam优化器来启动模型的训练，这将为模型的训练节省很多参数初始化和微调的时间。一旦模型的性能有所起伏，我们就可以切换到带动量的随机梯度下降法来进一步优化模型，以达到最佳的性能</p>
-</blockquote>
-</li>
-<li><p><strong>处理数据不平衡</strong>：不同类的训练数据数量差异较大，会使得预测结果倾向于数量大的类别。</p>
-<blockquote>
-<p> 对损失函数使用类别权重：对于数据量小的类别，损失函数中使用较高的权重值。这样对该类的任何错误都将导致非常大的损失值，以此来惩罚错误分类<br>过度抽样：对于小样本类别，重复进行采样<br>欠采样：对于大样本类别，跳过不选择部分数据<br>数据增强：对于小样本类别进行数据增强，生成更多训练样本  </p>
-</blockquote>
-</li>
-<li><strong>迁移学习</strong><img src="/2018/02/14/深度学习/深度学习技巧/transfer.png"></li>
-<li><strong>数据增强</strong>：保证数据原始类别标签的同时，对一些原始图像进行非线性的图像变换，来生成/合成新的训练样本。即对图像进行任何操作，改变图像的外观，但不能改变整体的内容。如对于猫的图像，我们可以把图像进行任意的几何变换，只要还是一只猫，那么label就不会变，<strong>但在图像以外的问题上能否直接使用数据增强有待进一步查阅资料</strong><blockquote>
-<p>水平或垂直旋转/翻转图像<br>随机改变图像的亮度和颜色<br>随机模糊图像<br>随机裁剪图像</p>
-</blockquote>
-</li>
-<li><strong>集成模型</strong>：对于一个特定的任务，训练多个模型并根据模型的整体性能决定最优的组合方案。具体的实现细节还不太清楚，但模型集成有三种比较典型的方式：<a href="http://blog.csdn.net/google19890102/article/details/46507387" target="_blank" rel="noopener">链接</a>。<strong>下2中有关于集成的几种常见设计</strong><img src="/2018/02/14/深度学习/深度学习技巧/集成.png"></li>
-<li><strong>模型剪枝加速</strong>：目的是为了在提高训练速度的同时保持模型的高性能，目前已有许多相关的研究，如<a href="https://arxiv.org/pdf/1704.04861.pdf" target="_blank" rel="noopener">MobileNet</a>等等。核心思想是按照一定标准为神经元进行排序，从而将排名低(即冗余的神经元，对模型贡献不大)的移除模型，也就是把不重要的卷积滤波器丢弃(因为神经元和卷积核一一对应)<blockquote>
-<p>一般的剪枝流程如下：Network -&gt; Evaluate Importance of Neurons -&gt; Remove the Least Important Neuron -&gt; Fine-tuning -&gt; Continue Pruning -&gt; Back to Evaluate Importance of Neurons  </p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h3 id="知乎专栏"><a href="#知乎专栏" class="headerlink" title="知乎专栏"></a><a href="https://zhuanlan.zhihu.com/easyml" target="_blank" rel="noopener">知乎专栏</a></h3><ul>
-<li><strong>参数初始化</strong>：<a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf" target="_blank" rel="noopener">Xavier</a>和<a href="https://arxiv.org/abs/1502.01852" target="_blank" rel="noopener">He</a>随便选一个，但一定要做<blockquote>
-<p>uniform均匀分布初始化：w = np.random.uniform(low=-scale, high=scale, size=[n_in,n_out])</p>
-<pre><code>Xavier初始法，适用于普通激活函数(tanh,sigmoid)：scale = np.sqrt(3/n)
-He初始化，适用于ReLU：scale = np.sqrt(6/n)
-</code></pre><p>normal高斯分布初始化：w = np.random.randn(n_in,n_out) * stdev # stdev为高斯分布的标准差，均值设为0</p>
-<pre><code>Xavier初始法，适用于普通激活函数 (tanh,sigmoid)：stdev = np.sqrt(n)
-He初始化，适用于ReLU：stdev = np.sqrt(2/n)
-</code></pre><p>svd初始化：对RNN有比较好的效果。参考论文：<a href="https://arxiv.org/abs/1312.6120" target="_blank" rel="noopener">https://arxiv.org/abs/1312.6120</a></p>
-</blockquote>
-</li>
-<li><strong>数据预处理</strong><blockquote>
-<p>常用：zero-center</p>
-<pre><code>X -= np.mean(X, axis = 0) # zero-center
-X /= np.std(X, axis = 0) # normalize
-</code></pre><p>不常用：白化</p>
-</blockquote>
-</li>
-<li><strong>训练技巧</strong><blockquote>
-<ul>
-<li>要做<strong>梯度归一化</strong>，即算出来的梯度除以minibatch size</li>
-<li><strong>clip c(梯度裁剪)</strong>: 限制最大梯度，其实是value = sqrt(w1^2+w2^2….)。如果value超过了阈值，就算一个衰减系系数，让value的值等于阈值: 5,10,15</li>
-<li><strong>Dropout</strong>对小数据防止过拟合有很好的效果，值一般设为0.5。小数据上dropout+sgd效果提升都非常明显。dropout的位置比较有讲究, 对于RNN,建议放到输入-&gt;RNN与RNN-&gt;输出的位置。关于RNN如何用dropout,可以参考<a href="http://arxiv.org/abs/1409.2329" target="_blank" rel="noopener">论文</a></li>
-<li><strong>优化器</strong>：同1中所述，SGD收敛慢，但结果好。对于SGD，可以选择从1.0或者0.1的学习率开始，隔一段时间在验证集上检查一下，如果cost没有下降，就对学习率减半。也可以先用ada系列先跑，最后快收敛的时候，更换成sgd继续训练，同样也会有提升。据说adadelta一般在分类问题上效果比较好，adam在生成问题上效果比较好</li>
-<li>除了gate之类的地方需要把输出限制成0-1之外，<strong>尽量不要用sigmoid</strong>。可以用tanh或者relu之类的激活函数。sigmoid的问题: 1. sigmoid函数在-4到4的区间里，才有较大的梯度。其他区间的梯度接近0，很容易造成梯度消失问题。2. 如果输入是0均值的，sigmoid函数的输出不是0均值的</li>
-<li>rnn的<strong>dim</strong>和<strong>embdding size</strong>，一般从128上下开始调整。<strong>batch size</strong>一般从128左右开始调整，合适最重要，并不是越大越好。关于Batch Size设置的分析可参考这篇<a href="http://blog.csdn.net/ycheng_sjtu/article/details/49804041" target="_blank" rel="noopener">文章</a>。对于batch，建议是把卡塞满的2的n次方</li>
-<li><strong>word2vec初始化</strong>，在小数据上不仅可以有效提高收敛速度，也可以可以提高结果</li>
-<li>尽量对数据做<strong>shuffle</strong></li>
-<li><strong>LSTM的forget gate的bias</strong>，用1.0或者更大的值做初始化可以取得更好的结果，来自这篇<a href="http://jmlr.org/proceedings/papers/v37/jozefowicz15.pdf" target="_blank" rel="noopener">论文</a>。实际使用中，不同的任务可能需要尝试不同的值</li>
-<li>使用<strong>Batch Normalization</strong>可以提升效果</li>
-<li>如果模型包含全连接层（MLP），且输入和输出大小一样，可以考虑<strong>将MLP替换成Highway Network</strong>，对结果有一点提升，建议作为最后提升模型的手段。原理很简单，就是给输出加了一个gate来控制信息的流动，详细介绍请参考<a href="http://arxiv.org/abs/1505.00387" target="_blank" rel="noopener">论文</a></li>
-<li><strong>一轮加正则，一轮不加正则</strong>，反复进行</li>
-</ul>
-</blockquote>
-</li>
-<li><strong>Ensemble(模型集成)</strong><blockquote>
-<p>Ensemble是论文刷结果的终极核武器，一般有以下几种方式：</p>
-<ul>
-<li>同样的参数，不同的初始化方式</li>
-<li>不同的参数，通过cross-validation，选取最好的几组</li>
-<li>同样的参数，模型训练的不同阶段，即不同迭代次数的模型</li>
-<li>不同的模型，进行线性融合。例如RNN和传统模型</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h3 id="知乎回答"><a href="#知乎回答" class="headerlink" title="知乎回答"></a><a href="https://www.zhihu.com/question/41631631" target="_blank" rel="noopener">知乎回答</a></h3><ul>
-<li><strong>Relu+Bn</strong>可以满足95%的情况，除非有些特殊情况会用identity，比如回归问题，比如resnet的shortcut支路</li>
-<li><strong>Dropout</strong>，分类问题用dropout ，只需要最后一层softmax 前用基本就可以了，能够防止过拟合，可能对accuracy提高不大，但是dropout 前面的那层如果是之后要使用的feature的话，性能会大大提升</li>
-<li><strong>数据的shuffle和augmentation</strong>，aug不能瞎加，比如行人识别一般就不会加上下翻转的，因为不会碰到头朝下的异型种</li>
-<li><strong>降学习率</strong>，随着网络训练的进行，学习率要逐渐降下来。如果用tensorboard就能发现，在学习率下降的一瞬间，网络会有个巨大的性能提升。同样的fine-tuning也要根据模型的性能设置合适的学习率，比如一个训练的已经非常好的模型你上来就1e-3的学习率，那之前就白训练了，就是说网络性能越好，学习率要越小</li>
-<li><strong>tensorboard</strong>，帮助你监视网络的状态，来调整网络参数</li>
-<li><strong>随时存档模型，要有validation</strong>。把每个epoch和其对应的validation 结果存下来，可以分析出开始overfitting的时间点，方便下次加载fine-tuning</li>
-<li><strong>网络层数</strong>，参数量什么的都不是大问题，在性能不丢的情况下，减到最小。<strong>（不是说网络越深越好？）</strong></li>
-<li>对于batch size，建议是把卡塞满的2的n次方</li>
-<li>输入减不减mean归一化在有了bn之后已经不那么重要了</li>
-<li>卷积核的分解。从最初的5×5分解为两个3×3，到后来的3×3分解为1×3和3×1，再到resnet的1×1，3×3，1×1，再xception的3×3 channel-wise conv+1×1，网络的计算量越来越小，层数越来越多，性能越来越好，这些都是设计网络时可以借鉴的</li>
-<li>不同尺寸的feature maps的concat，只用一层的feature map一把梭可能不如concat好，pspnet就是这种思想，这个思想很常用</li>
-<li>resnet的shortcut确实会很有用，重点在于shortcut支路一定要是identity，主路是什么conv都无所谓，这是我亲耳听resnet作者所述</li>
-<li>针对于metric learning，对feature加个classification 的约束通常可以提高性能加快收敛</li>
-</ul>
-<hr>
-<h3 id="链接和链接"><a href="#链接和链接" class="headerlink" title="链接和链接"></a><a href="https://www.zhihu.com/question/27962483" target="_blank" rel="noopener">链接</a>和<a href="https://www.zhihu.com/question/25097993" target="_blank" rel="noopener">链接</a></h3>]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> 炼丹技巧 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[六大聚类算法]]></title>
-      <url>/2018/02/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%85%AD%E5%A4%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/</url>
-      <content type="html"><![CDATA[<p>介绍六类主流的聚类算法，并总结了相应的优缺点</p>
-<ul>
-<li>K-Means</li>
-<li>均值漂移聚类</li>
-<li>基于密度的聚类方法（DBSCAN）</li>
-<li>用高斯混合模型（GMM）的最大期望（EM）聚类</li>
-<li>凝聚层次聚类</li>
-<li>图团体检测</li>
-</ul>
-<a id="more"></a>
-<p>原文来自机器之心 <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a><br>序号写成”.”格式全部崩了。。把分隔符去掉又显得太挤了。。。以后找到办法了再回来改TAT</p>
-<h3 id="K-Means"><a href="#K-Means" class="headerlink" title="K-Means"></a><strong>K-Means</strong></h3> <img src="/2018/02/12/深度学习/六大聚类算法/K-Means.png">
-<ul>
-<li>优点：速度快，O(N)</li>
-<li>缺点：类别数需要事先人为估计，无法通过算法来确定类别数；结果有可能不可重复</li>
-<li>变种：K-Medians，每次用中值向量而不是均值来作为中心。对异常值不敏感，对大数据集速度慢，因为需要做排序</li>
-</ul>
-<hr>
-<h3 id="均值漂移聚类"><a href="#均值漂移聚类" class="headerlink" title="均值漂移聚类"></a><strong>均值漂移聚类</strong></h3><ul>
-<li>算法：随机选择n个中心点，有n个半径为r的圆形滑动窗口，同时开始迭代。每次迭代时，滑动窗口的中心点都不断移向窗口内所有点的均值点，也就是<strong>移向点密度更大的区域</strong>，直到收敛(点密度无法再增加)。收敛时，若多个窗口发生重叠时，保留点数最多的那个窗口。这样就可以得到类别数以及每个类的中心位置。其他各个点属于哪一类则取决于迭代过程中该点在哪一类的窗口中的次数最多<img src="/2018/02/12/深度学习/六大聚类算法/Meanshift.png"></li>
-<li>优点：类别数量由算法自动获得；聚类中心朝最大点密度聚集的事实也是非常令人满意的</li>
-<li>缺点：窗口大小/半径「r」的选择可能是不重要的</li>
-</ul>
-<hr>
-<h3 id="基于密度的聚类方法（DBSCAN）"><a href="#基于密度的聚类方法（DBSCAN）" class="headerlink" title="基于密度的聚类方法（DBSCAN）"></a><strong>基于密度的聚类方法（DBSCAN）</strong></h3><ul>
-<li>算法：每次从一个未被访问过的数据点开始，若该点的邻域(ε 距离内的所有点都是邻域点)内点的数量大于参数minPoints，则该点为一个新类的第一个点，否则该点就是噪声点。若该点成为了一个新类的第一个点，则该点邻域内的所有点也成为了该类的一部分，同时以这些新点再去找它们邻域中的点并加到该类中来，直到收敛。收敛后，在未被访问过的点中再找一个重新开始之前的步骤<img src="/2018/02/12/深度学习/六大聚类算法/DBSCAN.png"></li>
-<li>优点：不需要人为确定类别数；能够辨别噪声；能很好地找到任意大小和任意形状的类</li>
-<li>缺点：当簇的密度不同时，它的表现不如其他聚类算法(因为密度不同，参数ε和minPoints的设置也需要不一样，难以估计)</li>
-</ul>
-<hr>
-<h3 id="用高斯混合模型（GMM）的最大期望（EM）聚类"><a href="#用高斯混合模型（GMM）的最大期望（EM）聚类" class="headerlink" title="用高斯混合模型（GMM）的最大期望（EM）聚类"></a><strong>用高斯混合模型（GMM）的最大期望（EM）聚类</strong></h3><ul>
-<li>K-Means中假设数据点的分布是圆形的(其分类原理是离哪个中心点更近就认为是哪一类)，限制较大。GMM中假设数据点是高斯分布的，意味着类可以是各种类型的形状(二维中为椭圆，因为x和y方向各自有标准差)。于是，任务就变成了<strong>使用EM来找到每个类别的高斯函数</strong>。下图是典型的K-Means不适用的情况：<img src="/2018/02/12/深度学习/六大聚类算法/EM.png"></li>
-<li>算法：和K-Means一样，先选择类别数量，并随机初始化高斯分布参数。随后计算每个数据点属于一个特定类的概率(一个点越靠近高斯的中心，它就越可能属于该类)。基于这些概率，计算一组新的高斯分布参数使得类内数据点的概率最大化。其中，新参数是由数据点位置的加权和得到，权重就是之前提到的概率。重复之前的操作直到收敛<img src="/2018/02/12/深度学习/六大聚类算法/EM2.png"></li>
-<li>优点：类形状任意(K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0)；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率</li>
-</ul>
-<hr>
-<h3 id="凝聚层次聚类"><a href="#凝聚层次聚类" class="headerlink" title="凝聚层次聚类"></a><strong>凝聚层次聚类</strong></h3><ul>
-<li>层次聚类分为自上而下和自下而上。对于自下而上，每个数据点都是单独的一个类，随后<strong>不断合并两个类</strong>，直到所有类最后都合并成一个包含所有数据点的类。自下而上层次聚类又被称为凝聚式层次聚类(HAC)。<img src="/2018/02/12/深度学习/六大聚类算法/HAC.png"></li>
-<li>算法：一开始有N个数据点，也就是N个类。随后自行定义一种距离度量标准如平均距离等，每次迭代时选择将两个距离最近的类合并在一起，直到只剩下一个类。我们只需要选择何时停止合并，就可以选择最终需要多少个类</li>
-<li>优点：不需要指定类个数，我们可以自由选择看起来最好的类个数；对距离度量标准不敏感；</li>
-<li>缺点：效率低，O(N^2)</li>
-</ul>
-<hr>
-<h3 id="图团体检测（Graph-Community-Detection）"><a href="#图团体检测（Graph-Community-Detection）" class="headerlink" title="图团体检测（Graph Community Detection）"></a>图团体检测（Graph Community Detection）</h3><ul>
-<li>当我们的数据可以被表示为一个网络或图（graph）时，我们可以使用图团体检测方法完成聚类。聚类的质量由<strong>模块性分数</strong>进行评估，模块性越高，该网络聚类成不同团体的程度就越好。因此通过最优化方法寻找最大模块性就能发现聚类该网络的最佳方法。<img src="/2018/02/12/深度学习/六大聚类算法/Graph.png"></li>
-<li>模块性可以使用以下公式进行计算：<img src="/2018/02/12/深度学习/六大聚类算法/Graph1.png"></li>
-<li>其中L代表网络中边的数量，k_i和k_j是指每个顶点的degree，它可以通过将每一行和每一列的项加起来而得到。两者相乘再除以2L表示当该网络是随机分配的时候顶点i和j之间的预期边数。括号中的项表示了该网络的真实结构和随机组合时的预期结构之间的差。当A_ij==1且(k_i*k_j)/2L很小时，其返回的值最高。即当在定点i和j之间存在一个「非预期」的边时，得到的值更高。最后的δc_i, c_j是克罗内克δ函数（Kronecker-delta function）。</li>
-<li>优点：在典型的结构化数据中和现实网状数据都有非常好的性能</li>
-<li>缺点：会忽略一些小的集群，且只适用于结构化的图模型</li>
-</ul>
-]]></content>
-      
-        <categories>
-            
-            <category> 机器学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 机器学习 </tag>
-            
-            <tag> 无监督学习 </tag>
-            
-            <tag> 聚类 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[自编码器]]></title>
-      <url>/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8/</url>
-      <content type="html"><![CDATA[<p>关于AE到VAE的介绍</p>
-<a id="more"></a>
-<p>待看：论文、cs231nLet13中的VAE推导</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> 无监督学习 </tag>
-            
-            <tag> 自编码器 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[cs231n学习笔记]]></title>
-      <url>/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-      <content type="html"><![CDATA[<p>把cs231n 2017年的课程重新刷一遍，记录相关的笔记</p>
-<a id="more"></a>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> 公开课 </tag>
-            
-            <tag> 计算机视觉 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Daily Reading]]></title>
-      <url>/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Daily-Reading/</url>
-      <content type="html"><![CDATA[<p>记录一下每天看的公众号和知乎相关内容</p>
-<a id="more"></a>
-<hr>
-<h5 id="2017-12-26"><a href="#2017-12-26" class="headerlink" title="2017-12-26"></a>2017-12-26</h5><ol>
-<li>十大机器学习Python库(机器之心)<blockquote>
-<p>大部分都没见过，可以看看</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h5 id="2017-12-27"><a href="#2017-12-27" class="headerlink" title="2017-12-27"></a>2017-12-27</h5><ol>
-<li>如何在NLP领域干成第一件事(AI科技评论)<blockquote>
-<p>找开源项目并重现，争取进一步改善；<br>找如ACL会议论文集，找感兴趣的方向8，了解该方向的方法/数据/团队；</p>
-</blockquote>
-</li>
-<li><strong>Python相关文章(AI科技评论)*</strong><blockquote>
-<p>静态代码检查工具Flake；<br>视频合成器；<br>从零开始用遗传算法和深度学习演化有机体的生长过程；<br>破解验证码；<br>Chutes&amp;Ladders游戏模拟；<br>创建Chatbot；<br>图像散列；<br>介绍BP；<br>Memorization技术，加速Python；<br>分享Python学习技巧</p>
-</blockquote>
-</li>
-<li>Attention模型(机器学习算法与自然语言处理)<blockquote>
-<p>各种Attention机制的综述 </p>
-</blockquote>
-</li>
-<li><strong>神经进化策略(机器之心)*</strong><blockquote>
-<p>可能未来使用神经进化策略替代反向传播，了解一下</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h5 id="2017-12-28"><a href="#2017-12-28" class="headerlink" title="2017-12-28"></a>2017-12-28</h5><ol>
-<li><strong>CS中的线代(机器之心)*</strong><blockquote>
-<p>一篇普渡的论文，45页</p>
-</blockquote>
-</li>
-<li><strong>2018AI研究趋势(机器之心)**</strong><blockquote>
-<p>汇总资源：开放资源(介绍了DeepMind/OpenAI等的博客，着重推荐Distill)；<br>机器翻译；<br>理解视频(预测下一帧等+数据集介绍)；<br>多任务/多模式学习；<br>强化学习(游戏Dota/星际争霸)；<br>解释人工智能(可视化/InterpretNet)；<br>保护人工智能被对抗样本愚弄；<br>超越梯度(合成梯度/进化策略/SGD改进/学习优化/不同空间的优化)；<br>3D和图形的几何深度学习</p>
-</blockquote>
-</li>
-<li>FoolNLTK：一个便捷的中文处理工具(机器之心)<blockquote>
-<p>基于BiLSTM的开源中文分词模型</p>
-</blockquote>
-</li>
-<li>NIPS 2017的收获与思考(AI科技评论)<blockquote>
-<p>3篇Best paper：博弈论相关，打败德州扑克顶级玩家；随机优化风险最小化问题；提出全新的拟合优度算法。都好高端，不知道讲的是什么<br>这篇文章作者主要关注了强化学习；<br> *还介绍了4篇MSRA的paper：有一篇关于机器翻译的论文可能可以用在LipNet项目中？</p>
-</blockquote>
-</li>
-<li>如何理解hekaiming的Focal Loss(PaperWeekly)<blockquote>
-<p>解决分类问题中类别不平衡、分类难度差异的一个loss</p>
-</blockquote>
-</li>
-<li><strong>草根学Python(机器学习研究会)**</strong><blockquote>
-<p>寒假和笨方法学Python一起看</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h5 id="2017-12-29"><a href="#2017-12-29" class="headerlink" title="2017-12-29"></a>2017-12-29</h5><ol>
-<li>2017最火的五篇深度学习论文(专知)<blockquote>
-<p>CycleGAN-图像迁移；<br>Wasserstein GAN-提出更好的用于训练GAN的目标函数；<br>simGAN-产生模拟数据，使用未标记的真实数据来改进模拟数据(无监督的)<br>AlphaGo zero-无人类知识先验的情况下学会下围棋<br>深度图像先验-理解神经网络模型中先验的作用(没搞懂)</p>
-</blockquote>
-</li>
-<li><strong>机器学习、NLP、Python和Math最好的150余个教程(AI科技大本营)**</strong><blockquote>
-<p>资源汇总</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h5 id="2017-12-30"><a href="#2017-12-30" class="headerlink" title="2017-12-30"></a>2017-12-30</h5><ol>
-<li><strong>ICCV2017: 基于检测和跟踪的视频中人体姿态估计(专知)*</strong><blockquote>
-<p>人体姿态估计相关</p>
-</blockquote>
-</li>
-<li><strong>如何与深度学习服务器优雅的交互(夕小瑶)**</strong><blockquote>
-<p>服务器相关操作</p>
-</blockquote>
-</li>
-<li>机器之心年度盘点：2017年人工智能领域备受关注的科研成果(机器之心)<blockquote>
-<p>AlphaGo-无须人类知识标注，自我对抗<br>德州扑克击败人类-深度学习/纳什均衡的博弈求解<br>自归一化-比BN更好的归一化<br>GAN和各种变体<br>深度神经网络碰上语音合成-WaveNet<br>大批量数据并行训练ImageNet-分布式同步SGD训练(将ResNet-50在ImageNet上的训练时间缩短到48分钟)<br>Capsule-抛弃反向传播<br>递归皮质网络-新型概率生成模型，旨在超越神经网络<br>从TPU到NPU-NPU是华为麒麟970手机端的芯片</p>
-</blockquote>
-</li>
-<li>机器学习非凸优化技术(机器之心)</li>
-<li>在线深度学习：在数据流中实时学习深度神经网络(机器之心)</li>
-</ol>
-<hr>
-<h5 id="2018-02-10"><a href="#2018-02-10" class="headerlink" title="2018-02-10"></a>2018-02-10</h5><ol>
-<li>想要实现深度神经网络？一张 Excel 表格就够了(机器之心) <a href="https://mp.weixin.qq.com/s/Gdqo4XKkq6UG0aS4KF2MXg" target="_blank" rel="noopener">链接</a><blockquote>
-<p>有一个比较完整的CNN流程，关于CNN的一些理解：<a href="https://docs.google.com/spreadsheets/d/1SwfVctd4TjdN2S8BL09ktpQN_41sARYzD3NEHyr-8Z0/edit?usp=sharing" target="_blank" rel="noopener">链接</a>    </p>
-</blockquote>
-</li>
-<li><strong>Facebook提出DensePose数据集和网络架构：可实现实时的人体姿态估计(机器之心)*</strong> <a href="https://mp.weixin.qq.com/s/sFd9hrMrKDl5UJwlY6N7mw" target="_blank" rel="noopener">链接</a><blockquote>
-<p>人体姿态估计相关</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h5 id="2018-02-11"><a href="#2018-02-11" class="headerlink" title="2018-02-11"></a>2018-02-11</h5><ol>
-<li><strong>从语义上理解卷积核行为，UCLA朱松纯等人使用决策树量化解释CNN(机器之心)*</strong> <a href="https://mp.weixin.qq.com/s/t9ZHW8fkWtnvpM7ynJOTDw" target="_blank" rel="noopener">链接</a><blockquote>
-<p><strong>解释CNN模型</strong>：借助<strong>决策树</strong>在语义层面上解释 CNN 做出的每一个特定预测，即哪个卷积核（或物体部位）被用于预测最终的类别，以及其在预测中贡献了多少。<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650735975&amp;idx=1&amp;sn=af91c24d8b0d058f35ac8b1ea65a0ea9&amp;chksm=871ac119b06d480f573675a7a60c6653fe8bcd09e2e5627b15ce1a2c704acecb8d857cde60fe&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">斯坦福也有类似的工作</a>。</p>
-</blockquote>
-</li>
-<li>李沐《动手学深度学习》课程视频汇总(机器之心) <a href="https://mp.weixin.qq.com/s/_6ewS7kzUC5TK71rjGOSAA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>使用Apache MXNet的最新前端Gluon作为开发工具。<a href="https://discuss.gluon.ai/t/topic/753" target="_blank" rel="noopener">视频链接</a>；<a href="http://zh.gluon.ai/" target="_blank" rel="noopener">中文文档</a></p>
-</blockquote>
-</li>
-<li>一文读懂什么是变分自编码器(专知) <a href="https://mp.weixin.qq.com/s/mtZ4_pwl8_GhitgImAU0VA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>AE到VAE</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h5 id="2018-02-12"><a href="#2018-02-12" class="headerlink" title="2018-02-12"></a>2018-02-12</h5><ol>
-<li>机器学习的经典算法 <a href="https://mp.weixin.qq.com/s/CxSG9l_dxA4G-SZKOGI1ng" target="_blank" rel="noopener">链接</a> <blockquote>
-<p>回归算法：线性回归(数值问题，最小二乘法，使用梯度下降逼近求解函数极值问题) &amp; 逻辑回归(分类问题，结果中加一个Sigmoid函数)</p>
-<pre><code>用于拟合逻辑回归中非线性分类线的两种算法：神经网络(ANN) &amp; SVM*(和高斯“核”结合，表达复杂的分类界限。核最典型的特征就是可以将低维的空间映射到高维空间，低维空间的非线性分类线就相当于高维空间的线性分类线)
-</code></pre><p>聚类算法：无监督的一种，K-Means。<strong>见3</strong><br>降维算法：无监督的一种，<strong>PCA*</strong><br>推荐算法：基于物品内容的推荐（将与用户购买的内容近似的物品推荐给用户） &amp; 基于用户相似度的推荐（将与目标用户兴趣相同的其他用户购买的东西推荐给目标用户），<strong>协同过滤算法*</strong><br>其他：高斯判别、朴素贝叶斯、决策树</p>
-</blockquote>
-</li>
-<li>​爬虫与反爬虫 <a href="https://mp.weixin.qq.com/s/tO0ArSJK4AFx5E49v7RBqw" target="_blank" rel="noopener">链接</a><blockquote>
-<p>有趣的爬虫与反爬虫工作介绍</p>
-</blockquote>
-</li>
-<li><strong>六大聚类算法*</strong> <a href="https://mp.weixin.qq.com/s/_5A3DuVyN6aE9n5OEc19kA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>参看博文<a href="https://dmortem.github.io/2018/02/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%85%AD%E5%A4%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/#more">六大聚类算法</a></p>
-</blockquote>
-</li>
-<li>最新云端&amp;单机GPU横评 <a href="https://mp.weixin.qq.com/s/gdDKw-nHdilpB3JfoLAuaA" target="_blank" rel="noopener">链接</a><blockquote>
-<p><strong>性能</strong>：Volta性能优于Nvidia 1080Ti（约1.1-1.3倍）和P100（约1.2-1.5倍）<br><strong>成本</strong>：Paperspace Volta性价比高。Google P100比Paperspace Volta贵10%，Amazon Volta比Paperspace Volta贵40%</p>
-<pre><code>- Paperspace Volta适合只需要1个GPU的用户，性能好
-- Google P100最为灵活，它允许用户在任意实例上使用1、2、4个P100 GPU（或最多 8个K80 GPU），允许用户自定义CPU和GPU配置来满足计算需求。尽管由于架构所限，Tesla P100的性能略显落后，但从成本角度考虑，其性价比很有优势
-- Amazon Volta性能优于Google P100，也可以连接1、4或8个GPU。但用户无法自定义基础实例类型。性价比比较低。如果迫切需要用8个GPU或在EC2上搭建模型，那么目前仍推荐使用Amazon Volta
-</code></pre></blockquote>
-</li>
-<li><strong>理解深度学习中的矩阵运算*</strong> <a href="https://mp.weixin.qq.com/s/703Lb9jO0r7biA91ddV2Bg" target="_blank" rel="noopener">链接</a><blockquote>
-<p><a href="http://parrt.cs.usfca.edu/doc/matrix-calculus/index.html" target="_blank" rel="noopener">论文链接</a></p>
-</blockquote>
-</li>
-<li>最新7篇VAE相关论文 <a href="https://mp.weixin.qq.com/s/oTF8xiLoKpPm_n-iF2rXIQ" target="_blank" rel="noopener">链接</a><blockquote>
-<p>利用带混合解码器的条件变分自编码器生成主题汉语诗歌<br>一种使用条件变分自编码器的Zero Shot Learning的生成模型<br>变分自编码器在不同模态之间的双向生成<br>使用深度密度先验的MR图像重建<br>变分递归神经机器翻译<br>变分自编码器的推断次优性<br>使用条件VAEs和GANs从视觉属性中合成人脸</p>
-</blockquote>
-</li>
-<li><strong>UC Berkeley提出特征选择新方法：条件协方差最小化*</strong> <a href="https://mp.weixin.qq.com/s/LbXHpnC19euqriCtSHeg1Q" target="_blank" rel="noopener">链接</a><blockquote>
-<p><strong>模型解释性。</strong>这篇<a href="https://papers.nips.cc/paper/7270-kernel-feature-selection-via-conditional-covariance-minimization.pdf" target="_blank" rel="noopener">论文</a>的综述部分可以看一下，论文本身数学性比较强，<a href="https://github.com/Jianbo-Lab/CCM" target="_blank" rel="noopener">Github</a><br><strong>降维可以增强模型的可解释性，特征选择则是常用的降维方法。</strong>特征选择算法通常可分为：滤波器（filter）、封装（wrapper）以及嵌入（embedded）。<br><strong>滤波器</strong>方法基于数据的本质属性选择特征，与所用的学习算法无关。如可以计算每个特征和响应变量之间的相关性，然后选择相关性最高的变量<br><strong>封装</strong>方法的目标是寻找能够使某个预测器的性能最优化的特征。如可以训练多个支持向量机，每个支持向量机使用不同的特征子集，然后选择在训练数据上损失最小的特征子集。因为特征子集的数量是指数规模的，所以封装方法通常会使用贪心算法<br><strong>嵌入</strong>方法将特征选择和预测结合成一个问题。它通常会优化一个目标函数，这个目标函数结合了拟合优度和对参数数量的惩罚。一个例子就是构建线性模型的LASSO方法，它用L1 penalty来表征对参数数目的惩罚<br><strong>本文</strong>提出了条件协方差最小化（CCM）方法，这是一个统一前两个观点的特征选择方法。这个方法基于最小化条件协方差算子的迹来进行特征选择。思想是选择能够最大化预测基于协变量响应依赖的特征。</p>
-</blockquote>
-</li>
-<li><strong>深度学习的7大实用技巧*</strong> <a href="https://mp.weixin.qq.com/s/geCFcJDvOAw2Jaf2_nWsrg" target="_blank" rel="noopener">链接</a><br>参看博文<a href="https://dmortem.github.io/2018/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/">深度学习技巧</a></li>
-</ol>
-<hr>
-<h5 id="2018-02-13"><a href="#2018-02-13" class="headerlink" title="2018-02-13"></a>2018-02-13</h5><ol>
-<li><strong>机器学习中的模型评价、模型选择及算法选择*</strong> <a href="https://mp.weixin.qq.com/s/zs9ihUFI-ixP4EgMTvnFBg" target="_blank" rel="noopener">链接</a><br>参看博文<a href="https://dmortem.github.io/2018/02/16/深度学习/机器学习中的模型评价与选择/">机器学习中的模型评价与选择</a></li>
-<li>波士顿动力的机器人会开门了，中国尚需奋力追赶 <a href="https://mp.weixin.qq.com/s/mEd0sClnv8bFuYZ7_A0r5Q" target="_blank" rel="noopener">链接</a><blockquote>
-<p>里面的几个视频非常有趣</p>
-</blockquote>
-</li>
-<li>R语言入门指导 <a href="https://mp.weixin.qq.com/s/-e7sE71OCs86c9H-8mkT7Q" target="_blank" rel="noopener">链接</a><blockquote>
-<p>比较细比较初级的教程</p>
-</blockquote>
-</li>
-<li>谷歌云TPU服务正式全面开放 <a href="https://mp.weixin.qq.com/s/CPmSTWhnrCMAokt-nCh9nA" target="_blank" rel="noopener">链接</a><blockquote>
-<p>张量处理器（Tensor Processing Unit，TPU）是机器学习专属芯片，去年又推出了第二代产品（Cloud TPU）。<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650725188&amp;idx=1&amp;sn=98b6e447704a5797989f3200c47a5f6e&amp;chksm=871b1f3ab06c962c4087eff5fc8e35cb32e6a7964d086b377314f0373d08d4c8adad766183e3&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">TPU论文</a><br>谷歌云平台（GCP）提供Cloud TPU beta版自2018年2月12日起用，旨在帮助机器学习专家更快地训练和运行ML模型<br>云TPU如今在数量受限的情况下可用，价格以秒计费，大约为每云TPU每小时6.50美元</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h5 id="2018-02-14"><a href="#2018-02-14" class="headerlink" title="2018-02-14"></a>2018-02-14</h5><ol>
-<li>多维数据可视化策略 <a href="https://mp.weixin.qq.com/s/mD732PqDtqYdFZSxZWtvvg" target="_blank" rel="noopener">链接</a></li>
-</ol>
-<hr>
-<h5 id="2018-02-15"><a href="#2018-02-15" class="headerlink" title="2018-02-15"></a>2018-02-15</h5><ol>
-<li><strong>从LeNet到SENet——卷积神经网络回顾**</strong> <a href="https://mp.weixin.qq.com/s/2wfwe_d0_moKYDjV-WM7Jw" target="_blank" rel="noopener">链接</a></li>
-</ol>
-<hr>
-<h5 id="2018-02-16"><a href="#2018-02-16" class="headerlink" title="2018-02-16"></a>2018-02-16</h5><ol>
-<li><p><strong>2017年机器之心AI高分概述文章全集**</strong> <a href="https://mp.weixin.qq.com/s/wDWF1RFaW9EOEoctyJvopQ" target="_blank" rel="noopener">链接</a></p>
-</li>
-<li><p>谷歌大脑Wasserstein自编码器：新一代生成模型算法 <a href="https://mp.weixin.qq.com/s/Ci0HPy3ENz1ZooB784aMcA" target="_blank" rel="noopener">链接</a></p>
-<blockquote>
-<p>ICLR 2018. 具有VAE的一些优点，也结合了GAN结构的特性，可以实现更好的性能</p>
-</blockquote>
-</li>
-<li><p>Pedro Domingos总结机器学习研究的12个宝贵经验 <a href="https://mp.weixin.qq.com/s/HnJ2GfslrMcLc04eJ35qHQ" target="_blank" rel="noopener">链接</a></p>
-<blockquote>
-<p>关于机器学习的一些经验分享，非调参经验</p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> 论文阅读 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Pytorch学习]]></title>
-      <url>/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Pytorch%E5%AD%A6%E4%B9%A0/</url>
-      <content type="html"><![CDATA[<p>记录一下Pytorch学习过程以及踩过的一些坑</p>
-<a id="more"></a>]]></content>
-      
-        <categories>
-            
-            <category> 深度学习 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-            <tag> Pytorch </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Welcome to my blog]]></title>
-      <url>/2018/02/09/%E9%9A%8F%E7%AC%94/Welcome-to-my-blog/</url>
-      <content type="html"><![CDATA[<p>一直想搞个博客，但是一直懒得搞，拖延癌晚期/(ㄒoㄒ)/~~。。之前搞过一个jekyll的，这次想了想还是换hexo了</p>
-<a id="more"></a>
-<h3 id="搭建细节"><a href="#搭建细节" class="headerlink" title="搭建细节"></a>搭建细节</h3><p>主要参考了<a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="noopener">http://blog.csdn.net/gdutxiaoxu/article/details/53576018</a></p>
-<p>大致流程如下：</p>
-<ul>
-<li>安装node.js</li>
-<li>本地安装Hexo</li>
-<li>配置Hexo</li>
-<li>把Hexo和Github Page联系</li>
-</ul>
-<p>随后就是换主题、搞一下私人定制的事情啦，接下来几天慢慢看看官方文档，把这个博客做的好看一点o(<em>￣▽￣</em>)ブ</p>
-<hr>
-<h3 id="2018-02-10-update"><a href="#2018-02-10-update" class="headerlink" title="2018-02-10 update"></a>2018-02-10 update</h3><p>新添站内搜索功能、生成站点地图功能，参考<a href="https://www.ezlippi.com/blog/2017/02/hexo-search.html" target="_blank" rel="noopener">https://www.ezlippi.com/blog/2017/02/hexo-search.html</a><br>**删除安装的插件直接npm unistall 插件名即可<br>根据官方文档通过修改_config.yml添加了一系列功能</p>
-<hr>
-<h3 id="2018-02-12-update"><a href="#2018-02-12-update" class="headerlink" title="2018-02-12 update"></a>2018-02-12 update</h3><p>在博文中添加图片，参考<a href="https://www.jianshu.com/p/cf0628478a4e" target="_blank" rel="noopener">链接</a><br>在博文中的写法：<br>Markdown中写注释，参考<a href="https://www.jianshu.com/p/9be87e7e15bf" target="_blank" rel="noopener">链接</a></p>
-<hr>
-<p>待添加：评论功能(next继承来必力)；<a href="http://blog.csdn.net/qq_33699981/article/details/72716951" target="_blank" rel="noopener">http://blog.csdn.net/qq_33699981/article/details/72716951</a><br>To be continued…</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 随笔 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 随笔 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[机器学习中的模型评价与选择]]></title>
+    <url>%2F2018%2F02%2F16%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7%E4%B8%8E%E9%80%89%E6%8B%A9%2F</url>
+    <content type="text"><![CDATA[介绍机器学习中如何评估、选择模型 Holdout方法和正态逼近置信区间 重复Holdout和Bootstrap 交叉验证和超参数优化 结论 节选自机器之心 链接，原文还涉及很多偏数学、理论方面的东西英文原文 链接 机器学习模型的性能估计主要分为以下三步 使用训练集训练模型 用模型预测测试集的分类 计算在测试集上的错误率 Holdout方法 Holdout是最简单的模型评估技术，把数据集随机拆分成训练集和测试集 Resubstitution验证或Resubstitution评估指的是在同一个训练数据集上训练和评估一个模型 随机抽样可能导致训练集和测试集分布不平衡，甚至测试集中可能不包含少数类的样本。因此，可以使用层次化的方式划分数据集，保证划分得到的训练集和测试集保持原始比例 在数据量大、类别较平衡的数据集上，非层次化的随机抽样不是一个大问题，但最好还是使用层次化抽样 正态逼近置信区间：计算模型预测精度或计算误差置信区间。假设预测结果会遵循一个正态分布，然后根据中心极限定理计算单次训练-测试划分的平均值的置信区间。通过正态逼近计算出基于单个测试集的性能估计的不确定性。详细推导见原文 重复Holdout和Bootstrap 模型评估的偏差与方差：将数据集的较多数据作为测试集容易给评估带来悲观偏差。随着测试集样本数量的减少，悲观偏差降低，性能估计的方差增加 重复Holdout验证：多次随机划分训练集和测试集，重复Holdout方法估计模型性能然后取平均值的方法获得更具鲁棒性的评估，又称为蒙特卡洛交叉验证 Bootstrap方法：从经验分布中采样生成新样本，衡量性能估计的不确定性。如果把Holdout方法理解为不放回采样，那么bootstrap就可以理解为通过有放回重采样产生新数据 Leave-one-out Bootstrap（LOOB）方法：这种方法测试集数据和训练集数据没有重叠 交叉验证和超参数优化 three-way Holdout方法：将数据集划分为训练、验证和测试集三部分，用于超参数调优 K-Fold交叉验证：数据集中的每个样本都有被测试的机会。与重复holdout方法相比，k-fold交叉验证的测试数据没有重叠，而重复holdout是重复使用样本进行测试 2-fold和留一法（Leave-One-Out）交叉验证：分别是K-Fold交叉验证中k=2和k=n的特殊情况。留一交叉验证法中，每次迭代中，模型都在其中n-1个样本上进行拟合，然后在剩余的一个样本上进行评估。这种方法对小数据集特别有用 在计算可行的情况下，留一法交叉验证更值得推荐，近似无偏，但方差大；当数据集很大的时候，出于计算效率的考虑我们就会更倾向于holdout方法（相当于分成2部分，迭代2次即可），我们在深度学习中使用的就是Holdout方法而不是交叉验证 在k-fold交叉验证中，随着k的增加有如下趋势： 性能估计偏差减小（更准确）性能估计方差增大（更大的变化性）计算成本增加（在拟合过程中训练集更大，需要的迭代次数更多）在k-fold交叉验证中将k的值降到最小（如2或3）也会增加小数据集上模型估计的方差，因为随机抽样变化较大推荐用10折交叉验证 如果我们对数据归一化或进行特征选择，我们通常会在k-fold交叉验证循环中执行这些操作，即做归一化时不考虑测试集部分的数据，但可能效果不好。关于这一选择可参考链接。看了以后感觉不是很有所谓，差异不大(“for the greater majority of cases, IN and OUT are not significantly different”) 结论 当处理的样本量较大时，使用holdout方法进行模型评价非常合适 对于超参数优化，推荐10折交叉验证 对于小样本，留一法交叉验证则是一个不错的选择]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>模型评估</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深度学习技巧]]></title>
+    <url>%2F2018%2F02%2F14%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7%2F</url>
+    <content type="text"><![CDATA[在这里总结一下看到过的各路炼丹技巧 深度学习的7大实用技巧* 链接 数据：有标签的数据越多，模型的性能越好。重温深度学习时代数据不可思议的有效性 优化器：RMSprop，Adadelta和Adam法都是自适应优化算法，会自动更新学习率。普通的随机梯度下降法需要手动选择学习率和动量参数。 在实践中，自适应优化器往往比普通的梯度下降法更快地让模型达到收敛状态。然而，选择这些优化器的模型最终性能都不太好，而普通的梯度下降法通常能够达到更好的收敛最小值，从而获得更好的模型性能，但这可能比某些优化程序需要更多的收敛时间。此外，随机梯度下降法也更依赖于有效的初始化方法和学习速率衰减指数的设置，这在实践中是很难确定的。如下图，Adam初期效果好，但SGD在训练结束后可以获得更好的全局最小值 可以混合使用两类优化器：由Adam优化器过渡到随机梯度下降法来优化模型。在训练的早期阶段，使用Adam优化器来启动模型的训练，这将为模型的训练节省很多参数初始化和微调的时间。一旦模型的性能有所起伏，我们就可以切换到带动量的随机梯度下降法来进一步优化模型，以达到最佳的性能 处理数据不平衡：不同类的训练数据数量差异较大，会使得预测结果倾向于数量大的类别。 对损失函数使用类别权重：对于数据量小的类别，损失函数中使用较高的权重值。这样对该类的任何错误都将导致非常大的损失值，以此来惩罚错误分类过度抽样：对于小样本类别，重复进行采样欠采样：对于大样本类别，跳过不选择部分数据数据增强：对于小样本类别进行数据增强，生成更多训练样本 迁移学习 数据增强：保证数据原始类别标签的同时，对一些原始图像进行非线性的图像变换，来生成/合成新的训练样本。即对图像进行任何操作，改变图像的外观，但不能改变整体的内容。如对于猫的图像，我们可以把图像进行任意的几何变换，只要还是一只猫，那么label就不会变，但在图像以外的问题上能否直接使用数据增强有待进一步查阅资料 水平或垂直旋转/翻转图像随机改变图像的亮度和颜色随机模糊图像随机裁剪图像 集成模型：对于一个特定的任务，训练多个模型并根据模型的整体性能决定最优的组合方案。具体的实现细节还不太清楚，但模型集成有三种比较典型的方式：链接。下2中有关于集成的几种常见设计 模型剪枝加速：目的是为了在提高训练速度的同时保持模型的高性能，目前已有许多相关的研究，如MobileNet等等。核心思想是按照一定标准为神经元进行排序，从而将排名低(即冗余的神经元，对模型贡献不大)的移除模型，也就是把不重要的卷积滤波器丢弃(因为神经元和卷积核一一对应) 一般的剪枝流程如下：Network -&gt; Evaluate Importance of Neurons -&gt; Remove the Least Important Neuron -&gt; Fine-tuning -&gt; Continue Pruning -&gt; Back to Evaluate Importance of Neurons 知乎专栏 参数初始化：Xavier和He随便选一个，但一定要做 uniform均匀分布初始化：w = np.random.uniform(low=-scale, high=scale, size=[n_in,n_out]) Xavier初始法，适用于普通激活函数(tanh,sigmoid)：scale = np.sqrt(3/n) He初始化，适用于ReLU：scale = np.sqrt(6/n) normal高斯分布初始化：w = np.random.randn(n_in,n_out) * stdev # stdev为高斯分布的标准差，均值设为0 Xavier初始法，适用于普通激活函数 (tanh,sigmoid)：stdev = np.sqrt(n) He初始化，适用于ReLU：stdev = np.sqrt(2/n) svd初始化：对RNN有比较好的效果。参考论文：https://arxiv.org/abs/1312.6120 数据预处理 常用：zero-center X -= np.mean(X, axis = 0) # zero-center X /= np.std(X, axis = 0) # normalize 不常用：白化 训练技巧 要做梯度归一化，即算出来的梯度除以minibatch size clip c(梯度裁剪): 限制最大梯度，其实是value = sqrt(w1^2+w2^2….)。如果value超过了阈值，就算一个衰减系系数，让value的值等于阈值: 5,10,15 Dropout对小数据防止过拟合有很好的效果，值一般设为0.5。小数据上dropout+sgd效果提升都非常明显。dropout的位置比较有讲究, 对于RNN,建议放到输入-&gt;RNN与RNN-&gt;输出的位置。关于RNN如何用dropout,可以参考论文 优化器：同1中所述，SGD收敛慢，但结果好。对于SGD，可以选择从1.0或者0.1的学习率开始，隔一段时间在验证集上检查一下，如果cost没有下降，就对学习率减半。也可以先用ada系列先跑，最后快收敛的时候，更换成sgd继续训练，同样也会有提升。据说adadelta一般在分类问题上效果比较好，adam在生成问题上效果比较好 除了gate之类的地方需要把输出限制成0-1之外，尽量不要用sigmoid。可以用tanh或者relu之类的激活函数。sigmoid的问题: 1. sigmoid函数在-4到4的区间里，才有较大的梯度。其他区间的梯度接近0，很容易造成梯度消失问题。2. 如果输入是0均值的，sigmoid函数的输出不是0均值的 rnn的dim和embdding size，一般从128上下开始调整。batch size一般从128左右开始调整，合适最重要，并不是越大越好。关于Batch Size设置的分析可参考这篇文章。对于batch，建议是把卡塞满的2的n次方 word2vec初始化，在小数据上不仅可以有效提高收敛速度，也可以可以提高结果 尽量对数据做shuffle LSTM的forget gate的bias，用1.0或者更大的值做初始化可以取得更好的结果，来自这篇论文。实际使用中，不同的任务可能需要尝试不同的值 使用Batch Normalization可以提升效果 如果模型包含全连接层（MLP），且输入和输出大小一样，可以考虑将MLP替换成Highway Network，对结果有一点提升，建议作为最后提升模型的手段。原理很简单，就是给输出加了一个gate来控制信息的流动，详细介绍请参考论文 一轮加正则，一轮不加正则，反复进行 Ensemble(模型集成) Ensemble是论文刷结果的终极核武器，一般有以下几种方式： 同样的参数，不同的初始化方式 不同的参数，通过cross-validation，选取最好的几组 同样的参数，模型训练的不同阶段，即不同迭代次数的模型 不同的模型，进行线性融合。例如RNN和传统模型 知乎回答 Relu+Bn可以满足95%的情况，除非有些特殊情况会用identity，比如回归问题，比如resnet的shortcut支路 Dropout，分类问题用dropout ，只需要最后一层softmax 前用基本就可以了，能够防止过拟合，可能对accuracy提高不大，但是dropout 前面的那层如果是之后要使用的feature的话，性能会大大提升 数据的shuffle和augmentation，aug不能瞎加，比如行人识别一般就不会加上下翻转的，因为不会碰到头朝下的异型种 降学习率，随着网络训练的进行，学习率要逐渐降下来。如果用tensorboard就能发现，在学习率下降的一瞬间，网络会有个巨大的性能提升。同样的fine-tuning也要根据模型的性能设置合适的学习率，比如一个训练的已经非常好的模型你上来就1e-3的学习率，那之前就白训练了，就是说网络性能越好，学习率要越小 tensorboard，帮助你监视网络的状态，来调整网络参数 随时存档模型，要有validation。把每个epoch和其对应的validation 结果存下来，可以分析出开始overfitting的时间点，方便下次加载fine-tuning 网络层数，参数量什么的都不是大问题，在性能不丢的情况下，减到最小。（不是说网络越深越好？） 对于batch size，建议是把卡塞满的2的n次方 输入减不减mean归一化在有了bn之后已经不那么重要了 卷积核的分解。从最初的5×5分解为两个3×3，到后来的3×3分解为1×3和3×1，再到resnet的1×1，3×3，1×1，再xception的3×3 channel-wise conv+1×1，网络的计算量越来越小，层数越来越多，性能越来越好，这些都是设计网络时可以借鉴的 不同尺寸的feature maps的concat，只用一层的feature map一把梭可能不如concat好，pspnet就是这种思想，这个思想很常用 resnet的shortcut确实会很有用，重点在于shortcut支路一定要是identity，主路是什么conv都无所谓，这是我亲耳听resnet作者所述 针对于metric learning，对feature加个classification 的约束通常可以提高性能加快收敛 链接和链接]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>炼丹技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[六大聚类算法]]></title>
+    <url>%2F2018%2F02%2F12%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2F%E5%85%AD%E5%A4%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[介绍六类主流的聚类算法，并总结了相应的优缺点 K-Means 均值漂移聚类 基于密度的聚类方法（DBSCAN） 用高斯混合模型（GMM）的最大期望（EM）聚类 凝聚层次聚类 图团体检测 原文来自机器之心 链接序号写成”.”格式全部崩了。。把分隔符去掉又显得太挤了。。。以后找到办法了再回来改TAT K-Means 优点：速度快，O(N) 缺点：类别数需要事先人为估计，无法通过算法来确定类别数；结果有可能不可重复 变种：K-Medians，每次用中值向量而不是均值来作为中心。对异常值不敏感，对大数据集速度慢，因为需要做排序 均值漂移聚类 算法：随机选择n个中心点，有n个半径为r的圆形滑动窗口，同时开始迭代。每次迭代时，滑动窗口的中心点都不断移向窗口内所有点的均值点，也就是移向点密度更大的区域，直到收敛(点密度无法再增加)。收敛时，若多个窗口发生重叠时，保留点数最多的那个窗口。这样就可以得到类别数以及每个类的中心位置。其他各个点属于哪一类则取决于迭代过程中该点在哪一类的窗口中的次数最多 优点：类别数量由算法自动获得；聚类中心朝最大点密度聚集的事实也是非常令人满意的 缺点：窗口大小/半径「r」的选择可能是不重要的 基于密度的聚类方法（DBSCAN） 算法：每次从一个未被访问过的数据点开始，若该点的邻域(ε 距离内的所有点都是邻域点)内点的数量大于参数minPoints，则该点为一个新类的第一个点，否则该点就是噪声点。若该点成为了一个新类的第一个点，则该点邻域内的所有点也成为了该类的一部分，同时以这些新点再去找它们邻域中的点并加到该类中来，直到收敛。收敛后，在未被访问过的点中再找一个重新开始之前的步骤 优点：不需要人为确定类别数；能够辨别噪声；能很好地找到任意大小和任意形状的类 缺点：当簇的密度不同时，它的表现不如其他聚类算法(因为密度不同，参数ε和minPoints的设置也需要不一样，难以估计) 用高斯混合模型（GMM）的最大期望（EM）聚类 K-Means中假设数据点的分布是圆形的(其分类原理是离哪个中心点更近就认为是哪一类)，限制较大。GMM中假设数据点是高斯分布的，意味着类可以是各种类型的形状(二维中为椭圆，因为x和y方向各自有标准差)。于是，任务就变成了使用EM来找到每个类别的高斯函数。下图是典型的K-Means不适用的情况： 算法：和K-Means一样，先选择类别数量，并随机初始化高斯分布参数。随后计算每个数据点属于一个特定类的概率(一个点越靠近高斯的中心，它就越可能属于该类)。基于这些概率，计算一组新的高斯分布参数使得类内数据点的概率最大化。其中，新参数是由数据点位置的加权和得到，权重就是之前提到的概率。重复之前的操作直到收敛 优点：类形状任意(K-Means其实是GMM的一个特殊情况，即所有维度的协方差均接近0)；由于GMM使用概率，因此每个数据点可以属于很多类，且对于每个类都有一个相应的概率 凝聚层次聚类 层次聚类分为自上而下和自下而上。对于自下而上，每个数据点都是单独的一个类，随后不断合并两个类，直到所有类最后都合并成一个包含所有数据点的类。自下而上层次聚类又被称为凝聚式层次聚类(HAC)。 算法：一开始有N个数据点，也就是N个类。随后自行定义一种距离度量标准如平均距离等，每次迭代时选择将两个距离最近的类合并在一起，直到只剩下一个类。我们只需要选择何时停止合并，就可以选择最终需要多少个类 优点：不需要指定类个数，我们可以自由选择看起来最好的类个数；对距离度量标准不敏感； 缺点：效率低，O(N^2) 图团体检测（Graph Community Detection） 当我们的数据可以被表示为一个网络或图（graph）时，我们可以使用图团体检测方法完成聚类。聚类的质量由模块性分数进行评估，模块性越高，该网络聚类成不同团体的程度就越好。因此通过最优化方法寻找最大模块性就能发现聚类该网络的最佳方法。 模块性可以使用以下公式进行计算： 其中L代表网络中边的数量，k_i和k_j是指每个顶点的degree，它可以通过将每一行和每一列的项加起来而得到。两者相乘再除以2L表示当该网络是随机分配的时候顶点i和j之间的预期边数。括号中的项表示了该网络的真实结构和随机组合时的预期结构之间的差。当A_ij==1且(k_i*k_j)/2L很小时，其返回的值最高。即当在定点i和j之间存在一个「非预期」的边时，得到的值更高。最后的δc_i, c_j是克罗内克δ函数（Kronecker-delta function）。 优点：在典型的结构化数据中和现实网状数据都有非常好的性能 缺点：会忽略一些小的集群，且只适用于结构化的图模型]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>无监督学习</tag>
+        <tag>机器学习</tag>
+        <tag>聚类</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[自编码器]]></title>
+    <url>%2F2018%2F02%2F11%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2F%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[关于AE到VAE的介绍 待看：论文、cs231nLet13中的VAE推导]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>无监督学习</tag>
+        <tag>自编码器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[cs231n学习笔记]]></title>
+    <url>%2F2018%2F02%2F11%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2Fcs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[把cs231n 2017年的课程重新刷一遍，记录相关的笔记]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>公开课</tag>
+        <tag>计算机视觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Daily Reading]]></title>
+    <url>%2F2018%2F02%2F10%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2FDaily-Reading%2F</url>
+    <content type="text"><![CDATA[记录一下每天看的公众号和知乎相关内容 2017-12-26 十大机器学习Python库(机器之心) 大部分都没见过，可以看看 2017-12-27 如何在NLP领域干成第一件事(AI科技评论) 找开源项目并重现，争取进一步改善；找如ACL会议论文集，找感兴趣的方向8，了解该方向的方法/数据/团队； Python相关文章(AI科技评论)* 静态代码检查工具Flake；视频合成器；从零开始用遗传算法和深度学习演化有机体的生长过程；破解验证码；Chutes&amp;Ladders游戏模拟；创建Chatbot；图像散列；介绍BP；Memorization技术，加速Python；分享Python学习技巧 Attention模型(机器学习算法与自然语言处理) 各种Attention机制的综述 神经进化策略(机器之心)* 可能未来使用神经进化策略替代反向传播，了解一下 2017-12-28 CS中的线代(机器之心)* 一篇普渡的论文，45页 2018AI研究趋势(机器之心)** 汇总资源：开放资源(介绍了DeepMind/OpenAI等的博客，着重推荐Distill)；机器翻译；理解视频(预测下一帧等+数据集介绍)；多任务/多模式学习；强化学习(游戏Dota/星际争霸)；解释人工智能(可视化/InterpretNet)；保护人工智能被对抗样本愚弄；超越梯度(合成梯度/进化策略/SGD改进/学习优化/不同空间的优化)；3D和图形的几何深度学习 FoolNLTK：一个便捷的中文处理工具(机器之心) 基于BiLSTM的开源中文分词模型 NIPS 2017的收获与思考(AI科技评论) 3篇Best paper：博弈论相关，打败德州扑克顶级玩家；随机优化风险最小化问题；提出全新的拟合优度算法。都好高端，不知道讲的是什么这篇文章作者主要关注了强化学习； *还介绍了4篇MSRA的paper：有一篇关于机器翻译的论文可能可以用在LipNet项目中？ 如何理解hekaiming的Focal Loss(PaperWeekly) 解决分类问题中类别不平衡、分类难度差异的一个loss 草根学Python(机器学习研究会)** 寒假和笨方法学Python一起看 2017-12-29 2017最火的五篇深度学习论文(专知) CycleGAN-图像迁移；Wasserstein GAN-提出更好的用于训练GAN的目标函数；simGAN-产生模拟数据，使用未标记的真实数据来改进模拟数据(无监督的)AlphaGo zero-无人类知识先验的情况下学会下围棋深度图像先验-理解神经网络模型中先验的作用(没搞懂) 机器学习、NLP、Python和Math最好的150余个教程(AI科技大本营)** 资源汇总 2017-12-30 ICCV2017: 基于检测和跟踪的视频中人体姿态估计(专知)* 人体姿态估计相关 如何与深度学习服务器优雅的交互(夕小瑶)** 服务器相关操作 机器之心年度盘点：2017年人工智能领域备受关注的科研成果(机器之心) AlphaGo-无须人类知识标注，自我对抗德州扑克击败人类-深度学习/纳什均衡的博弈求解自归一化-比BN更好的归一化GAN和各种变体深度神经网络碰上语音合成-WaveNet大批量数据并行训练ImageNet-分布式同步SGD训练(将ResNet-50在ImageNet上的训练时间缩短到48分钟)Capsule-抛弃反向传播递归皮质网络-新型概率生成模型，旨在超越神经网络从TPU到NPU-NPU是华为麒麟970手机端的芯片 机器学习非凸优化技术(机器之心) 在线深度学习：在数据流中实时学习深度神经网络(机器之心) 2018-02-10 想要实现深度神经网络？一张 Excel 表格就够了(机器之心) 链接 有一个比较完整的CNN流程，关于CNN的一些理解：链接 Facebook提出DensePose数据集和网络架构：可实现实时的人体姿态估计(机器之心)* 链接 人体姿态估计相关 2018-02-11 从语义上理解卷积核行为，UCLA朱松纯等人使用决策树量化解释CNN(机器之心)* 链接 解释CNN模型：借助决策树在语义层面上解释 CNN 做出的每一个特定预测，即哪个卷积核（或物体部位）被用于预测最终的类别，以及其在预测中贡献了多少。斯坦福也有类似的工作。 李沐《动手学深度学习》课程视频汇总(机器之心) 链接 使用Apache MXNet的最新前端Gluon作为开发工具。视频链接；中文文档 一文读懂什么是变分自编码器(专知) 链接 AE到VAE 2018-02-12 机器学习的经典算法 链接 回归算法：线性回归(数值问题，最小二乘法，使用梯度下降逼近求解函数极值问题) &amp; 逻辑回归(分类问题，结果中加一个Sigmoid函数) 用于拟合逻辑回归中非线性分类线的两种算法：神经网络(ANN) &amp; SVM*(和高斯“核”结合，表达复杂的分类界限。核最典型的特征就是可以将低维的空间映射到高维空间，低维空间的非线性分类线就相当于高维空间的线性分类线) 聚类算法：无监督的一种，K-Means。见3降维算法：无监督的一种，PCA*推荐算法：基于物品内容的推荐（将与用户购买的内容近似的物品推荐给用户） &amp; 基于用户相似度的推荐（将与目标用户兴趣相同的其他用户购买的东西推荐给目标用户），协同过滤算法*其他：高斯判别、朴素贝叶斯、决策树 ​爬虫与反爬虫 链接 有趣的爬虫与反爬虫工作介绍 六大聚类算法 链接 参看博文六大聚类算法 最新云端&amp;单机GPU横评 链接 性能：Volta性能优于Nvidia 1080Ti（约1.1-1.3倍）和P100（约1.2-1.5倍）成本：Paperspace Volta性价比高。Google P100比Paperspace Volta贵10%，Amazon Volta比Paperspace Volta贵40% - Paperspace Volta适合只需要1个GPU的用户，性能好 - Google P100最为灵活，它允许用户在任意实例上使用1、2、4个P100 GPU（或最多 8个K80 GPU），允许用户自定义CPU和GPU配置来满足计算需求。尽管由于架构所限，Tesla P100的性能略显落后，但从成本角度考虑，其性价比很有优势 - Amazon Volta性能优于Google P100，也可以连接1、4或8个GPU。但用户无法自定义基础实例类型。性价比比较低。如果迫切需要用8个GPU或在EC2上搭建模型，那么目前仍推荐使用Amazon Volta 理解深度学习中的矩阵运算* 链接 论文链接 最新7篇VAE相关论文 链接 利用带混合解码器的条件变分自编码器生成主题汉语诗歌一种使用条件变分自编码器的Zero Shot Learning的生成模型变分自编码器在不同模态之间的双向生成使用深度密度先验的MR图像重建变分递归神经机器翻译变分自编码器的推断次优性使用条件VAEs和GANs从视觉属性中合成人脸 UC Berkeley提出特征选择新方法：条件协方差最小化* 链接 模型解释性。这篇论文的综述部分可以看一下，论文本身数学性比较强，Github降维可以增强模型的可解释性，特征选择则是常用的降维方法。特征选择算法通常可分为：滤波器（filter）、封装（wrapper）以及嵌入（embedded）。滤波器方法基于数据的本质属性选择特征，与所用的学习算法无关。如可以计算每个特征和响应变量之间的相关性，然后选择相关性最高的变量封装方法的目标是寻找能够使某个预测器的性能最优化的特征。如可以训练多个支持向量机，每个支持向量机使用不同的特征子集，然后选择在训练数据上损失最小的特征子集。因为特征子集的数量是指数规模的，所以封装方法通常会使用贪心算法嵌入方法将特征选择和预测结合成一个问题。它通常会优化一个目标函数，这个目标函数结合了拟合优度和对参数数量的惩罚。一个例子就是构建线性模型的LASSO方法，它用L1 penalty来表征对参数数目的惩罚本文提出了条件协方差最小化（CCM）方法，这是一个统一前两个观点的特征选择方法。这个方法基于最小化条件协方差算子的迹来进行特征选择。思想是选择能够最大化预测基于协变量响应依赖的特征。 深度学习的7大实用技巧* 链接参看博文深度学习技巧 2018-02-13 机器学习中的模型评价、模型选择及算法选择* 链接参看博文机器学习中的模型评价与选择 波士顿动力的机器人会开门了，中国尚需奋力追赶 链接 里面的几个视频非常有趣 R语言入门指导 链接 比较细比较初级的教程 谷歌云TPU服务正式全面开放 链接 张量处理器（Tensor Processing Unit，TPU）是机器学习专属芯片，去年又推出了第二代产品（Cloud TPU）。TPU论文谷歌云平台（GCP）提供Cloud TPU beta版自2018年2月12日起用，旨在帮助机器学习专家更快地训练和运行ML模型云TPU如今在数量受限的情况下可用，价格以秒计费，大约为每云TPU每小时6.50美元 2018-02-14 多维(1-6)数据可视化策略* 链接 可视化资源：pandas、matplotlib、seaborn、plotly、bokeh库；D3.js；The Visual Display of Quantitative Information.pdf教程的Github资源数据集：UCI机器学习库中的Wine Quality Data Set，分为葡萄酒中红色和白色酒框架：matplotlib和seaborn一维数据：利用pandas画直方图、核密度图等二维数据：配对相关性矩阵（pair-wise correlation matrix）并将其可视化为热力图；在感兴趣的属性之间使用配对散点图；平行坐标图；散点图；联合分布图等等多维数据：高于3维的最好方法是使用图分面、颜色、形状、大小、深度等。还可以使用时间作为维度，为随时间变化的属性制作一段动画。每多一个维度，就使用一种新的表征，如色调、深度、大小等 2018-02-15 从LeNet到SENet——卷积神经网络回顾** 链接 2018-02-16 2017年机器之心AI高分概述文章全集** 链接 去年机器之心的盘点：链接非常好的一份教程全集，有时间多看看 谷歌大脑Wasserstein自编码器：新一代生成模型算法 链接 ICLR 2018. 具有VAE的一些优点，也结合了GAN结构的特性，可以实现更好的性能 Pedro Domingos总结机器学习研究的12个宝贵经验 链接 关于机器学习的一些经验分享，非调参经验]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>论文阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Pytorch学习]]></title>
+    <url>%2F2018%2F02%2F10%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2FPytorch%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[记录一下Pytorch学习过程以及踩过的一些坑]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>Pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Welcome to my blog]]></title>
+    <url>%2F2018%2F02%2F09%2F%E9%9A%8F%E7%AC%94%2FWelcome-to-my-blog%2F</url>
+    <content type="text"><![CDATA[一直想搞个博客，但是一直懒得搞，拖延癌晚期/(ㄒoㄒ)/~~。。之前搞过一个jekyll的，这次想了想还是换hexo了 搭建细节主要参考了http://blog.csdn.net/gdutxiaoxu/article/details/53576018 大致流程如下： 安装node.js 本地安装Hexo 配置Hexo 把Hexo和Github Page联系 随后就是换主题、搞一下私人定制的事情啦，接下来几天慢慢看看官方文档，把这个博客做的好看一点o(￣▽￣)ブ 2018-02-10 update新添站内搜索功能、生成站点地图功能，参考https://www.ezlippi.com/blog/2017/02/hexo-search.html**删除安装的插件直接npm unistall 插件名即可根据官方文档通过修改_config.yml添加了一系列功能 2018-02-12 update在博文中添加图片，参考链接在博文中的写法：Markdown中写注释，参考链接 待添加：评论功能(next继承来必力)；http://blog.csdn.net/qq_33699981/article/details/72716951To be continued…]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
 </search>
