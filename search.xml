@@ -893,7 +893,21 @@ X /= np.std(X, axis = 0) # normalize
       <title><![CDATA[cs231n学习笔记]]></title>
       <url>/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<p>把cs231n 2017年的课程重新刷一遍，记录相关的笔记</p>
+<ul>
+<li><a href="http://cs231n.stanford.edu/" target="_blank" rel="noopener">cs231n课程主页</a></li>
+<li><a href="http://cs231n.stanford.edu/syllabus.html" target="_blank" rel="noopener">cs231n课程大纲</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv" target="_blank" rel="noopener">cs231n课程视频</a></li>
+</ul>
 <a id="more"></a>
+<h2 id="Lecture-2-Image-Classification"><a href="#Lecture-2-Image-Classification" class="headerlink" title="Lecture 2 Image Classification"></a>Lecture 2 Image Classification</h2><h4 id="Course-Materials"><a href="#Course-Materials" class="headerlink" title="Course Materials"></a>Course Materials</h4><ul>
+<li><a href="http://cs231n.github.io/python-numpy-tutorial/" target="_blank" rel="noopener">python/numpy tutorial</a></li>
+<li><a href="http://cs231n.github.io/classification/" target="_blank" rel="noopener">image classification notes</a></li>
+</ul>
+<h4 id="Course-Materials-翻译"><a href="#Course-Materials-翻译" class="headerlink" title="Course Materials 翻译"></a>Course Materials 翻译</h4><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/20878530?refer=intelligentunit" target="_blank" rel="noopener">Python Numpy教程</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20894041?refer=intelligentunit" target="_blank" rel="noopener">图像分类笔记</a></li>
+</ul>
+<h4 id="课程笔记"><a href="#课程笔记" class="headerlink" title="课程笔记"></a>课程笔记</h4><p> - </p>
 ]]></content>
       
         <categories>
@@ -1045,6 +1059,10 @@ X /= np.std(X, axis = 0) # normalize
 <hr>
 <h3 id="2018-02-17"><a href="#2018-02-17" class="headerlink" title="2018-02-17"></a>2018-02-17</h3><h4 id="1-区块链vs传统数据库：分布式运行有何优势-链接"><a href="#1-区块链vs传统数据库：分布式运行有何优势-链接" class="headerlink" title="1. 区块链vs传统数据库：分布式运行有何优势 链接"></a>1. 区块链vs传统数据库：分布式运行有何优势 <a href="https://mp.weixin.qq.com/s/fvrTBr7lvuXOhgyL2BRUuw" target="_blank" rel="noopener">链接</a></h4><blockquote>
 <p>区块链是一种容错率很高的分布式数据存储模式<br><strong>去中心化控制</strong>消除了中心化控制的风险。任何能够充分访问中心化数据库的人都可以摧毁或破坏其中的数据，因此用户依赖于数据库管理员的安全基础架构。区块链技术使用去中心化数据存储来避开这一问题，从而在自己的结构中建立安全性。区块链技术很适合记录某些种类的信息，传统数据库更适合记录另外一些种类的信息。对于每个组织而言，理解它想从数据库中获得什么非常关键，我们需要在选择数据库之前，判断每种数据库的优缺点</p>
+</blockquote>
+<hr>
+<h3 id="2018-02-18"><a href="#2018-02-18" class="headerlink" title="2018-02-18"></a>2018-02-18</h3><h4 id="1-胶囊网络为何如此热门-链接"><a href="#1-胶囊网络为何如此热门-链接" class="headerlink" title="1. 胶囊网络为何如此热门 链接"></a>1. 胶囊网络为何如此热门 <a href="https://mp.weixin.qq.com/s/Eyc4n-QIX3JTgBaFgC9d9w" target="_blank" rel="noopener">链接</a></h4><blockquote>
+<p>CapsNets需要的训练数据少；<br>CapsNets能更好地处理图像多义性表达<br>CapsNets具有“同变性”，输入的微小变化会导致输出的细微变化。即详细的姿态信息在整个网络中都被保留<br>CNNs需要额外的组件来实现自动识别一个部件归属于哪一个对象（如，这条腿属于这只羊）。而CapsNets则免费提供部件的层次结构<br>CapsNets在如CIFAR10或ImageNet大规模图像测试集上的表现不如CNNs好；需要大量计算，不能检测出相互靠近的同类型的两个对象（这被称为“拥挤问题”，且已被证明人类也存在这个问题）<br>CapsNets的主要思想还是非常有前途的，似乎只需要一些调整就可以发挥全部潜力</p>
 </blockquote>
 ]]></content>
       
