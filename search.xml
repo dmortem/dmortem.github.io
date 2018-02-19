@@ -899,15 +899,65 @@ X /= np.std(X, axis = 0) # normalize
 <li><a href="https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv" target="_blank" rel="noopener">cs231n课程视频</a></li>
 </ul>
 <a id="more"></a>
-<h2 id="Lecture-2-Image-Classification"><a href="#Lecture-2-Image-Classification" class="headerlink" title="Lecture 2 Image Classification"></a>Lecture 2 Image Classification</h2><h4 id="Course-Materials"><a href="#Course-Materials" class="headerlink" title="Course Materials"></a>Course Materials</h4><ul>
+<h1 id="Lecture-2-Image-Classification"><a href="#Lecture-2-Image-Classification" class="headerlink" title="Lecture 2 Image Classification"></a>Lecture 2 Image Classification</h1><h2 id="课程资源"><a href="#课程资源" class="headerlink" title="课程资源"></a>课程资源</h2><h3 id="Course-Materials"><a href="#Course-Materials" class="headerlink" title="Course Materials"></a>Course Materials</h3><ul>
 <li><a href="http://cs231n.github.io/python-numpy-tutorial/" target="_blank" rel="noopener">python/numpy tutorial</a></li>
 <li><a href="http://cs231n.github.io/classification/" target="_blank" rel="noopener">image classification notes</a></li>
 </ul>
-<h4 id="Course-Materials-翻译"><a href="#Course-Materials-翻译" class="headerlink" title="Course Materials 翻译"></a>Course Materials 翻译</h4><ul>
+<h3 id="Course-Materials-翻译"><a href="#Course-Materials-翻译" class="headerlink" title="Course Materials 翻译"></a>Course Materials 翻译</h3><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/20878530?refer=intelligentunit" target="_blank" rel="noopener">Python Numpy教程</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/20894041?refer=intelligentunit" target="_blank" rel="noopener">图像分类笔记</a></li>
 </ul>
-<h4 id="课程笔记"><a href="#课程笔记" class="headerlink" title="课程笔记"></a>课程笔记</h4><p> - </p>
+<h2 id="课程笔记"><a href="#课程笔记" class="headerlink" title="课程笔记"></a>课程笔记</h2><h3 id="Python-Numpy"><a href="#Python-Numpy" class="headerlink" title="Python Numpy"></a>Python Numpy</h3><h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><ul>
+<li>python –version        # 查看Python版本</li>
+<li>Python没有x++和x—的操作符</li>
+<li><strong>布尔逻辑</strong>：and；or；not；!=(xor)</li>
+<li><strong>字符串</strong>：<a href="http://link.zhihu.com/?target=https%3A//docs.python.org/2/library/stdtypes.html%23string-methods" target="_blank" rel="noopener">文档</a><ul>
+<li>hw = ‘hello’ + ‘ ‘ + ‘world’  </li>
+<li>hw = ‘%s %s %d’ % (hello, world, 12)  </li>
+<li>print(s.capitalize())        # 把第一个字母变大写，其余小写  </li>
+<li>print(s.upper())          # 全部大写  </li>
+<li>print(s.rjust(7))          # 右对齐，最左端不足补空格  </li>
+<li>print(s.center(7))        # 居中对齐  </li>
+<li>print(s.replace(‘l’, ‘(ell)’))    # 替换  </li>
+<li>print(‘  world ‘.strip())    # 去掉空格</li>
+</ul>
+</li>
+<li><p><strong>容器</strong>：<a href="https://docs.python.org/2/tutorial/datastructures.html#more-on-lists" target="_blank" rel="noopener">文档</a></p>
+<ul>
+<li><strong>列表Lists</strong>：Python中的数组，但是列表长度可变，能包含不同类型元素<pre><code>xs = [3, 1, 2]   # 创建一个列表
+print xs, xs[2]  # 输出：&quot;[3, 1, 2] 2&quot;
+print xs[-1]     # 即xs[2]
+xs[2] = &apos;foo&apos;    # 列表可以容纳不同类型的元素
+print xs         # 输出：&quot;[3, 1, &apos;foo&apos;]&quot;
+xs.append(&apos;bar&apos;) # 向列表末尾中加元素
+print xs         # 输出：&quot;[3, 1, &apos;foo&apos;, &apos;bar&apos;]&quot;
+x = xs.pop()     # 移除最后列表最后一个元素，并返回该元素
+print x, xs      # 输出：&quot;bar [3, 1, &apos;foo&apos;]&quot;
+</code></pre></li>
+<li>切片Slicing：用于获取列表中的元素<pre><code>nums = range(5)    # range是一个内置函数，创建一个列表，包含0到5的integer
+print nums         # 输出：&quot;[0, 1, 2, 3, 4]&quot;
+print nums[2:4]    # 获得一个索引从2到4（不包括4）的切片; 输出：&quot;[2, 3]&quot;
+print nums[2:]     # 获得一个索引从2到末尾的切片; 输出：&quot;[2, 3, 4]&quot;
+print nums[:2]     # 获得一个索引从开头到2（不包括2）的切片; 输出：&quot;[0, 1]&quot;
+print nums[:]      # 获得一个索引全部元素的切片; 输出：&quot;[0, 1, 2, 3, 4]&quot;
+print nums[:-1]    # 切片的索引也可以是负数; 输出：&quot;[0, 1, 2, 3]&quot;
+nums[2:4] = [8, 9] # 把一个列表赋值给一个切片
+print nums         # 输出：&quot;[0, 1, 8, 8, 4]&quot;
+</code></pre></li>
+<li><p>循环Loops</p>
+<pre><code>animals = [&apos;cat&apos;, &apos;dog&apos;, &apos;monkey&apos;]
+for animal in animals:
+    print animal
+# 输出：&quot;cat&quot;, &quot;dog&quot;, &quot;monkey&quot;, 一个一行
+
+animals = [&apos;cat&apos;, &apos;dog&apos;, &apos;monkey&apos;]
+for idx, animal in enumerate(animals):
+    print &apos;#%d: %s&apos; % (idx + 1, animal)
+# 输出：&quot;#1: cat&quot;, &quot;#2: dog&quot;, &quot;#3: monkey&quot;, 一个一行
+</code></pre></li>
+</ul>
+</li>
+</ul>
 ]]></content>
       
         <categories>
