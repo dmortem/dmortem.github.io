@@ -879,9 +879,9 @@ X /= np.std(X, axis = 0) # normalize
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 无监督学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
             <tag> 自编码器 </tag>
             
@@ -1086,7 +1086,55 @@ print np.sum(x, axis=1)        # 计算每行的sum; &quot;[3, 7]&quot;
 
 print x.True        # 转置
 </code></pre></li>
-<li>广播Broadcasting</li>
+<li><p>广播Broadcasting：让不同大小的矩阵直接在一起进行数学计算 <a href="https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html" target="_blank" rel="noopener">文档</a></p>
+<pre><code>import numpy as np
+x = np.array([[1,2,3], [4,5,6], [7,8,9], [10, 11, 12]])
+v = np.array([1, 0, 1])
+y = x + v  # 使用广播把v加到x的每一行中
+print y  
+# &quot;[[ 2  2  4]
+#   [ 5  5  7]
+#   [ 8  8 10]
+#   [11 11 13]]&quot;
+</code></pre><p> <strong>广播规则</strong></p>
+<ol>
+<li>如果数组的秩不同，使用1来将秩较小的数组进行扩展，直到两个数组的尺寸的长度都一样。</li>
+<li>如果两个数组在某个维度上的长度是一样的，或者其中一个数组在该维度上长度为1，那么我们就说这两个数组在该维度上是相容的。</li>
+<li>如果两个数组在所有维度上都是相容的，他们就能使用广播。</li>
+<li>如果两个输入数组的尺寸不同，那么注意其中较大的那个尺寸。因为广播之后，两个数组的尺寸将和那个较大的尺寸一样。</li>
+<li>在任何一个维度上，如果一个数组的长度为1，另一个数组长度大于1，那么在该维度上，就好像是对第一个数组进行了复制。</li>
+</ol>
+</li>
+<li><p>广播例子</p>
+<pre><code>import numpy as np
+
+v = np.array([1,2,3])  # v has shape (3,)
+w = np.array([4,5])    # w has shape (2,)
+print np.reshape(v, (3, 1)) * w        # 矩阵乘法
+# [[ 4  5]
+#  [ 8 10]
+#  [12 15]]
+# 首先v变成(3,1)，而w是(2,)，即(1,2)，两者广播运算后，维度为(3,2)
+
+x = np.array([[1,2,3], [4,5,6]])
+print x + v
+# [[2 4 6]
+#  [5 7 9]]
+# x是(2,3)，v是(3,)/(1,3)，广播后为(2,3)
+
+print (x.T + w).T
+# [[ 5  6  7]
+#  [ 9 10 11]]
+# x.T为(3,2)，w为(1,2)，相加后为(3,2)，再转置得到(2,3)
+
+print x + np.reshape(w, (2, 1))
+# 和上面的表达式等价，把w变形后可以直接广播相加
+
+print x * 2
+# [[ 2  4  6]
+#  [ 8 10 12]]
+# 对矩阵乘一个常数        
+</code></pre></li>
 </ul>
 <h4 id="Scipy-文档"><a href="#Scipy-文档" class="headerlink" title="Scipy 文档"></a>Scipy <a href="https://docs.scipy.org/doc/scipy/reference/" target="_blank" rel="noopener">文档</a></h4><ul>
 <li><p>图像操作</p>
