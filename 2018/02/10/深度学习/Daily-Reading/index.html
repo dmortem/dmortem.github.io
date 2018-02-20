@@ -590,7 +590,18 @@
 <li>CapsNets在如CIFAR10或ImageNet大规模图像测试集上的表现不如CNNs好；需要大量计算，不能检测出相互靠近的同类型的两个对象（这被称为“拥挤问题”，且已被证明人类也存在这个问题）</li>
 <li>CapsNets的主要思想还是非常有前途的，似乎只需要一些调整就可以发挥全部潜力</li>
 </ul>
-<h3 id="2018-02-19"><a href="#2018-02-19" class="headerlink" title="2018-02-19"></a>2018-02-19</h3><h4 id="1-神经网络“剪枝”的两个方法-链接"><a href="#1-神经网络“剪枝”的两个方法-链接" class="headerlink" title="1. 神经网络“剪枝”的两个方法 链接"></a>1. 神经网络“剪枝”的两个方法 <a href="https://mp.weixin.qq.com/s/rj1GTtFy6g131RIDo8OxrA" target="_blank" rel="noopener">链接</a></h4><h3 id="2018-02-20"><a href="#2018-02-20" class="headerlink" title="2018-02-20"></a>2018-02-20</h3><h4 id="1-从1400篇机器学习文章中精选出Top-10-链接"><a href="#1-从1400篇机器学习文章中精选出Top-10-链接" class="headerlink" title="1. 从1400篇机器学习文章中精选出Top 10 链接"></a>1. 从1400篇机器学习文章中精选出Top 10 <a href="https://mp.weixin.qq.com/s/-5jt5lvZIiJaamfCVb4OqQ" target="_blank" rel="noopener">链接</a></h4><ul>
+<h3 id="2018-02-19"><a href="#2018-02-19" class="headerlink" title="2018-02-19"></a>2018-02-19</h3><h4 id="1-神经网络“剪枝”的两个方法-链接"><a href="#1-神经网络“剪枝”的两个方法-链接" class="headerlink" title="1. 神经网络“剪枝”的两个方法 链接"></a>1. 神经网络“剪枝”的两个方法 <a href="https://mp.weixin.qq.com/s/f1SCK0J5oTWNJvtld3UAHQ" target="_blank" rel="noopener">链接</a></h4><ul>
+<li>一般用于减少网络非零参数数量的方法有三种：<blockquote>
+<p>(1) 正则化(regularization)：修改目标函数，如使用L0范数 <a href="https://arxiv.org/pdf/1712.01312.pdf" target="_blank" rel="noopener">论文</a><br>(2) 修剪(pruning)：面向大规模神经网络，并删除某些意义上冗余的特征或参数 <a href="https://arxiv.org/pdf/1801.05787.pdf" target="_blank" rel="noopener">论文</a><br>(3) 增长(growing)：从小型网络开始，按某种增长标准逐步增加新的单元</p>
+</blockquote>
+</li>
+<li>减少非零参数的目的如下：<blockquote>
+<p>(1) 保持相同性能的前提下降低计算成本，加速推断和训练<br>(2) 减少参数数量可以减少参数空间的冗余，从而提高泛化能力</p>
+</blockquote>
+</li>
+<li>这篇文章介绍了两篇近期关于神经网络修剪的论文，分别是 L_0 正则化方法和 Fisher 修剪方法</li>
+</ul>
+<h3 id="2018-02-20"><a href="#2018-02-20" class="headerlink" title="2018-02-20"></a>2018-02-20</h3><h4 id="1-从1400篇机器学习文章中精选出Top-10-链接"><a href="#1-从1400篇机器学习文章中精选出Top-10-链接" class="headerlink" title="1. 从1400篇机器学习文章中精选出Top 10 链接"></a>1. 从1400篇机器学习文章中精选出Top 10 <a href="https://mp.weixin.qq.com/s/-5jt5lvZIiJaamfCVb4OqQ" target="_blank" rel="noopener">链接</a></h4><ul>
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzI0ODcxODk5OA==&amp;mid=2247492492&amp;idx=3&amp;sn=ed0f600a84adfa7a4c3c39ad3890a71f&amp;chksm=e99ed075dee95963ae5a2c81c54f439a19b14405febd1685d2a194e1fecb1d599a4dcba530b0&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">Google Brain去年干了太多事，Jeff Dean一篇长文都没回顾完</a></li>
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzI0ODcxODk5OA==&amp;mid=2247492791&amp;idx=3&amp;sn=495f428dc27b8fb4e4ce3e2a7fbf0ece&amp;chksm=e99ed74edee95e58f68d62a2863cf2079d5fc01557dabcb46bdf03a089c70e79d714d25f47ff&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">一文详解如何使用Python和Keras构建属于你的 AlphaZero AI</a></li>
 <li><a href="https://arxiv.org/pdf/1801.10198.pdf" target="_blank" rel="noopener">通过概况长序列来生成维基百科</a></li>
