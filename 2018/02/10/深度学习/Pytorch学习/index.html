@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Chiyu Wu">
 <meta property="og:description" content="记录一下Pytorch学习过程以及踩过的一些坑  Pytorch官方文档 Pytorch官方教程">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-10T03:40:00.000Z">
+<meta property="og:updated_time" content="2018-02-20T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch学习">
 <meta name="twitter:description" content="记录一下Pytorch学习过程以及踩过的一些坑  Pytorch官方文档 Pytorch官方教程">
@@ -362,8 +362,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-10T11:40:00+08:00">
-                2018-02-10
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-21T00:00:00+08:00">
+                2018-02-21
               </time>
             
           </span>
@@ -441,7 +441,7 @@
 </ul>
 <h4 id="Autograd-automatic-differentiation（用于反向传播）"><a href="#Autograd-automatic-differentiation（用于反向传播）" class="headerlink" title="Autograd: automatic differentiation（用于反向传播）"></a>Autograd: automatic differentiation（用于反向传播）</h4><ul>
 <li>Variable<blockquote>
-<p>Variable是核心类，包含Tensor并支持在Tensor上的一切操作<br>.data访问数据；.grad访问梯度(如x.grad访问的是目标函数对于x的梯度)；.grad_fn涉及创建该变量的函数(如b=a+2，那么b.grad_fn就是a+2这个函数)，若变量是人为直接定义的，那.grad_fn就是None</p>
+<p>Variable是核心类，包含Tensor并支持在Tensor上的一切操作。记录了一系列操作<br>.data访问数据；.grad访问梯度(如x.grad访问的是目标函数对于x的梯度)；.grad_fn涉及创建该变量的函数(如b=a+2，那么b.grad_fn就是a+2这个函数)，若变量是人为直接定义的，那.grad_fn就是None</p>
 </blockquote>
 </li>
 <li>Gradients<blockquote>
@@ -454,9 +454,37 @@ y.backward(gradients)
 </code></pre></blockquote>
 </li>
 </ul>
-<h4 id="Neural-Networks（搭建网络）"><a href="#Neural-Networks（搭建网络）" class="headerlink" title="Neural Networks（搭建网络）"></a>Neural Networks（搭建网络）</h4><hr>
+<h4 id="Neural-Networks（搭建网络）"><a href="#Neural-Networks（搭建网络）" class="headerlink" title="Neural Networks（搭建网络）"></a>Neural Networks（搭建网络）</h4><ul>
+<li>Define the network<blockquote>
+<p>只需要定义forward，backward会自动计算<br>获取参数：params = list(net.parameters())；访问参数值：net.conv1.weight/bias<br>零初始化梯度：net.zero_grad</p>
+</blockquote>
+</li>
+<li>Loss Function &amp; Backprop<blockquote>
+<p>查看梯度信息（图）：loss.grad_fn / loss.grad_fn.next_functions[0][0] (print输出以后是MseLossBackward object at 0x7fe4c18539e8)<br>查看梯度值：net.conv1.bias.grad</p>
+</blockquote>
+</li>
+<li>Update the weights<blockquote>
+<p>不用手动实现weight的更新，直接调用torch.optim中的优化算法SGD、Adam等</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="Training-a-classifier（完整的一个训练例子）"><a href="#Training-a-classifier（完整的一个训练例子）" class="headerlink" title="Training a classifier（完整的一个训练例子）"></a>Training a classifier（完整的一个训练例子）</h4><ul>
+<li>What about data?<blockquote>
+<p>把数据利用各种库导入到numpy array，再转化到torch的Tensor<br>对于computer vision，Pytorch有一个torchvision库，里面有针对ImageNet、mnist等数据集的dataloader和data transformer</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="Data-Parallelism（多GPU并行计算）"><a href="#Data-Parallelism（多GPU并行计算）" class="headerlink" title="Data Parallelism（多GPU并行计算）"></a>Data Parallelism（多GPU并行计算）</h4><hr>
+<h3 id="Data-Loading-and-Processing-Tutorial-链接"><a href="#Data-Loading-and-Processing-Tutorial-链接" class="headerlink" title="Data Loading and Processing Tutorial 链接"></a>Data Loading and Processing Tutorial <a href="http://pytorch.org/tutorials/beginner/data_loading_tutorial.html" target="_blank" rel="noopener">链接</a></h3><ul>
+<li></li>
+</ul>
+<hr>
 <h3 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h3><ul>
 <li>x.view(-1, 8)是改变x的维度，如原来x是16*1，有16个元素，使用view(-1, 8)后为了保证还是16个元素，-1那一维就是16/8=2</li>
+<li>torch.nn只支持mini-batches，即所有的图像数据格式必须是batch * channel * height * width，因为nn.Conv2d的输入需要是这样的，如果是FC，那么可能不需要channel那一维。但batch维必须要有，如果只有一个batch，那就用input = input.unsqueeze(0)添加batch维</li>
+<li>训练的循环里，要把Tensor转换成Variable之后再送进网络，即inputs = Variable(inputs)</li>
+<li>若要用GPU训练，需要net.cuda()以及inputs = Variable(inputs.cuda())，即把网络和输入输出都放到GPU当中</li>
+<li>似乎把numpy转成Tensor后，还要指定是FloatTensor，即input = input.type(torch.FloatTensor)</li>
 </ul>
 
       
@@ -672,7 +700,7 @@ y.backward(gradients)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#60分钟教程-链接"><span class="nav-number">1.</span> <span class="nav-text">60分钟教程 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Pytorch"><span class="nav-number">1.1.</span> <span class="nav-text">What is Pytorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autograd-automatic-differentiation（用于反向传播）"><span class="nav-number">1.2.</span> <span class="nav-text">Autograd: automatic differentiation（用于反向传播）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Networks（搭建网络）"><span class="nav-number">1.3.</span> <span class="nav-text">Neural Networks（搭建网络）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">2.</span> <span class="nav-text">坑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#60分钟教程-链接"><span class="nav-number">1.</span> <span class="nav-text">60分钟教程 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Pytorch"><span class="nav-number">1.1.</span> <span class="nav-text">What is Pytorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autograd-automatic-differentiation（用于反向传播）"><span class="nav-number">1.2.</span> <span class="nav-text">Autograd: automatic differentiation（用于反向传播）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Networks（搭建网络）"><span class="nav-number">1.3.</span> <span class="nav-text">Neural Networks（搭建网络）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-a-classifier（完整的一个训练例子）"><span class="nav-number">1.4.</span> <span class="nav-text">Training a classifier（完整的一个训练例子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Parallelism（多GPU并行计算）"><span class="nav-number">1.5.</span> <span class="nav-text">Data Parallelism（多GPU并行计算）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Loading-and-Processing-Tutorial-链接"><span class="nav-number">2.</span> <span class="nav-text">Data Loading and Processing Tutorial 链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">3.</span> <span class="nav-text">坑</span></a></li></ol></div>
             
 
           </div>

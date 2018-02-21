@@ -89,7 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="/2018/02/11/深度学习/cs231n学习笔记/作图.png">
 <meta property="og:image" content="/2018/02/11/深度学习/cs231n学习笔记/作图2.png">
-<meta property="og:updated_time" content="2018-02-17T16:00:00.000Z">
+<meta property="og:updated_time" content="2018-02-20T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs231n学习笔记">
 <meta name="twitter:description" content="把cs231n 2017年的课程重新刷一遍，记录相关的笔记  cs231n课程主页 cs231n课程大纲 cs231n课程视频">
@@ -365,8 +365,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-18T00:00:00+08:00">
-                2018-02-18
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-21T00:00:00+08:00">
+                2018-02-21
               </time>
             
           </span>
@@ -467,8 +467,12 @@ xs.append(&apos;bar&apos;) # 向列表末尾中加元素
 print xs         # 输出：&quot;[3, 1, &apos;foo&apos;, &apos;bar&apos;]&quot;
 x = xs.pop()     # 移除最后列表最后一个元素，并返回该元素
 print x, xs      # 输出：&quot;bar [3, 1, &apos;foo&apos;]&quot;
+xs = xs + [&quot;fig&quot;, &quot;melon&quot;]    # 添加元素可以直接&quot;+&quot;或用append
+my_list_copy = my_list    # list在变量中存的是引用，这样赋值的话两个变量对应的是同一片内存地址
+my_list_copy = list(my_list)
+my_list_copy = my_list[:]    # 以上两种是复制列表中的值而不是引用
 </code></pre></li>
-<li>切片Slicing：用于获取列表中的元素<pre><code>nums = range(5)    # range是一个内置函数，创建一个列表，包含0到5的integer
+<li>切片Slicing：用于获取列表中的元素，语法list[start_index: end_index: step]<pre><code>nums = range(5)    # range是一个内置函数，创建一个列表，包含0到5的integer
 print nums         # 输出：&quot;[0, 1, 2, 3, 4]&quot;
 print nums[2:4]    # 获得一个索引从2到4（不包括4）的切片; 输出：&quot;[2, 3]&quot;
 print nums[2:]     # 获得一个索引从2到末尾的切片; 输出：&quot;[2, 3, 4]&quot;
