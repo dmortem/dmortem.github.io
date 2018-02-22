@@ -475,8 +475,18 @@ y.backward(gradients)
 </li>
 </ul>
 <h4 id="Data-Parallelism（多GPU并行计算）"><a href="#Data-Parallelism（多GPU并行计算）" class="headerlink" title="Data Parallelism（多GPU并行计算）"></a>Data Parallelism（多GPU并行计算）</h4><hr>
-<h3 id="Data-Loading-and-Processing-Tutorial-链接"><a href="#Data-Loading-and-Processing-Tutorial-链接" class="headerlink" title="Data Loading and Processing Tutorial 链接"></a>Data Loading and Processing Tutorial <a href="http://pytorch.org/tutorials/beginner/data_loading_tutorial.html" target="_blank" rel="noopener">链接</a></h3><ul>
-<li></li>
+<h3 id="Data-Loading-and-Processing-Tutorial-链接"><a href="#Data-Loading-and-Processing-Tutorial-链接" class="headerlink" title="Data Loading and Processing Tutorial 链接"></a>Data Loading and Processing Tutorial <a href="http://pytorch.org/tutorials/beginner/data_loading_tutorial.html" target="_blank" rel="noopener">链接</a></h3><h4 id="Dataset-class"><a href="#Dataset-class" class="headerlink" title="Dataset class"></a>Dataset class</h4><ul>
+<li>必须继承Dataset(torch.utils.data.Dataset)</li>
+<li>必须覆盖__len__和__getitem__两个方法，__getitem__的使用方式就是a[i]</li>
+<li>给的example的数据集有一个csv和一堆图片，csv中有图片的名称。建议构造函数(__init__)中只读csv文件(相当于索引)，具体对图片的读取放到__getitem__中，按需要读取    </li>
+</ul>
+<h4 id="Transforms"><a href="#Transforms" class="headerlink" title="Transforms"></a>Transforms</h4><ul>
+<li>dataset中transform参数可选，根据需求可以自己写一些变换，如改变图像大小、data augmentation等</li>
+<li>tsfm = Transform(params)</li>
+<li>transformed_sample = tsfm(sample)</li>
+</ul>
+<h4 id="Iterating-through-the-dataset"><a href="#Iterating-through-the-dataset" class="headerlink" title="Iterating through the dataset"></a>Iterating through the dataset</h4><ul>
+<li>torch.utils.data.DataLoader是一个迭代器，提供batching the data、shuffling the data、load the data in parallel功能</li>
 </ul>
 <hr>
 <h3 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h3><ul>
@@ -485,6 +495,7 @@ y.backward(gradients)
 <li>训练的循环里，要把Tensor转换成Variable之后再送进网络，即inputs = Variable(inputs)</li>
 <li>若要用GPU训练，需要net.cuda()以及inputs = Variable(inputs.cuda())，即把网络和输入输出都放到GPU当中</li>
 <li>似乎把numpy转成Tensor后，还要指定是FloatTensor，即input = input.type(torch.FloatTensor)</li>
+<li>numpy的图像矩阵储存格式是H * W * C，而Tensor是C * H * W，转换的时候要image = image.transpose((2, 0, 1))</li>
 </ul>
 
       
@@ -700,7 +711,7 @@ y.backward(gradients)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#60分钟教程-链接"><span class="nav-number">1.</span> <span class="nav-text">60分钟教程 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Pytorch"><span class="nav-number">1.1.</span> <span class="nav-text">What is Pytorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autograd-automatic-differentiation（用于反向传播）"><span class="nav-number">1.2.</span> <span class="nav-text">Autograd: automatic differentiation（用于反向传播）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Networks（搭建网络）"><span class="nav-number">1.3.</span> <span class="nav-text">Neural Networks（搭建网络）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-a-classifier（完整的一个训练例子）"><span class="nav-number">1.4.</span> <span class="nav-text">Training a classifier（完整的一个训练例子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Parallelism（多GPU并行计算）"><span class="nav-number">1.5.</span> <span class="nav-text">Data Parallelism（多GPU并行计算）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Loading-and-Processing-Tutorial-链接"><span class="nav-number">2.</span> <span class="nav-text">Data Loading and Processing Tutorial 链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">3.</span> <span class="nav-text">坑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#60分钟教程-链接"><span class="nav-number">1.</span> <span class="nav-text">60分钟教程 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Pytorch"><span class="nav-number">1.1.</span> <span class="nav-text">What is Pytorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autograd-automatic-differentiation（用于反向传播）"><span class="nav-number">1.2.</span> <span class="nav-text">Autograd: automatic differentiation（用于反向传播）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Networks（搭建网络）"><span class="nav-number">1.3.</span> <span class="nav-text">Neural Networks（搭建网络）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-a-classifier（完整的一个训练例子）"><span class="nav-number">1.4.</span> <span class="nav-text">Training a classifier（完整的一个训练例子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Parallelism（多GPU并行计算）"><span class="nav-number">1.5.</span> <span class="nav-text">Data Parallelism（多GPU并行计算）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Loading-and-Processing-Tutorial-链接"><span class="nav-number">2.</span> <span class="nav-text">Data Loading and Processing Tutorial 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dataset-class"><span class="nav-number">2.1.</span> <span class="nav-text">Dataset class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transforms"><span class="nav-number">2.2.</span> <span class="nav-text">Transforms</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Iterating-through-the-dataset"><span class="nav-number">2.3.</span> <span class="nav-text">Iterating through the dataset</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">3.</span> <span class="nav-text">坑</span></a></li></ol></div>
             
 
           </div>
