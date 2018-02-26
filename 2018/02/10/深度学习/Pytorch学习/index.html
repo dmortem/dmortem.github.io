@@ -433,7 +433,10 @@
 <p>由于教程中有太多的代码了，因此这里就只记录看过的内容的索引，方便以后自己写代码的时候回来找</p>
 <h3 id="60分钟教程-链接"><a href="#60分钟教程-链接" class="headerlink" title="60分钟教程 链接"></a>60分钟教程 <a href="http://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html#" target="_blank" rel="noopener">链接</a></h3><h4 id="What-is-Pytorch"><a href="#What-is-Pytorch" class="headerlink" title="What is Pytorch"></a>What is Pytorch</h4><ul>
 <li>介绍Tensors</li>
-<li>对于Tensor的操作</li>
+<li>对于Tensor的操作<blockquote>
+<p>view改变Tensor维度</p>
+</blockquote>
+</li>
 <li>Tensor和Numpy的相互转化<blockquote>
 <p>Torch的Tensor和Numpy数组使用的是同一块内存空间，改变其中一个也会影响另一个（指的是Numpy数组的内容是用a.numpy()赋值给b的情况）</p>
 </blockquote>
@@ -465,7 +468,7 @@ y.backward(gradients)
 </blockquote>
 </li>
 <li>Update the weights<blockquote>
-<p>不用手动实现weight的更新，直接调用torch.optim中的优化算法SGD、Adam等</p>
+<p>不用手动实现weight的更新，直接调用torch.optim中的优化算法SGD、Adam等<br>softmax包含在CrossEntropyLoss里面了</p>
 </blockquote>
 </li>
 </ul>
@@ -490,6 +493,12 @@ y.backward(gradients)
 <li>torch.utils.data.DataLoader是一个迭代器，提供batching the data、shuffling the data、load the data in parallel功能</li>
 </ul>
 <hr>
+<h3 id="Transfer-Learning-tutorial-链接"><a href="#Transfer-Learning-tutorial-链接" class="headerlink" title="Transfer Learning tutorial 链接"></a>Transfer Learning tutorial <a href="http://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html" target="_blank" rel="noopener">链接</a></h3><ul>
+<li>Finetuning the convnet：先在ImageNet上训练，再在自己的数据集上对该模型进行微调</li>
+<li>ConvNet as fixed feature extractor：把FC层之前的都当作一个固定的特征提取器，只调整最后几层全连接层</li>
+<li>划分了train和val集</li>
+</ul>
+<hr>
 <h3 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h3><ul>
 <li>x.view(-1, 8)是改变x的维度，如原来x是16*1，有16个元素，使用view(-1, 8)后为了保证还是16个元素，-1那一维就是16/8=2</li>
 <li>torch.nn只支持mini-batches，即所有的图像数据格式必须是batch * channel * height * width，因为nn.Conv2d的输入需要是这样的，如果是FC，那么可能不需要channel那一维。但batch维必须要有，如果只有一个batch，那就用input = input.unsqueeze(0)添加batch维</li>
@@ -497,6 +506,9 @@ y.backward(gradients)
 <li>若要用GPU训练，需要net.cuda()以及inputs = Variable(inputs.cuda())，即把网络和输入输出都放到GPU当中</li>
 <li>似乎把numpy转成Tensor后，还要指定是FloatTensor，即input = input.type(torch.FloatTensor)</li>
 <li>numpy的图像矩阵储存格式是H * W * C，而Tensor是C * H * W，转换的时候要image = image.transpose((2, 0, 1))</li>
+<li>conv1D卷积核的输入维度是Batch_size * Channels * H * W；Linear全连接的输入维度是Batch_size * 维度</li>
+<li>label是从0开始计数，注意自己的dataset中的label值</li>
+<li>pytorch的CrossEntropyLoss不含正则项，且是平均loss，求总loss的时候还要乘上batch_size（手算验证过）</li>
 </ul>
 <hr>
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
@@ -716,7 +728,7 @@ y.backward(gradients)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#60分钟教程-链接"><span class="nav-number">1.</span> <span class="nav-text">60分钟教程 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Pytorch"><span class="nav-number">1.1.</span> <span class="nav-text">What is Pytorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autograd-automatic-differentiation（用于反向传播）"><span class="nav-number">1.2.</span> <span class="nav-text">Autograd: automatic differentiation（用于反向传播）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Networks（搭建网络）"><span class="nav-number">1.3.</span> <span class="nav-text">Neural Networks（搭建网络）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-a-classifier（完整的一个训练例子）"><span class="nav-number">1.4.</span> <span class="nav-text">Training a classifier（完整的一个训练例子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Parallelism（多GPU并行计算）"><span class="nav-number">1.5.</span> <span class="nav-text">Data Parallelism（多GPU并行计算）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Loading-and-Processing-Tutorial-链接"><span class="nav-number">2.</span> <span class="nav-text">Data Loading and Processing Tutorial 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dataset-class"><span class="nav-number">2.1.</span> <span class="nav-text">Dataset class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transforms"><span class="nav-number">2.2.</span> <span class="nav-text">Transforms</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Iterating-through-the-dataset"><span class="nav-number">2.3.</span> <span class="nav-text">Iterating through the dataset</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">3.</span> <span class="nav-text">坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#60分钟教程-链接"><span class="nav-number">1.</span> <span class="nav-text">60分钟教程 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Pytorch"><span class="nav-number">1.1.</span> <span class="nav-text">What is Pytorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autograd-automatic-differentiation（用于反向传播）"><span class="nav-number">1.2.</span> <span class="nav-text">Autograd: automatic differentiation（用于反向传播）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Networks（搭建网络）"><span class="nav-number">1.3.</span> <span class="nav-text">Neural Networks（搭建网络）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-a-classifier（完整的一个训练例子）"><span class="nav-number">1.4.</span> <span class="nav-text">Training a classifier（完整的一个训练例子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Parallelism（多GPU并行计算）"><span class="nav-number">1.5.</span> <span class="nav-text">Data Parallelism（多GPU并行计算）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Loading-and-Processing-Tutorial-链接"><span class="nav-number">2.</span> <span class="nav-text">Data Loading and Processing Tutorial 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dataset-class"><span class="nav-number">2.1.</span> <span class="nav-text">Dataset class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transforms"><span class="nav-number">2.2.</span> <span class="nav-text">Transforms</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Iterating-through-the-dataset"><span class="nav-number">2.3.</span> <span class="nav-text">Iterating through the dataset</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transfer-Learning-tutorial-链接"><span class="nav-number">3.</span> <span class="nav-text">Transfer Learning tutorial 链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">4.</span> <span class="nav-text">坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">5.</span> <span class="nav-text">问题</span></a></li></ol></div>
             
 
           </div>
