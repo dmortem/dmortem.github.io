@@ -65,14 +65,14 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
+        <loc>dmortem.github.io/tags/Pytorch/</loc>
         <lastmod>2018-02-20T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/Pytorch/</loc>
+        <loc>dmortem.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
         <lastmod>2018-02-20T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
