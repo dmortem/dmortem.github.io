@@ -65,7 +65,14 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/Pytorch/</loc>
+        <loc>dmortem.github.io/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/</loc>
+        <lastmod>2018-02-20T16:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>dmortem.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/</loc>
         <lastmod>2018-02-20T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -79,14 +86,7 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/</loc>
-        <lastmod>2018-02-20T16:00:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>dmortem.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/</loc>
+        <loc>dmortem.github.io/tags/Pytorch/</loc>
         <lastmod>2018-02-20T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
