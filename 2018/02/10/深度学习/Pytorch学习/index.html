@@ -511,6 +511,7 @@ y.backward(gradients)
 <li>conv1D卷积核的输入维度是Batch_size * Channels * H * W；Linear全连接的输入维度是Batch_size * 维度</li>
 <li>label是从0开始计数，注意自己的dataset中的label值</li>
 <li>pytorch的CrossEntropyLoss不含正则项，且是平均loss，求总loss的时候还要乘上batch_size（手算验证过）</li>
+<li>用matplotlib绘制曲线时，注意x和y都需要是numpy的，不然就np.array(loss)[x]</li>
 </ul>
 <hr>
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>

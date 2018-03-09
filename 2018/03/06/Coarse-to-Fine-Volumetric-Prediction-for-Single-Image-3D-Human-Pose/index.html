@@ -425,6 +425,18 @@
       
         <p>Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose<br>CVPR 2017</p>
 <a id="more"></a>
+<p>人体姿态估计：给定一幅图或是一段视频，恢复其中人体关节点位置</p>
+<ul>
+<li>基于深度图（设备要求高）</li>
+<li><p>基于RGB图像</p>
+</li>
+<li><p>2D/3D</p>
+</li>
+<li>单人/多人<br>方法</li>
+<li>回归：得到精确的值(x, y)。效果不好：人体活动灵活+模型扩展性差</li>
+<li>检测：得到热点图谱</li>
+</ul>
+<p>多人估计的方法：<br> 先检测joint和limb，再group成一个人（区分是谁的关节）<br> 先检测单个人，再对单人做single-person pose estimation</p>
 
       
     </div>
