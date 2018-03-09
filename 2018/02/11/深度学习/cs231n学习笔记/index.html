@@ -89,6 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="/2018/02/11/深度学习/cs231n学习笔记/作图.png">
 <meta property="og:image" content="/2018/02/11/深度学习/cs231n学习笔记/作图2.png">
+<meta property="og:image" content="/2018/02/11/深度学习/cs231n学习笔记/作图3.png">
 <meta property="og:updated_time" content="2018-02-20T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs231n学习笔记">
@@ -764,6 +765,26 @@ plt.title(&apos;Cosine&apos;)
 # Show the figure.
 plt.show()
 </code></pre> <img src="/2018/02/11/深度学习/cs231n学习笔记/作图2.png">
+<pre><code># 绘制双Y轴曲线图
+x = np.arange(0., np.e, 0.01)
+y1 = np.exp(-x)
+y2 = np.log(x)
+
+fig = plt.figure()
+
+ax1 = fig.add_subplot(111)
+ax1.plot(x, y1)
+ax1.set_ylabel(&apos;Y values for exp(-x)&apos;)
+ax1.set_title(&quot;Double Y axis&quot;)
+
+ax2 = ax1.twinx()  # this is the important function
+ax2.plot(x, y2, &apos;r&apos;)
+ax2.set_xlim([0, np.e])
+ax2.set_ylabel(&apos;Y values for ln(x)&apos;)
+ax2.set_xlabel(&apos;Same X for both exp(-x) and ln(x)&apos;)
+
+plt.show()
+</code></pre> <img src="/2018/02/11/深度学习/cs231n学习笔记/作图3.png">
 <pre><code># 图像读入与显示(imread/imwrite)
 import numpy as np
 from scipy.misc import imread, imresize
