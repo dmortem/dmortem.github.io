@@ -519,7 +519,9 @@ X /= np.std(X, axis = 0) # normalize
 <li>针对于metric learning，对feature加个classification 的约束通常可以提高性能加快收敛</li>
 </ul>
 <hr>
-<h3 id="链接和链接"><a href="#链接和链接" class="headerlink" title="链接和链接"></a><a href="https://www.zhihu.com/question/27962483" target="_blank" rel="noopener">链接</a>和<a href="https://www.zhihu.com/question/25097993" target="_blank" rel="noopener">链接</a></h3>
+<h3 id="链接和链接"><a href="#链接和链接" class="headerlink" title="链接和链接"></a><a href="https://www.zhihu.com/question/27962483" target="_blank" rel="noopener">链接</a>和<a href="https://www.zhihu.com/question/25097993" target="_blank" rel="noopener">链接</a></h3><hr>
+<p>Loss曲线：如果loss趋于平稳，但是没有降到足够低，随着learning rate的进一步降低，loss还可能继续减小。把test(validation)的accurcy也放在同一张图中，查看何时过拟合，参看<a href="https://www.linuxidc.com/Linux/2016-11/136774p19.htm" target="_blank" rel="noopener">链接</a>。loss波动大的，考虑减小lr</p>
+
       
     </div>
     
