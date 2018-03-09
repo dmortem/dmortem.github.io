@@ -3,38 +3,29 @@
   
     
     <entry>
-      <title><![CDATA[Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose]]></title>
-      <url>/2018/03/06/Coarse-to-Fine-Volumetric-Prediction-for-Single-Image-3D-Human-Pose/</url>
-      <content type="html"><![CDATA[<p>Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose<br>CVPR 2017</p>
+      <title><![CDATA[Python常用函数]]></title>
+      <url>/2018/03/09/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
+      <content type="html"><![CDATA[<p>记录了一些python的常用函数</p>
 <a id="more"></a>
-<p>人体姿态估计：给定一幅图或是一段视频，恢复其中人体关节点位置</p>
 <ul>
-<li>基于深度图（设备要求高）</li>
-<li><p>基于RGB图像</p>
-</li>
-<li><p>2D/3D</p>
-</li>
-<li>单人/多人<br>方法</li>
-<li>回归：得到精确的值(x, y)。效果不好：人体活动灵活+模型扩展性差</li>
-<li>检测：得到热点图谱</li>
+<li>列表的大小：len(L)</li>
+<li>判断是否包含子串：’Acc’ in str[i]</li>
+<li>字符串截取：str[s:t]</li>
+<li>二维数组访问：a[1,1]；字符串列表访问：str[i][s:t]</li>
+<li>找索引值：.index(‘loss’)</li>
 </ul>
-<p>多人估计的方法：<br> 先检测joint和limb，再group成一个人（区分是谁的关节）<br> 先检测单个人，再对单人做single-person pose estimation</p>
 ]]></content>
       
         <categories>
             
-            <category> 论文阅读 </category>
+            <category> Python </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> 论文阅读 </tag>
-            
-            <tag> 计算机视觉 </tag>
-            
-            <tag> 人体姿态估计 </tag>
+            <tag> Python </tag>
             
         </tags>
         
@@ -1347,11 +1338,11 @@ plt.show()
         
         <tags>
             
-            <tag> 计算机视觉 </tag>
-            
             <tag> 深度学习 </tag>
             
             <tag> 公开课 </tag>
+            
+            <tag> 计算机视觉 </tag>
             
         </tags>
         
@@ -1600,9 +1591,9 @@ plt.show()
         
         <tags>
             
-            <tag> 论文阅读 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 论文阅读 </tag>
             
         </tags>
         
