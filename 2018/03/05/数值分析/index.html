@@ -87,10 +87,15 @@
 <meta property="og:site_name" content="Chiyu Wu">
 <meta property="og:description" content="ZJU 数值分析课程笔记">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="/2018/03/05/数值分析/1.png">
+<meta property="og:image" content="/2018/03/05/数值分析/2.png">
+<meta property="og:image" content="/2018/03/05/数值分析/3.png">
+<meta property="og:image" content="/2018/03/05/数值分析/4.png">
 <meta property="og:updated_time" content="2018-03-04T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数值分析">
 <meta name="twitter:description" content="ZJU 数值分析课程笔记">
+<meta name="twitter:image" content="/2018/03/05/数值分析/1.png">
 
 
 
@@ -425,7 +430,66 @@
       
         <p>ZJU 数值分析课程笔记</p>
 <a id="more"></a>
-<p>###</p>
+<h2 id="2018-03-05"><a href="#2018-03-05" class="headerlink" title="2018-03-05"></a>2018-03-05</h2><h3 id="课程介绍"><a href="#课程介绍" class="headerlink" title="课程介绍"></a>课程介绍</h3><p>黄劲<br>hj@cad.zju.edu.cn<br>蒙民伟楼 431</p>
+<p>30分Lab Pro + 18分Discussion + 7分Research Topic + 5分Q&amp;A + 40分考试<br>    考过高斯积分，尽可能提高精度<br>    discussion：2个人一组做报告，3-5分钟<br>    research topic：按组完成，有18个topic，5-10分钟展示</p>
+<h3 id="数值分析（Numerical-Analysis）的作用是什么？"><a href="#数值分析（Numerical-Analysis）的作用是什么？" class="headerlink" title="数值分析（Numerical Analysis）的作用是什么？"></a>数值分析（Numerical Analysis）的作用是什么？</h3><ul>
+<li>硬件只做最简单的+/-/*等，剩下的复杂计算都依赖于软件实现（尽管现在有部分简单的计算被加进了CPU）</li>
+<li>计算机里面的数学几乎全是近似，如0.7都无法在计算机里面精确表示</li>
+</ul>
+<h3 id="这门课将要介绍什么"><a href="#这门课将要介绍什么" class="headerlink" title="这门课将要介绍什么"></a>这门课将要介绍什么</h3><ul>
+<li>介绍经典的近似技术/逼近技术（approximation technique）</li>
+<li>解释为何这些技术可以有效地工作</li>
+<li>是将来从事科学计算的基础</li>
+</ul>
+<h3 id="Chapter-1-Mathematical-Preliminaries"><a href="#Chapter-1-Mathematical-Preliminaries" class="headerlink" title="Chapter 1 Mathematical Preliminaries"></a>Chapter 1 Mathematical Preliminaries</h3><h4 id="1-2-Roundoff-Errors-and-Computer-Arithmetic"><a href="#1-2-Roundoff-Errors-and-Computer-Arithmetic" class="headerlink" title="1.2 Roundoff Errors and Computer Arithmetic"></a>1.2 Roundoff Errors and Computer Arithmetic</h4><h5 id="误差来源："><a href="#误差来源：" class="headerlink" title="误差来源："></a>误差来源：</h5><ul>
+<li><strong>Truncation Error</strong>：对于无穷项/无穷小数等，必须进行截断，即舍去后面的项（如泰勒展开）</li>
+<li><strong>Roundoff Error</strong>：计算机本身进行实数运算时由于不精确产生的误差（因为计算机在运算时只能保留有限位数）</li>
+</ul>
+<h5 id="Roundoff-Error何时会影响结果的精确性？"><a href="#Roundoff-Error何时会影响结果的精确性？" class="headerlink" title="Roundoff Error何时会影响结果的精确性？"></a>Roundoff Error何时会影响结果的精确性？</h5><ul>
+<li>做除法时，如果除数非常小，那么被除数的一个小误差，在商当中会产生巨大的误差，ex/y很大(因为y很小)<blockquote>
+<p>如果一个值非常大，那么一定涉及了除法，如tan、log</p>
+</blockquote>
+</li>
+<li><strong>结论*：必须先把式子简化后再输入计算机，这样可以减少计算机在运算过程中产生的Roundoff的误差</strong>（如秦九韶算法）</li>
+</ul>
+<h5 id="对于一个无限小数，有两种近似的处理："><a href="#对于一个无限小数，有两种近似的处理：" class="headerlink" title="对于一个无限小数，有两种近似的处理："></a>对于一个无限小数，有两种近似的处理：</h5><ul>
+<li><strong>Chopping</strong>（直接截断）</li>
+<li><strong>Rounding</strong>（四舍五入）</li>
+</ul>
+<h5 id="误差分类："><a href="#误差分类：" class="headerlink" title="误差分类："></a>误差分类：</h5><ul>
+<li><strong>Absolute Error</strong>: |p-p*|</li>
+<li><strong>Relative Error</strong>: |p-p*|/|p| 或 f~(x+e) - f(x)  / f(x)<blockquote>
+<p>有效数字是一个相对误差<br>Rounding的每一步相对误差都较小（对于单次，四舍五入肯定比直接舍去要更精确），但是对于整个运算来说不一定</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="一个定义："><a href="#一个定义：" class="headerlink" title="一个定义："></a>一个定义：</h5><img src="/2018/03/05/数值分析/1.png">
+<h4 id="1-3-Algorithms-and-Convergence"><a href="#1-3-Algorithms-and-Convergence" class="headerlink" title="1.3 Algorithms and Convergence"></a>1.3 Algorithms and Convergence</h4><h5 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h5><ul>
+<li>stable：输入有一个小的扰动，输出的扰动也很小</li>
+<li>unstable：输入有一个小的扰动，输出的扰动很大</li>
+<li>conditionally stable：仅当输入的数据是某几个特定选择时，是stable的</li>
+</ul>
+<h5 id="定义：-1"><a href="#定义：-1" class="headerlink" title="定义："></a>定义：</h5><p> E0 表示初始误差，En 表示第 n 次操作后的误差。</p>
+<ul>
+<li>若 En == C*n*E0 (C是常数)，那么error的增长是Linear的</li>
+<li>若 En == C^n*E0 ，那么error的增长是Exponential的<blockquote>
+<p>Linear的误差是不可避免的，但要尽可能避免Exponential的误差</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="Example："><a href="#Example：" class="headerlink" title="Example："></a>Example：</h5><img src="/2018/03/05/数值分析/2.png">
+<ul>
+<li><p>Method 1：<img src="/2018/03/05/数值分析/3.png"></p>
+<blockquote>
+<p>|En| = |In - In*| = |(1-n*In-1) - (1-n*In-1*)| = n*|En-1| = … = n!*|E0|<br>随着n的增大，误差的增长是Exponential的，若去计算（每一次保留若干位）就会发现，明明In是递减的，其算到n比较大时，会增大，甚至在正负之间跳动</p>
+</blockquote>
+</li>
+<li><p>Method 2：<img src="/2018/03/05/数值分析/4.png"></p>
+<blockquote>
+<p>区别于上面由In-1推到In，这里先定In，再推回In-1：由1/(e*(n+1)) &lt; In &lt; 1/(N+1)，取In’ = [1/(e*(n+1)) + 1/(n+1)]/2<br>|En| = |In - In’| -&gt; 0，当 n -&gt; ∞；|Ej| = |En|/(n*(n-1)*(n-2)…(j+1))<br>因为该方法的Error是有界的，就是区间长度，此时向前算，误差就会越来越小，所以就不会出现Method 1的大误差。实际计算中，该方法算出来的I0、I1也都是很准确的</p>
+</blockquote>
+</li>
+</ul>
 
       
     </div>
@@ -520,8 +584,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -619,6 +692,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2018-03-05"><span class="nav-number">1.</span> <span class="nav-text">2018-03-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程介绍"><span class="nav-number">1.1.</span> <span class="nav-text">课程介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值分析（Numerical-Analysis）的作用是什么？"><span class="nav-number">1.2.</span> <span class="nav-text">数值分析（Numerical Analysis）的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这门课将要介绍什么"><span class="nav-number">1.3.</span> <span class="nav-text">这门课将要介绍什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-1-Mathematical-Preliminaries"><span class="nav-number">1.4.</span> <span class="nav-text">Chapter 1 Mathematical Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Roundoff-Errors-and-Computer-Arithmetic"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.2 Roundoff Errors and Computer Arithmetic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#误差来源："><span class="nav-number">1.4.1.1.</span> <span class="nav-text">误差来源：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Roundoff-Error何时会影响结果的精确性？"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">Roundoff Error何时会影响结果的精确性？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对于一个无限小数，有两种近似的处理："><span class="nav-number">1.4.1.3.</span> <span class="nav-text">对于一个无限小数，有两种近似的处理：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#误差分类："><span class="nav-number">1.4.1.4.</span> <span class="nav-text">误差分类：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一个定义："><span class="nav-number">1.4.1.5.</span> <span class="nav-text">一个定义：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-Algorithms-and-Convergence"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.3 Algorithms and Convergence</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义："><span class="nav-number">1.4.2.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义：-1"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example："><span class="nav-number">1.4.2.3.</span> <span class="nav-text">Example：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
