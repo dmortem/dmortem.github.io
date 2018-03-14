@@ -95,7 +95,10 @@
 <meta property="og:image" content="/2018/03/09/Action-Recognition-Survey/4.png">
 <meta property="og:image" content="/2018/03/09/Action-Recognition-Survey/5.png">
 <meta property="og:image" content="/2018/03/09/Action-Recognition-Survey/6.png">
+<meta property="og:image" content="/2018/03/09/Action-Recognition-Survey/10.png">
+<meta property="og:image" content="/2018/03/09/Action-Recognition-Survey/11.png">
 <meta property="og:image" content="/2018/03/09/Action-Recognition-Survey/9.png">
+<meta property="og:image" content="/2018/03/09/Action-Recognition-Survey/12.png">
 <meta property="og:updated_time" content="2018-03-13T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Action Recognition Survey">
@@ -609,7 +612,79 @@
 </ul>
 </li>
 </ul>
-<h4 id="Temporal-Coherency-Networks"><a href="#Temporal-Coherency-Networks" class="headerlink" title="Temporal Coherency Networks"></a>Temporal Coherency Networks</h4><h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2> <img src="/2018/03/09/Action-Recognition-Survey/9.png">
+<h4 id="Temporal-Coherency-Networks"><a href="#Temporal-Coherency-Networks" class="headerlink" title="Temporal Coherency Networks"></a>Temporal Coherency Networks</h4><ul>
+<li>Temporal Coherency is a form of <strong>weak supervision</strong></li>
+<li>Temporal coherency states that consecutive video frames are correlated both semantically and dynamically (i.e., abrupt motions are less likely)</li>
+<li>Temporal coherency is not always a strong assumption to rely on</li>
+<li><p><strong>Siamese Network</strong> (Chopra, 2005; Varior, 2016; Lu, 2016) is trained with tuples to determine whether a given sequence is coherent or not. </p>
+<blockquote>
+<p>Give more attention to human poses<br>Avoid ambiguities between positive and negative tuples<br>Compared to networks trained from scratch, pretrained networks based on the temporal coherency have potential to improve the accuracy</p>
+</blockquote>
+<img src="/2018/03/09/Action-Recognition-Survey/10.png">
+</li>
+<li><p>Action is split into two phases for classification, the precondition set Xp and the effect set Xe.</p>
+<blockquote>
+<p>An action is identified by the transformation required to map a high-level descriptor extracted from Xp to a high-level descriptor extracted from Xe.</p>
+</blockquote>
+<img src="/2018/03/09/Action-Recognition-Survey/11.png">
+</li>
+<li><p>Rank pooling (Fernando, 2015) is an effective solution for capturing temporal evolution<br>of a sequence. </p>
+</li>
+</ul>
+<h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2> <img src="/2018/03/09/Action-Recognition-Survey/9.png">
+<ul>
+<li>No universal solution for all datasets</li>
+<li><p>the <strong>KTH</strong> and the <strong>Weizmann</strong> datasets contain human actions in controlled conditions, and their scope is limited to basic actions such as walking, running and jumping. </p>
+<blockquote>
+<p>comparing solutions on the KTH and Weizmann datasets is <strong>less insightful</strong> unless a specific need is considered.</p>
+</blockquote>
+</li>
+<li><p><strong>HMDB-51</strong> and <strong>UCF-101</strong> datasets contain camera motion (and shakes), viewpoint variations and resolution inconsistencies.</p>
+<blockquote>
+<p>these datasets are not well-suited for measuring the performance of <strong>action localization</strong></p>
+</blockquote>
+</li>
+<li><p><strong>Hollywood2</strong> and <strong>Sports-1M</strong> datasets contain view-point/editing complexities (sudden viewpoint variations in the video streams)</p>
+<blockquote>
+<p>methods that rely on <strong>temporal coherency</strong> may fail on Sports-1M</p>
+</blockquote>
+</li>
+<li><p>Algorithms benefiting from <strong>object details</strong> are expected to perform better</p>
+</li>
+<li><p>For <strong>Deep Learning</strong>, <strong>Sports-1M</strong> dataset is great while <strong>KTH and Wiezmann</strong> often leads to unsatisfactory performance</p>
+</li>
+</ul>
+<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2> <img src="/2018/03/09/Action-Recognition-Survey/12.png">
+<ul>
+<li>the state-of-the-art solutions based on both representation and deep learning perform <strong>equally well</strong><blockquote>
+<p>One reason is the <strong>insufficiency of data</strong><br>A dominant theme to get around this limitation is to benefit from <strong>models pre-trained on images</strong></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Current-State-of-the-art-solutions"><a href="#Current-State-of-the-art-solutions" class="headerlink" title="Current State-of-the-art solutions"></a>Current State-of-the-art solutions</h2><h3 id="Handcrafted-Solutions"><a href="#Handcrafted-Solutions" class="headerlink" title="Handcrafted Solutions"></a>Handcrafted Solutions</h3><ul>
+<li><strong>Dense trajectory descriptors</strong>, incorporated in various pooling strategies such as <strong>FV</strong>’s and <strong>Rank-Pooling</strong></li>
+</ul>
+<h3 id="Deep-Net-Solutions"><a href="#Deep-Net-Solutions" class="headerlink" title="Deep-Net Solutions"></a>Deep-Net Solutions</h3><ul>
+<li>the <strong>spatiotemporal networks</strong> and <strong>two-stream networks</strong> outperform other network structures<blockquote>
+<p>Equipped with 3D convolution filters<br>Training deeper networks demands more rigorous data augmentation techniques</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Fusion-with-Dense-Trajectories-always-help"><a href="#Fusion-with-Dense-Trajectories-always-help" class="headerlink" title="Fusion with Dense Trajectories always help"></a>Fusion with Dense Trajectories always help</h3><ul>
+<li>The structures learned by deep networks are complementary to the handcrafted trajectory descriptors</li>
+</ul>
+<h2 id="What-algorithmic-changes-to-expect-in-the-future"><a href="#What-algorithmic-changes-to-expect-in-the-future" class="headerlink" title="What algorithmic changes to expect in the future?"></a>What algorithmic changes to expect in the future?</h2><ul>
+<li><p>Moving towards <strong>deep architectures</strong> for action recognition is dominating the action recognition research lately</p>
+<blockquote>
+<p>Training deep networks difficult on video data -&gt; <strong>Knowledge Transfer</strong> (Use models trained on images or other sources)</p>
+</blockquote>
+</li>
+<li><p>Blend <strong>3D convolutions</strong>, <strong>temporal pooling</strong>, <strong>optical flow frames</strong>, and <strong>LSTMs</strong> to boost the performance</p>
+</li>
+<li><p>Use <strong>data augmentation techniques</strong>, <strong>foveated architecture</strong> and <strong>distinct frame sampling strategies</strong></p>
+</li>
+</ul>
+
       
     </div>
     
@@ -758,7 +833,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -825,7 +900,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-an-action"><span class="nav-number">1.</span> <span class="nav-text">What is an action?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Taxonomy"><span class="nav-number">2.</span> <span class="nav-text">Taxonomy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Representation-based-Solutions"><span class="nav-number">2.1.</span> <span class="nav-text">Representation based Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Holistic-Representation"><span class="nav-number">2.1.1.</span> <span class="nav-text">Holistic Representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Local-Representation"><span class="nav-number">2.1.2.</span> <span class="nav-text">Local Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Interest-point-detection"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Interest point detection</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Local-Desscriptors"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">Local Desscriptors</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Aggregation"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">Aggregation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-Architectures-for-Action-Recognition"><span class="nav-number">2.2.</span> <span class="nav-text">Deep Architectures for Action Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spatiotemporal-Networks-From-3D-CNN-to-3D-CNN-LSTM"><span class="nav-number">2.2.1.</span> <span class="nav-text">Spatiotemporal Networks (From 3D-CNN to 3D-CNN+LSTM)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiple-Stream-Networks"><span class="nav-number">2.2.2.</span> <span class="nav-text">Multiple Stream Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deep-Generative-Models"><span class="nav-number">2.2.3.</span> <span class="nav-text">Deep Generative Models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Temporal-Coherency-Networks"><span class="nav-number">2.2.4.</span> <span class="nav-text">Temporal Coherency Networks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Datasets"><span class="nav-number">3.</span> <span class="nav-text">Datasets</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-an-action"><span class="nav-number">1.</span> <span class="nav-text">What is an action?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Taxonomy"><span class="nav-number">2.</span> <span class="nav-text">Taxonomy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Representation-based-Solutions"><span class="nav-number">2.1.</span> <span class="nav-text">Representation based Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Holistic-Representation"><span class="nav-number">2.1.1.</span> <span class="nav-text">Holistic Representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Local-Representation"><span class="nav-number">2.1.2.</span> <span class="nav-text">Local Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Interest-point-detection"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Interest point detection</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Local-Desscriptors"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">Local Desscriptors</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Aggregation"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">Aggregation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-Architectures-for-Action-Recognition"><span class="nav-number">2.2.</span> <span class="nav-text">Deep Architectures for Action Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spatiotemporal-Networks-From-3D-CNN-to-3D-CNN-LSTM"><span class="nav-number">2.2.1.</span> <span class="nav-text">Spatiotemporal Networks (From 3D-CNN to 3D-CNN+LSTM)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiple-Stream-Networks"><span class="nav-number">2.2.2.</span> <span class="nav-text">Multiple Stream Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deep-Generative-Models"><span class="nav-number">2.2.3.</span> <span class="nav-text">Deep Generative Models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Temporal-Coherency-Networks"><span class="nav-number">2.2.4.</span> <span class="nav-text">Temporal Coherency Networks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Datasets"><span class="nav-number">3.</span> <span class="nav-text">Datasets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance"><span class="nav-number">4.</span> <span class="nav-text">Performance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Current-State-of-the-art-solutions"><span class="nav-number">5.</span> <span class="nav-text">Current State-of-the-art solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Handcrafted-Solutions"><span class="nav-number">5.1.</span> <span class="nav-text">Handcrafted Solutions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-Net-Solutions"><span class="nav-number">5.2.</span> <span class="nav-text">Deep-Net Solutions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fusion-with-Dense-Trajectories-always-help"><span class="nav-number">5.3.</span> <span class="nav-text">Fusion with Dense Trajectories always help</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-algorithmic-changes-to-expect-in-the-future"><span class="nav-number">6.</span> <span class="nav-text">What algorithmic changes to expect in the future?</span></a></li></ol></div>
             
 
           </div>
