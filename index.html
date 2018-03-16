@@ -313,6 +313,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/03/16/Fast-Image-Processing-with-Fully-Convolutional-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chiyu Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/image.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chiyu Wu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/16/Fast-Image-Processing-with-Fully-Convolutional-Networks/" itemprop="url">Fast Image Processing with Fully-Convolutional Networks</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-16T15:34:25+08:00">
+                2018-03-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-03-16T00:00:00+08:00">
+                2018-03-16
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>CVPR 2017的一篇文章：<a href="http://cqf.io/papers/Fast_Image_Processing_ICCV2017.pdf" target="_blank" rel="noopener">Fast Image Processing with Fully-Convolutional Networks</a>，作者陈启峰</p>
+<ul>
+<li>提出一种使用FCN来替代原始图像处理的方法，可以对任意分辨率的图像进行操作</li>
+<li>处理速度快、比原来的其他替代方法准确率更高、所有操作都基于同一个模型(只有具体的参数值不同，超参数也完全一致)</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/16/Fast-Image-Processing-with-Fully-Convolutional-Networks/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/03/10/ZOJ1007-Numerical-Summation-of-a-Series/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -894,7 +1056,17 @@
 
       
         
-          <p>CVPR 2017的一篇文章: Qua Vadis, Action Recognition? A New Model and the Kinetics Dataset<br>提出了一个新的video数据集Kinetics，规模大于之前的公开数据集<br>提出一个新模型I3D，在Kinetics上预训练后，在HMDB-51数据集上取得了80.2%的准确率，在UCF-101上取得了97.9%的准确率</p>
+          <p>CVPR 2017的一篇文章: <a href="http://openaccess.thecvf.com/content_cvpr_2017/papers/Carreira_Quo_Vadis_Action_CVPR_2017_paper.pdf" target="_blank" rel="noopener">Qua Vadis, Action Recognition? A New Model and the Kinetics Dataset</a></p>
+<ul>
+<li>在一个规模更大的新video数据集Kinetics上，重新评估了当下state-of-the-art的模型结构，并和在小数据集上训练的结构进行比较</li>
+<li>提出一个新模型I3D，在Kinetics上预训练后，在HMDB-51数据集上取得了80.2%的准确率，在UCF-101上取得了97.9%的准确率</li>
+</ul>
+<p><strong>本文的idea*</strong>：</p>
+<ul>
+<li>根据之前3D-ConvNets的缺点(1. 参数多；2. 无法利用在ImageNet上预训练过的2D网络)，提出一种benefit from ImageNet 2D ConvNet design and their learned parameters的方法，并探究了在时间维度上的感受野要如何设置</li>
+<li>吸收了之前state-of-the-art的模型，把双流的思想加到3D-ConvNet当中来，取得优异的效果</li>
+<li>验证了视频模型的迁移学习同样有效，即在Kinetics上进行预训练能够提升模型效果</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/03/07/Qua-Vadis-Action-Recognition-A-New-Model-and-the-Kinetics-Dataset/#more" rel="contents">
@@ -1739,169 +1911,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/11/深度学习/cs231n学习笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chiyu Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/image.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chiyu Wu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/11/深度学习/cs231n学习笔记/" itemprop="url">cs231n学习笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-11T00:20:55+08:00">
-                2018-02-11
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Post modified&#58;</span>
-              
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-21T00:00:00+08:00">
-                2018-02-21
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>把cs231n 2017年的课程重新刷一遍，记录相关的笔记</p>
-<ul>
-<li><a href="http://cs231n.stanford.edu/" target="_blank" rel="noopener">cs231n课程主页</a></li>
-<li><a href="http://cs231n.stanford.edu/syllabus.html" target="_blank" rel="noopener">cs231n课程大纲</a></li>
-<li><a href="https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv" target="_blank" rel="noopener">cs231n课程视频</a></li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/11/深度学习/cs231n学习笔记/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1956,7 +1965,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1978,7 +1987,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
