@@ -91,7 +91,9 @@
 <meta property="og:image" content="/2018/03/05/数值分析/2.png">
 <meta property="og:image" content="/2018/03/05/数值分析/3.png">
 <meta property="og:image" content="/2018/03/05/数值分析/4.png">
-<meta property="og:updated_time" content="2018-03-04T16:00:00.000Z">
+<meta property="og:image" content="/2018/03/05/数值分析/6.png">
+<meta property="og:image" content="/2018/03/05/数值分析/7.png">
+<meta property="og:updated_time" content="2018-03-24T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数值分析">
 <meta name="twitter:description" content="ZJU 数值分析课程笔记">
@@ -367,8 +369,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-03-05T00:00:00+08:00">
-                2018-03-05
+              <time title="Post modified" itemprop="dateModified" datetime="2018-03-25T00:00:00+08:00">
+                2018-03-25
               </time>
             
           </span>
@@ -491,10 +493,44 @@
 </li>
 </ul>
 <hr>
-<h2 id="2018-03-12"><a href="#2018-03-12" class="headerlink" title="2018-03-12"></a>2018-03-12</h2><h3 id="Chapter-2-Solutions-of-Equations-in-One-Variable"><a href="#Chapter-2-Solutions-of-Equations-in-One-Variable" class="headerlink" title="Chapter 2 Solutions of Equations in One Variable"></a>Chapter 2 Solutions of Equations in One Variable</h3><h4 id="2-1-The-Bisection-Method"><a href="#2-1-The-Bisection-Method" class="headerlink" title="2.1 The Bisection Method"></a>2.1 The Bisection Method</h4><p>二分的条件：单调、有界</p>
-<p>Why not p = (a+b)/2        ————担心溢出<br>收敛到某一个solution<br>不能find complex roots，是因为complex number无序，不可排序</p>
-<h4 id="2-2-Fixed-Point-Iteration"><a href="#2-2-Fixed-Point-Iteration" class="headerlink" title="2.2 Fixed-Point Iteration"></a>2.2 Fixed-Point Iteration</h4><p>一个f(x)可以对应一堆g(x)<br>g(x)目标：能收敛，且收敛到f(x)的root    (如g(x)=x^2，初值选了&gt;1，那么永远不可能收敛)<br>Discussion 7：可以在计算前估计大概要算多久，k越小越好<br>example 算导数</p>
-<h4 id="2-3-Newton’s-Method"><a href="#2-3-Newton’s-Method" class="headerlink" title="2.3 Newton’s Method"></a>2.3 Newton’s Method</h4><p>有条件收敛</p>
+<h2 id="2018-03-12"><a href="#2018-03-12" class="headerlink" title="2018-03-12"></a>2018-03-12</h2><h3 id="Chapter-2-Solutions-of-Equations-in-One-Variable"><a href="#Chapter-2-Solutions-of-Equations-in-One-Variable" class="headerlink" title="Chapter 2 Solutions of Equations in One Variable"></a>Chapter 2 Solutions of Equations in One Variable</h3><h4 id="2-1-The-Bisection-Method"><a href="#2-1-The-Bisection-Method" class="headerlink" title="2.1 The Bisection Method"></a>2.1 The Bisection Method</h4><h5 id="中值定理"><a href="#中值定理" class="headerlink" title="中值定理"></a>中值定理</h5><ul>
+<li>若f属于C[a, b]，K是介于f(a)和f(b)之间的一个数(当然f是连续函数)，那么在(a, b)上必定存在一个数p，使得f(p) = K</li>
+</ul>
+<h5 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h5><ul>
+<li>若f属于C[a, b]，且f(a) * f(b) &lt; 0，那么由二分法可以产生一个逼近f零点p的序列，并保证：<img src="/2018/03/05/数值分析/6.png"></li>
+<li>二分的条件：单调、有界</li>
+<li>二分时，使用 p = a + (b - a) / 2 而不是 p = (a + b) / 2 的原因是保证精度；使用sign(FA)*sign(FP)来判断是否大于0是因为担心使用FA*FP判断时会溢出</li>
+<li>二分法的优点：<blockquote>
+<p>很容易，只需要f单调、有界；而且总能收敛到某个解</p>
+</blockquote>
+</li>
+<li>二分法的缺点：<blockquote>
+<p>收敛慢；<br>可能在收敛过程中会丢掉某一个好的中间近似解；<br>若有多个解，只能收敛到某一个solution；————可以事先把区间划成多段[ak, bk]，保证f(ak) * f(bk) &lt; 0<br>二分法不能用来找复数根，因为complex number无序，不可排序</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="2-2-Fixed-Point-Iteration"><a href="#2-2-Fixed-Point-Iteration" class="headerlink" title="2.2 Fixed-Point Iteration"></a>2.2 Fixed-Point Iteration</h4><ul>
+<li><p><strong>思想</strong>：把求根问题转化成求不动点(若g(p) = p，则p被定义成g的一个不动点)的问题：把f(x)转化成等价的x = g(x)</p>
+<blockquote>
+<p>一个f(x)可以对应一堆g(x)<br>g(x)目标：能收敛，且收敛到f(x)的root    (如g(x)=x^2，初值选了&gt;1，那么永远不可能收敛)</p>
+</blockquote>
+</li>
+<li><p><strong>求解方法</strong>：从一个初始的p0开始，随后通过pn = g(pn-1)生成一个序列，若这个序列收敛并且g是连续函数，则最终收敛得到的p=g(p)即为所求不动点 (因为pn = g(pn-1) = g(pn)，当n趋向于无限大）</p>
+</li>
+<li><p><strong>不动点定理</strong></p>
+<blockquote>
+<p>存在性：g属于C[a, b]且g(x)属于[a, b]，对于一切x属于[a, b]成立，则g在[a, b]有一个不动点<br>唯一性：在上述存在的条件下，若g’(x)在(a, b)存在，且存在一个正常数k &lt; 1，使得|g’(x)| &lt;= k，那么不动点在[a, b]上唯一<br>在不动点存在且唯一的条件下，使用上述求解方法可以收敛于[a, b]内的唯一不动点p</p>
+</blockquote>
+</li>
+<li><p>若g满足不动点定理的条件，则用pn逼近p的误差界如下：</p>
+<img src="/2018/03/05/数值分析/7.png"> 
+</li>
+<li><p>因此，根据这个误差界，我们可以在计算前估计大概要算多久。且我们发现k越小收敛越快</p>
+</li>
+<li><p><strong>构造g(x)时，要保证g’(x) &lt;= k &lt; 1，且k越小越好</strong></p>
+</li>
+</ul>
+<h4 id="2-3-Newton-Raphson-Method"><a href="#2-3-Newton-Raphson-Method" class="headerlink" title="2.3 Newton-Raphson Method"></a>2.3 Newton-Raphson Method</h4><p>有条件收敛</p>
 <hr>
 <h2 id="2018-03-19"><a href="#2018-03-19" class="headerlink" title="2018-03-19"></a>2018-03-19</h2><h4 id="2-4-Error-Analysis-for-Iterative-Methods"><a href="#2-4-Error-Analysis-for-Iterative-Methods" class="headerlink" title="2.4 Error Analysis for Iterative Methods"></a>2.4 Error Analysis for Iterative Methods</h4><p>Aitken’s 2 Method的假设：线性收敛，所以(Pn+1 - P)/(Pn - P) = lenda = (Pn - P)/(Pn-1 - P)，所以P可由三个P猜测，n越大lenda越小，所以猜测的P越准</p>
 
@@ -709,7 +745,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2018-03-05"><span class="nav-number">1.</span> <span class="nav-text">2018-03-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程介绍"><span class="nav-number">1.1.</span> <span class="nav-text">课程介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值分析（Numerical-Analysis）的作用是什么？"><span class="nav-number">1.2.</span> <span class="nav-text">数值分析（Numerical Analysis）的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这门课将要介绍什么"><span class="nav-number">1.3.</span> <span class="nav-text">这门课将要介绍什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-1-Mathematical-Preliminaries"><span class="nav-number">1.4.</span> <span class="nav-text">Chapter 1 Mathematical Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Roundoff-Errors-and-Computer-Arithmetic"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.2 Roundoff Errors and Computer Arithmetic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#误差来源："><span class="nav-number">1.4.1.1.</span> <span class="nav-text">误差来源：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Roundoff-Error何时会影响结果的精确性？"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">Roundoff Error何时会影响结果的精确性？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对于一个无限小数，有两种近似的处理："><span class="nav-number">1.4.1.3.</span> <span class="nav-text">对于一个无限小数，有两种近似的处理：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#误差分类："><span class="nav-number">1.4.1.4.</span> <span class="nav-text">误差分类：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一个定义："><span class="nav-number">1.4.1.5.</span> <span class="nav-text">一个定义：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-Algorithms-and-Convergence"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.3 Algorithms and Convergence</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义："><span class="nav-number">1.4.2.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义：-1"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example："><span class="nav-number">1.4.2.3.</span> <span class="nav-text">Example：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2018-03-12"><span class="nav-number">2.</span> <span class="nav-text">2018-03-12</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-2-Solutions-of-Equations-in-One-Variable"><span class="nav-number">2.1.</span> <span class="nav-text">Chapter 2 Solutions of Equations in One Variable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-The-Bisection-Method"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1 The Bisection Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Fixed-Point-Iteration"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.2 Fixed-Point Iteration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Newton’s-Method"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.3 Newton’s Method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2018-03-19"><span class="nav-number">3.</span> <span class="nav-text">2018-03-19</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-Error-Analysis-for-Iterative-Methods"><span class="nav-number">3.0.1.</span> <span class="nav-text">2.4 Error Analysis for Iterative Methods</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2018-03-05"><span class="nav-number">1.</span> <span class="nav-text">2018-03-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程介绍"><span class="nav-number">1.1.</span> <span class="nav-text">课程介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值分析（Numerical-Analysis）的作用是什么？"><span class="nav-number">1.2.</span> <span class="nav-text">数值分析（Numerical Analysis）的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这门课将要介绍什么"><span class="nav-number">1.3.</span> <span class="nav-text">这门课将要介绍什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-1-Mathematical-Preliminaries"><span class="nav-number">1.4.</span> <span class="nav-text">Chapter 1 Mathematical Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Roundoff-Errors-and-Computer-Arithmetic"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.2 Roundoff Errors and Computer Arithmetic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#误差来源："><span class="nav-number">1.4.1.1.</span> <span class="nav-text">误差来源：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Roundoff-Error何时会影响结果的精确性？"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">Roundoff Error何时会影响结果的精确性？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对于一个无限小数，有两种近似的处理："><span class="nav-number">1.4.1.3.</span> <span class="nav-text">对于一个无限小数，有两种近似的处理：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#误差分类："><span class="nav-number">1.4.1.4.</span> <span class="nav-text">误差分类：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一个定义："><span class="nav-number">1.4.1.5.</span> <span class="nav-text">一个定义：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-Algorithms-and-Convergence"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.3 Algorithms and Convergence</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义："><span class="nav-number">1.4.2.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义：-1"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example："><span class="nav-number">1.4.2.3.</span> <span class="nav-text">Example：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2018-03-12"><span class="nav-number">2.</span> <span class="nav-text">2018-03-12</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chapter-2-Solutions-of-Equations-in-One-Variable"><span class="nav-number">2.1.</span> <span class="nav-text">Chapter 2 Solutions of Equations in One Variable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-The-Bisection-Method"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1 The Bisection Method</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#中值定理"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">中值定理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二分法"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">二分法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Fixed-Point-Iteration"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.2 Fixed-Point Iteration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Newton-Raphson-Method"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.3 Newton-Raphson Method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2018-03-19"><span class="nav-number">3.</span> <span class="nav-text">2018-03-19</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-Error-Analysis-for-Iterative-Methods"><span class="nav-number">3.0.1.</span> <span class="nav-text">2.4 Error Analysis for Iterative Methods</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

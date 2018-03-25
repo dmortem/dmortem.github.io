@@ -9,9 +9,9 @@
       </categories>
       <tags>
         <tag>计算机视觉</tag>
-        <tag>图像处理</tag>
         <tag>深度学习</tag>
         <tag>论文阅读</tag>
+        <tag>图像处理</tag>
       </tags>
   </entry>
   <entry>
@@ -46,9 +46,9 @@
       </categories>
       <tags>
         <tag>计算机视觉</tag>
+        <tag>Action Recognition</tag>
         <tag>深度学习</tag>
         <tag>论文阅读</tag>
-        <tag>Action Recognition</tag>
       </tags>
   </entry>
   <entry>
@@ -60,15 +60,15 @@
       </categories>
       <tags>
         <tag>计算机视觉</tag>
+        <tag>Action Recognition</tag>
         <tag>深度学习</tag>
         <tag>论文阅读</tag>
-        <tag>Action Recognition</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[数值分析]]></title>
     <url>%2F2018%2F03%2F05%2F%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[ZJU 数值分析课程笔记 2018-03-05课程介绍黄劲hj@cad.zju.edu.cn蒙民伟楼 431 30分Lab Pro + 18分Discussion + 7分Research Topic + 5分Q&amp;A + 40分考试 考过高斯积分，尽可能提高精度 discussion：2个人一组做报告，3-5分钟 research topic：按组完成，有18个topic，5-10分钟展示 数值分析（Numerical Analysis）的作用是什么？ 硬件只做最简单的+/-/*等，剩下的复杂计算都依赖于软件实现（尽管现在有部分简单的计算被加进了CPU） 计算机里面的数学几乎全是近似，如0.7都无法在计算机里面精确表示 这门课将要介绍什么 介绍经典的近似技术/逼近技术（approximation technique） 解释为何这些技术可以有效地工作 是将来从事科学计算的基础 Chapter 1 Mathematical Preliminaries1.2 Roundoff Errors and Computer Arithmetic误差来源： Truncation Error：对于无穷项/无穷小数等，必须进行截断，即舍去后面的项（如泰勒展开） Roundoff Error：计算机本身进行实数运算时由于不精确产生的误差（因为计算机在运算时只能保留有限位数） Roundoff Error何时会影响结果的精确性？ 做除法时，如果除数非常小，那么被除数的一个小误差，在商当中会产生巨大的误差，ex/y很大(因为y很小) 如果一个值非常大，那么一定涉及了除法，如tan、log 结论*：必须先把式子简化后再输入计算机，这样可以减少计算机在运算过程中产生的Roundoff的误差（如秦九韶算法） 对于一个无限小数，有两种近似的处理： Chopping（直接截断） Rounding（四舍五入） 误差分类： Absolute Error: |p-p*| Relative Error: |p-p*|/|p| 或 f~(x+e) - f(x) / f(x) 有效数字是一个相对误差Rounding的每一步相对误差都较小（对于单次，四舍五入肯定比直接舍去要更精确），但是对于整个运算来说不一定 一个定义： 1.3 Algorithms and Convergence定义： stable：输入有一个小的扰动，输出的扰动也很小 unstable：输入有一个小的扰动，输出的扰动很大 conditionally stable：仅当输入的数据是某几个特定选择时，是stable的 定义： E0 表示初始误差，En 表示第 n 次操作后的误差。 若 En == C*n*E0 (C是常数)，那么error的增长是Linear的 若 En == C^n*E0 ，那么error的增长是Exponential的 Linear的误差是不可避免的，但要尽可能避免Exponential的误差 Example： Method 1： |En| = |In - In*| = |(1-n*In-1) - (1-n*In-1*)| = n*|En-1| = … = n!*|E0|随着n的增大，误差的增长是Exponential的，若去计算（每一次保留若干位）就会发现，明明In是递减的，其算到n比较大时，会增大，甚至在正负之间跳动 Method 2： 区别于上面由In-1推到In，这里先定In，再推回In-1：由1/(e*(n+1)) &lt; In &lt; 1/(N+1)，取In’ = [1/(e*(n+1)) + 1/(n+1)]/2|En| = |In - In’| -&gt; 0，当 n -&gt; ∞；|Ej| = |En|/(n*(n-1)*(n-2)…(j+1))因为该方法的Error是有界的，就是区间长度，此时向前算，误差就会越来越小，所以就不会出现Method 1的大误差。实际计算中，该方法算出来的I0、I1也都是很准确的 2018-03-12Chapter 2 Solutions of Equations in One Variable2.1 The Bisection Method二分的条件：单调、有界 Why not p = (a+b)/2 ————担心溢出收敛到某一个solution不能find complex roots，是因为complex number无序，不可排序 2.2 Fixed-Point Iteration一个f(x)可以对应一堆g(x)g(x)目标：能收敛，且收敛到f(x)的root (如g(x)=x^2，初值选了&gt;1，那么永远不可能收敛)Discussion 7：可以在计算前估计大概要算多久，k越小越好example 算导数 2.3 Newton’s Method有条件收敛 2018-03-192.4 Error Analysis for Iterative MethodsAitken’s 2 Method的假设：线性收敛，所以(Pn+1 - P)/(Pn - P) = lenda = (Pn - P)/(Pn-1 - P)，所以P可由三个P猜测，n越大lenda越小，所以猜测的P越准]]></content>
+    <content type="text"><![CDATA[ZJU 数值分析课程笔记 2018-03-05课程介绍黄劲hj@cad.zju.edu.cn蒙民伟楼 431 30分Lab Pro + 18分Discussion + 7分Research Topic + 5分Q&amp;A + 40分考试 考过高斯积分，尽可能提高精度 discussion：2个人一组做报告，3-5分钟 research topic：按组完成，有18个topic，5-10分钟展示 数值分析（Numerical Analysis）的作用是什么？ 硬件只做最简单的+/-/*等，剩下的复杂计算都依赖于软件实现（尽管现在有部分简单的计算被加进了CPU） 计算机里面的数学几乎全是近似，如0.7都无法在计算机里面精确表示 这门课将要介绍什么 介绍经典的近似技术/逼近技术（approximation technique） 解释为何这些技术可以有效地工作 是将来从事科学计算的基础 Chapter 1 Mathematical Preliminaries1.2 Roundoff Errors and Computer Arithmetic误差来源： Truncation Error：对于无穷项/无穷小数等，必须进行截断，即舍去后面的项（如泰勒展开） Roundoff Error：计算机本身进行实数运算时由于不精确产生的误差（因为计算机在运算时只能保留有限位数） Roundoff Error何时会影响结果的精确性？ 做除法时，如果除数非常小，那么被除数的一个小误差，在商当中会产生巨大的误差，ex/y很大(因为y很小) 如果一个值非常大，那么一定涉及了除法，如tan、log 结论*：必须先把式子简化后再输入计算机，这样可以减少计算机在运算过程中产生的Roundoff的误差（如秦九韶算法） 对于一个无限小数，有两种近似的处理： Chopping（直接截断） Rounding（四舍五入） 误差分类： Absolute Error: |p-p*| Relative Error: |p-p*|/|p| 或 f~(x+e) - f(x) / f(x) 有效数字是一个相对误差Rounding的每一步相对误差都较小（对于单次，四舍五入肯定比直接舍去要更精确），但是对于整个运算来说不一定 一个定义： 1.3 Algorithms and Convergence定义： stable：输入有一个小的扰动，输出的扰动也很小 unstable：输入有一个小的扰动，输出的扰动很大 conditionally stable：仅当输入的数据是某几个特定选择时，是stable的 定义： E0 表示初始误差，En 表示第 n 次操作后的误差。 若 En == C*n*E0 (C是常数)，那么error的增长是Linear的 若 En == C^n*E0 ，那么error的增长是Exponential的 Linear的误差是不可避免的，但要尽可能避免Exponential的误差 Example： Method 1： |En| = |In - In*| = |(1-n*In-1) - (1-n*In-1*)| = n*|En-1| = … = n!*|E0|随着n的增大，误差的增长是Exponential的，若去计算（每一次保留若干位）就会发现，明明In是递减的，其算到n比较大时，会增大，甚至在正负之间跳动 Method 2： 区别于上面由In-1推到In，这里先定In，再推回In-1：由1/(e*(n+1)) &lt; In &lt; 1/(N+1)，取In’ = [1/(e*(n+1)) + 1/(n+1)]/2|En| = |In - In’| -&gt; 0，当 n -&gt; ∞；|Ej| = |En|/(n*(n-1)*(n-2)…(j+1))因为该方法的Error是有界的，就是区间长度，此时向前算，误差就会越来越小，所以就不会出现Method 1的大误差。实际计算中，该方法算出来的I0、I1也都是很准确的 2018-03-12Chapter 2 Solutions of Equations in One Variable2.1 The Bisection Method中值定理 若f属于C[a, b]，K是介于f(a)和f(b)之间的一个数(当然f是连续函数)，那么在(a, b)上必定存在一个数p，使得f(p) = K 二分法 若f属于C[a, b]，且f(a) * f(b) &lt; 0，那么由二分法可以产生一个逼近f零点p的序列，并保证： 二分的条件：单调、有界 二分时，使用 p = a + (b - a) / 2 而不是 p = (a + b) / 2 的原因是保证精度；使用sign(FA)*sign(FP)来判断是否大于0是因为担心使用FA*FP判断时会溢出 二分法的优点： 很容易，只需要f单调、有界；而且总能收敛到某个解 二分法的缺点： 收敛慢；可能在收敛过程中会丢掉某一个好的中间近似解；若有多个解，只能收敛到某一个solution；————可以事先把区间划成多段[ak, bk]，保证f(ak) * f(bk) &lt; 0二分法不能用来找复数根，因为complex number无序，不可排序 2.2 Fixed-Point Iteration 思想：把求根问题转化成求不动点(若g(p) = p，则p被定义成g的一个不动点)的问题：把f(x)转化成等价的x = g(x) 一个f(x)可以对应一堆g(x)g(x)目标：能收敛，且收敛到f(x)的root (如g(x)=x^2，初值选了&gt;1，那么永远不可能收敛) 求解方法：从一个初始的p0开始，随后通过pn = g(pn-1)生成一个序列，若这个序列收敛并且g是连续函数，则最终收敛得到的p=g(p)即为所求不动点 (因为pn = g(pn-1) = g(pn)，当n趋向于无限大） 不动点定理 存在性：g属于C[a, b]且g(x)属于[a, b]，对于一切x属于[a, b]成立，则g在[a, b]有一个不动点唯一性：在上述存在的条件下，若g’(x)在(a, b)存在，且存在一个正常数k &lt; 1，使得|g’(x)| &lt;= k，那么不动点在[a, b]上唯一在不动点存在且唯一的条件下，使用上述求解方法可以收敛于[a, b]内的唯一不动点p 若g满足不动点定理的条件，则用pn逼近p的误差界如下： 因此，根据这个误差界，我们可以在计算前估计大概要算多久。且我们发现k越小收敛越快 构造g(x)时，要保证g’(x) &lt;= k &lt; 1，且k越小越好 2.3 Newton-Raphson Method有条件收敛 2018-03-192.4 Error Analysis for Iterative MethodsAitken’s 2 Method的假设：线性收敛，所以(Pn+1 - P)/(Pn - P) = lenda = (Pn - P)/(Pn-1 - P)，所以P可由三个P猜测，n越大lenda越小，所以猜测的P越准]]></content>
       <categories>
         <category>数值分析</category>
       </categories>
