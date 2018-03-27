@@ -30,13 +30,6 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2018-02-15T16:00:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>dmortem.github.io/tags/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/</loc>
         <lastmod>2018-02-15T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -51,14 +44,14 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/Pytorch/</loc>
+        <loc>dmortem.github.io/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/</loc>
         <lastmod>2018-02-20T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/%E5%85%AC%E5%BC%80%E8%AF%BE/</loc>
+        <loc>dmortem.github.io/tags/Pytorch/</loc>
         <lastmod>2018-02-20T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -93,6 +86,13 @@
     </url>
 
     <url>
+        <loc>dmortem.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</loc>
+        <lastmod>2018-03-15T16:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>dmortem.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
         <lastmod>2018-03-15T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -107,15 +107,22 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</loc>
-        <lastmod>2018-03-15T16:00:00.000Z</lastmod>
+        <loc>dmortem.github.io/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/</loc>
+        <lastmod>2018-03-25T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>dmortem.github.io/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/</loc>
-        <lastmod>2018-03-24T16:00:00.000Z</lastmod>
+        <loc>dmortem.github.io/tags/ZJU%E8%AF%BE%E7%A8%8B/</loc>
+        <lastmod>2018-03-25T16:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>dmortem.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2018-03-25T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
