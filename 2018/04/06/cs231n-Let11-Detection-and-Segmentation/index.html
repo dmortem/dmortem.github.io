@@ -94,6 +94,17 @@
 <meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/5.png">
 <meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/6.png">
 <meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/7.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/8.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/9.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/10.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/11.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/12.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/13.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/14.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/15.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/16.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/17.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/18.png">
 <meta property="og:updated_time" content="2018-04-05T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs231n Let11 Detection and Segmentation">
@@ -442,24 +453,76 @@
 <li>不区分instances。如下图有多只牛，不同牛位置的pixel相应的label都是cow，并不会作区分。而Instance Segmentation则会对具体的object做区分<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/2.png">
 </li>
 </ul>
-<h3 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h3><ul>
+<h3 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a>Sliding Window</h3><ul>
 <li><p>在原始图像中逐像素提取patch，把这些patch一一扔进CNN架构中进行分类。这些patch都是以当前用来分类的像素点作为中心，即该patch的label是基于中心点像素的</p>
 <blockquote>
 <p>效率很低；而且从相邻的两个像素提取的patch几乎长的一样，最后训练得到的network权重也基本一样，这部分可以考虑shared，不需要重新去训练</p>
 </blockquote>
 <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/3.png">
 </li>
-<li><p>全卷积(Fully Convolutional)：由于逐像素效率低，那么就直接把一整张图片送入网络，同时对所有像素点进行分类，最后输出一张C*H*W的分类图，每个像素点都有C个类别的score，这样还做到了上面所说的相邻像素可以直接使用shared feature</p>
+</ul>
+<h3 id="全卷积-Fully-Convolutional"><a href="#全卷积-Fully-Convolutional" class="headerlink" title="全卷积(Fully Convolutional)"></a>全卷积(Fully Convolutional)</h3><ul>
+<li><p>由于逐像素效率低，那么就直接把一整张图片送入网络，同时对所有像素点进行分类，最后输出一张C*H*W的分类图，每个像素点都有C个类别的score，这样还做到了上面所说的相邻像素可以直接使用shared feature</p>
 <blockquote>
 <p>在原始分辨率下做卷积比较昂贵，内存占用等都会很大，尤其是当每一层的feature map数也很多的时候</p>
 </blockquote>
 <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/4.png">
 </li>
-<li><p>既然在原始分辨率下做卷积代价高，那么就进行降维，随后再upsampling恢复原来的分辨率，得到具有原始分辨率的label图</p>
-<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/5.png">
-<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/6.png"> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/7.png"></li>
 </ul>
-
+<h3 id="改进的Fully-Convolutional"><a href="#改进的Fully-Convolutional" class="headerlink" title="改进的Fully Convolutional"></a>改进的Fully Convolutional</h3><ul>
+<li>既然在原始分辨率下做卷积代价高，那么就进行降维，随后再upsampling恢复原来的分辨率，得到具有原始分辨率的label图<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/5.png"></li>
+<li>Unsampling<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/6.png"> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/7.png">
+</li>
+</ul>
+<h2 id="Classification-Localization"><a href="#Classification-Localization" class="headerlink" title="Classification + Localization"></a>Classification + Localization</h2> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/8.png">
+<ul>
+<li>一些trick<blockquote>
+<p>同时做分类与回归bounding box？————有些人可能会对不同的类分别做bounding box的回归(因为类别不同可能影响到物体的位置与大小识别，相当于回归的loss会因为类别的识别错误而大大增加)，然后取ground truth对应的两个loss相加<br>两个loss相加时的权重怎么看？————当作超参数进行训练</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Human-Pose-Estimation"><a href="#Human-Pose-Estimation" class="headerlink" title="Human Pose Estimation"></a>Human Pose Estimation</h3> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/9.png">
+<h2 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h2><ul>
+<li>相比于Classification + Localization，Object Detection的每张输入图像都对应不同数量的output，即每张图片里有若干数量未知的待测物体</li>
+</ul>
+<h3 id="Object-Detection-as-Regression"><a href="#Object-Detection-as-Regression" class="headerlink" title="Object Detection as Regression"></a>Object Detection as Regression</h3><ul>
+<li>若使用类似Classification + Localization的方法，那么由于每张图片中有不同的输出，若使用某个固定的网络，输出数量只能是一定的，因此无法简单的进行regression<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/10.png"> 
+</li>
+</ul>
+<h3 id="Object-Detection-as-Classification-Sliding-Window"><a href="#Object-Detection-as-Classification-Sliding-Window" class="headerlink" title="Object Detection as Classification: Sliding Window"></a>Object Detection as Classification: Sliding Window</h3><ul>
+<li>使用Semantic Segmentation中提到的idea，使用sliding window后，就是对每一个window过一次网络，因此就不用担心每张图片有不同的输出了。因为这样做的话，对于一张图片，其经过k次网络，也就有k个output了，k是window的个数<blockquote>
+<p>window的大小、每次移动的位置都无法直接确定，而只能不断尝试，通过最后网络训练得到的结果进行判断。那么这种做法需要进行大量的训练，代价太大</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Region-Based-Methods"><a href="#Region-Based-Methods" class="headerlink" title="Region Based Methods"></a>Region Based Methods</h3><ul>
+<li>由于用Sliding Window有太多的candidate window了，所以计算代价太大，那么我们可以考虑使用算法来直接找到一些出现object概率比较大的candidate区域，减小搜索范围（如可以先找edge，然后再找有没有形成闭合回路的edge，若有那么这些闭合的曲线很有可能就是object，可以作为candidate region</li>
+</ul>
+<h4 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h4><ul>
+<li><p>先在input image上提取2000个ROI(ROI是固定算法)，随后把ROI warp成一样的size，再送入ConvNet，分别用SVM进行分类以及做线性回归(回归的是bounding box基于ROI的offset)。其中，在正式训练前，还需要对ConvNet进行微调，这时候是使用softmax进行微调</p>
+<blockquote>
+<p>由于仍然有2000个ROI，训练耗时还是很久，而且占用磁盘、内存资源；且测试速度也慢，无法做到实时性；ROI不能通过学习进行改进，可能算法本身的识别会有误差</p>
+</blockquote>
+<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/11.png"> 
+</li>
+</ul>
+<h4 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h4><ul>
+<li>既然对2000个ROI都训练ConvNet太耗时间，那么我们可以考虑把ROI提取放在feature map上，即先对input image用ConvNet进行特征提取，随后在提取的特征图上再做ROI提取，这样相当于只需要训练一个ConvNet就可以了，大大减少运行时间与其他资源<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/12.png"> </li>
+<li>*但具体做的时候，其实ROI提取的步骤还是在input image上执行的，只是把提取的ROI根据卷积操作的空间对应性映射到feature map上<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/13.png"> 
+</li>
+</ul>
+<h4 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h4><ul>
+<li>Fast R-CNN的测试时间主要是花在ROI的提取上了。而且ROI提取是固定算法，无法通过训练加以改进，可能本身的识别存在一些问题。因此，Faster R-CNN把ROI改进成RPN(Region Proposal Network)，在这里Region Proposal的提取都是可以通过学习得到。模型具体的detail比较复杂，还得去看看paper<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/14.png"> 
+</li>
+</ul>
+<h4 id="R-CNN-gt-Fast-R-CNN-gt-Faster-R-CNN"><a href="#R-CNN-gt-Fast-R-CNN-gt-Faster-R-CNN" class="headerlink" title="R-CNN -&gt; Fast R-CNN -&gt; Faster R-CNN"></a>R-CNN -&gt; Fast R-CNN -&gt; Faster R-CNN</h4> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/15.png"> 
+<h3 id="Detection-without-Proposals-Methods-YOLO-SSD"><a href="#Detection-without-Proposals-Methods-YOLO-SSD" class="headerlink" title="Detection without Proposals Methods: YOLO/SSD"></a>Detection without Proposals Methods: YOLO/SSD</h3><ul>
+<li>相比于Region based method对于每个region都要做一次独立的处理，YOLO和SSD直接使用一个很大的CNN对所有潜在的region做预测</li>
+<li>Faster R-CNN速度慢，但更准确；SSD更快但没那么准确<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/16.png"> 
+</li>
+</ul>
+<h2 id="Instance-Segmentation"><a href="#Instance-Segmentation" class="headerlink" title="Instance Segmentation"></a>Instance Segmentation</h2><h3 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h3> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/17.png"> 
+ <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/18.png">  
       
     </div>
     
@@ -593,7 +656,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -604,7 +667,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -671,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-11-Detection-and-Segmentation"><span class="nav-number">1.</span> <span class="nav-text">Lecture 11 Detection and Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-Segmentation"><span class="nav-number">1.2.</span> <span class="nav-text">Semantic Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Idea"><span class="nav-number">1.2.1.</span> <span class="nav-text">Idea</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-11-Detection-and-Segmentation"><span class="nav-number">1.</span> <span class="nav-text">Lecture 11 Detection and Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-Segmentation"><span class="nav-number">1.2.</span> <span class="nav-text">Semantic Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sliding-Window"><span class="nav-number">1.2.1.</span> <span class="nav-text">Sliding Window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全卷积-Fully-Convolutional"><span class="nav-number">1.2.2.</span> <span class="nav-text">全卷积(Fully Convolutional)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改进的Fully-Convolutional"><span class="nav-number">1.2.3.</span> <span class="nav-text">改进的Fully Convolutional</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classification-Localization"><span class="nav-number">1.3.</span> <span class="nav-text">Classification + Localization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Human-Pose-Estimation"><span class="nav-number">1.3.1.</span> <span class="nav-text">Human Pose Estimation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-Detection"><span class="nav-number">1.4.</span> <span class="nav-text">Object Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-Detection-as-Regression"><span class="nav-number">1.4.1.</span> <span class="nav-text">Object Detection as Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-Detection-as-Classification-Sliding-Window"><span class="nav-number">1.4.2.</span> <span class="nav-text">Object Detection as Classification: Sliding Window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Region-Based-Methods"><span class="nav-number">1.4.3.</span> <span class="nav-text">Region Based Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#R-CNN"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fast-R-CNN"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">Fast R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Faster-R-CNN"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">Faster R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R-CNN-gt-Fast-R-CNN-gt-Faster-R-CNN"><span class="nav-number">1.4.3.4.</span> <span class="nav-text">R-CNN -&gt; Fast R-CNN -&gt; Faster R-CNN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Detection-without-Proposals-Methods-YOLO-SSD"><span class="nav-number">1.4.4.</span> <span class="nav-text">Detection without Proposals Methods: YOLO/SSD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instance-Segmentation"><span class="nav-number">1.5.</span> <span class="nav-text">Instance Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mask-R-CNN"><span class="nav-number">1.5.1.</span> <span class="nav-text">Mask R-CNN</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
