@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="计算机视觉,深度学习,论文阅读,Action Recognition," />
 
 
 
@@ -79,13 +79,24 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chiyu Wu">
-<meta property="og:url" content="dmortem.github.io/tags/图像处理/index.html">
+<meta name="description" content="著名的双流模型，发表于2014年的NIPS：Two-Stream Convolutional Networks for Action Recognition in Videos  空间流处理静态图像，使用在ImageNet上预训练的ConvNet 时间流处理连续多帧稠密光流，得到运动信息。由于用于时间流训练的数据集小，文中提出一个multi-task learning 两个流经softmax输出的">
+<meta name="keywords" content="计算机视觉,深度学习,论文阅读,Action Recognition">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Two-Stream Convolutional Networks for Action Recognition in Videos">
+<meta property="og:url" content="dmortem.github.io/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/index.html">
 <meta property="og:site_name" content="Chiyu Wu">
+<meta property="og:description" content="著名的双流模型，发表于2014年的NIPS：Two-Stream Convolutional Networks for Action Recognition in Videos  空间流处理静态图像，使用在ImageNet上预训练的ConvNet 时间流处理连续多帧稠密光流，得到运动信息。由于用于时间流训练的数据集小，文中提出一个multi-task learning 两个流经softmax输出的">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/1.png">
+<meta property="og:image" content="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/2.png">
+<meta property="og:image" content="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/3.png">
+<meta property="og:image" content="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/4.png">
+<meta property="og:image" content="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/5.png">
+<meta property="og:updated_time" content="2018-04-10T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chiyu Wu">
+<meta name="twitter:title" content="Two-Stream Convolutional Networks for Action Recognition in Videos">
+<meta name="twitter:description" content="著名的双流模型，发表于2014年的NIPS：Two-Stream Convolutional Networks for Action Recognition in Videos  空间流处理静态图像，使用在ImageNet上预训练的ConvNet 时间流处理连续多帧稠密光流，得到运动信息。由于用于时间流训练的数据集小，文中提出一个multi-task learning 两个流经softmax输出的">
+<meta name="twitter:image" content="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/1.png">
 
 
 
@@ -115,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="dmortem.github.io/tags/图像处理/"/>
+  <link rel="canonical" href="dmortem.github.io/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/"/>
 
 
 
 
 
-  <title>Tag: 图像处理 | Chiyu Wu</title>
+  <title>Two-Stream Convolutional Networks for Action Recognition in Videos | Chiyu Wu</title>
   
 
 
@@ -150,7 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -298,54 +309,261 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>图像处理<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chiyu Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/image.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chiyu Wu">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/16/Fast-Image-Processing-with-Fully-Convolutional-Networks/" itemprop="url">
-              
-                <span itemprop="name">Fast Image Processing with Fully-Convolutional Networks</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Two-Stream Convolutional Networks for Action Recognition in Videos</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-16T15:34:25+08:00"
-              content="2018-03-16" >
-          03-16
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-11T21:59:40+08:00">
+                2018-04-11
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-04-11T00:00:00+08:00">
+                2018-04-11
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>著名的双流模型，发表于2014年的NIPS：<a href="http://papers.nips.cc/paper/5353-two-stream-convolutional" target="_blank" rel="noopener">Two-Stream Convolutional Networks for Action Recognition in Videos</a></p>
+<ul>
+<li>空间流处理静态图像，使用在ImageNet上预训练的ConvNet</li>
+<li>时间流处理连续多帧稠密光流，得到运动信息。由于用于时间流训练的数据集小，文中提出一个multi-task learning</li>
+<li>两个流经softmax输出的score进行平均或使用multi-class linear SVM进行融合</li>
+</ul>
+<a id="more"></a>
+<h2 id="Two-stream-architecture-for-video-recognition"><a href="#Two-stream-architecture-for-video-recognition" class="headerlink" title="Two-stream architecture for video recognition"></a>Two-stream architecture for video recognition</h2><ul>
+<li>使用同样结构的ConvNet分别对一张静态帧和L张光流进行处理，最后对双流经softmax输出的score进行平均或使用multi-class linear SVM进行融合</li>
+<li>空间流网络就直接使用在ImageNet上大放异彩的网络，并使用预训练的参数</li>
+<li><strong>注：这里双流只是结构一样，具体的参数值肯定不一样，一个是提取空间信息，一个是时间信息</strong><img src="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/1.png">
+</li>
+</ul>
+<h2 id="Optical-flow-ConvNets"><a href="#Optical-flow-ConvNets" class="headerlink" title="Optical flow ConvNets"></a>Optical flow ConvNets</h2><ul>
+<li>细节还没仔细看</li>
+<li>最后是下采样得到224*224*2L送入网络</li>
+</ul>
+<h2 id="Multi-task-learning"><a href="#Multi-task-learning" class="headerlink" title="Multi-task learning"></a>Multi-task learning</h2><ul>
+<li>空间流网络可以在ImageNet上预训练，但时间流网络的训练集相对而言就比较小了。为了减小由于训练集小而带来的过拟合问题，若把使用的两个数据集并成一个则会很麻烦</li>
+<li>使用<strong>multi-task learning</strong>: ConvNet旨在学习一个general的video representation，对于两个数据集，在CNN后面有两个不同的分类器，分别用于输出UCF-101和HMDB-51数据集的score，而总loss就是两个分类器的loss相加</li>
+</ul>
+<h2 id="Implementation-details"><a href="#Implementation-details" class="headerlink" title="Implementation details"></a>Implementation details</h2><h3 id="ConvNets-Configuration"><a href="#ConvNets-Configuration" class="headerlink" title="ConvNets Configuration"></a>ConvNets Configuration</h3><ul>
+<li>对于这个网络结构，和引用的[3]还有[31]比较类似，可以去查看这两个网络的细节</li>
+<li>每一层都使用了Relu、3*3 stride=2的max-pooling、使用AlexNet提出的Local Response Normalisation(现在已经不用了)</li>
+<li>空间流和时间流的区别就在于把时间流中的第二个归一化层去掉了(看上面的图)</li>
+</ul>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
+<li>训练主要参考了AlexNet那篇文章的细节</li>
+<li>使用mini-batch stochastic gradient descent, momentum=0.9</li>
+<li>mini-batch_size=256个video，里面的帧是随机挑选的</li>
+<li>从原始帧中随机提取224<em>224(区别于AlexNet中先从原始分辨率中提取center的256</em>256，再提取224<em>224，这里直接从原始分辨率中随机提取224</em>224，这也是作者认为在ILSVRC-2012准确率更高的原因)，并经历random horizontal flipping和RGB jittering</li>
+<li>初始学习率是10^-2，随后的变化遵循一套固定的schedule：对于从头训练的ConvNet，在50K次迭代后学习率变成10^-3，在70K次迭代后变成10^-4，在80K次迭代后停止；对于fine-tuning的情况，学习率在14K次迭代后变为10^-3，在20K次迭代后停止训练</li>
+</ul>
+<h3 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h3><ul>
+<li>对于一个视频，我们提取固定数量的帧(这里是25)，这些帧在时间上等间隔。对于每一帧，我们通过数据增强都能获得10个不同的input</li>
+<li><strong>整个video的score是对所有选取的帧的score的平均</strong></li>
+</ul>
+<h3 id="Pre-training-on-ImageNet-ILSVRC-2012"><a href="#Pre-training-on-ImageNet-ILSVRC-2012" class="headerlink" title="Pre-training on ImageNet ILSVRC-2012"></a>Pre-training on ImageNet ILSVRC-2012</h3><ul>
+<li>在ImageNet上对空间流网络进行预训练时，同样要使用上面说的数据增强技术，并发现结果比[31]中更好，作者认为的原因是：在这里，他们是对图片从原始分辨率直接提取224*224</li>
+</ul>
+<h3 id="Optical-Flow"><a href="#Optical-Flow" class="headerlink" title="Optical Flow"></a>Optical Flow</h3><ul>
+<li>是在训练前调用OpenCV得到的</li>
+<li>存储方面，为了减少对于float的存储，把光流数据rescaled到[0, 255]，并使用JPEG进行压缩</li>
+</ul>
+<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><ul>
+<li>作者还尝试了slow fusion，发现slow fusion只有56.4%准确率，远不如双流好</li>
+<li>在后面的实验中，空间流使用的是training the last layer on top of a pre-trained ConvNet<img src="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/2.png">
+</li>
+</ul>
+<h3 id="Multi-task-learning-of-temporal-ConvNets"><a href="#Multi-task-learning-of-temporal-ConvNets" class="headerlink" title="Multi-task learning of temporal ConvNets"></a>Multi-task learning of temporal ConvNets</h3><ul>
+<li>因为对于时间流的训练较难，尤其是在HMDB-51数据集上（数据量小），所以尝试不同的方案，发现multi-task learning最好，因为这种方案利用了最多的数据</li>
+<li>若是对于HMDB-51的训练，那么在multi-task learning的过程中，<strong>可以把UCF-101的全部数据都用于训练</strong><img src="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/3.png">
+</li>
+</ul>
+<h3 id="Two-Stream-ConvNets"><a href="#Two-Stream-ConvNets" class="headerlink" title="Two-Stream ConvNets"></a>Two-Stream ConvNets</h3><ul>
+<li><strong>空间流和时间流网络互补，两个加在一起可以大幅提升准确率</strong></li>
+<li><strong>使用SVM做fusion更好</strong></li>
+<li><strong>使用bi-directional flow在这里没有提升</strong></li>
+<li><strong>对时间流使用multi-task learning可以提升效果</strong><img src="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/4.png">
+</li>
+</ul>
+<h3 id="Comparison-with-the-state-of-the-art"><a href="#Comparison-with-the-state-of-the-art" class="headerlink" title="Comparison with the state of the art"></a>Comparison with the state of the art</h3><ul>
+<li>注：下表是对数据集的3个split求了平均，而上表则是split 1的结果<img src="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/5.png">
+</li>
+</ul>
+<h2 id="Conclusions-and-directions-for-improvement"><a href="#Conclusions-and-directions-for-improvement" class="headerlink" title="Conclusions and directions for improvement"></a>Conclusions and directions for improvement</h2><ul>
+<li>Training a temporal ConvNet on optical flow (as here) is significantly better than training on raw stacked frames</li>
+<li>Extra training data is beneficial for our temporal ConvNet</li>
+<li>There still remain some essential ingredients of the state-of-the-art shallow representation, which are missed in our current architecture.</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机视觉/" rel="tag"># 计算机视觉</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/论文阅读/" rel="tag"># 论文阅读</a>
+          
+            <a href="/tags/Action-Recognition/" rel="tag"># Action Recognition</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/" rel="next" title="cs231n Let11 Detection and Segmentation">
+                <i class="fa fa-chevron-left"></i> cs231n Let11 Detection and Segmentation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -353,6 +571,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -373,8 +595,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -472,6 +703,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-stream-architecture-for-video-recognition"><span class="nav-number">1.</span> <span class="nav-text">Two-stream architecture for video recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optical-flow-ConvNets"><span class="nav-number">2.</span> <span class="nav-text">Optical flow ConvNets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-task-learning"><span class="nav-number">3.</span> <span class="nav-text">Multi-task learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-details"><span class="nav-number">4.</span> <span class="nav-text">Implementation details</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ConvNets-Configuration"><span class="nav-number">4.1.</span> <span class="nav-text">ConvNets Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">4.2.</span> <span class="nav-text">Training</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing"><span class="nav-number">4.3.</span> <span class="nav-text">Testing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre-training-on-ImageNet-ILSVRC-2012"><span class="nav-number">4.4.</span> <span class="nav-text">Pre-training on ImageNet ILSVRC-2012</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optical-Flow"><span class="nav-number">4.5.</span> <span class="nav-text">Optical Flow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation"><span class="nav-number">5.</span> <span class="nav-text">Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-task-learning-of-temporal-ConvNets"><span class="nav-number">5.1.</span> <span class="nav-text">Multi-task learning of temporal ConvNets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Two-Stream-ConvNets"><span class="nav-number">5.2.</span> <span class="nav-text">Two-Stream ConvNets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparison-with-the-state-of-the-art"><span class="nav-number">5.3.</span> <span class="nav-text">Comparison with the state of the art</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusions-and-directions-for-improvement"><span class="nav-number">6.</span> <span class="nav-text">Conclusions and directions for improvement</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -634,6 +881,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
