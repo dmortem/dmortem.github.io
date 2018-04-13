@@ -3,15 +3,15 @@
   <entry>
     <title><![CDATA[Two-Stream Convolutional Networks for Action Recognition in Videos]]></title>
     <url>%2F2018%2F04%2F11%2FTwo-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos%2F</url>
-    <content type="text"><![CDATA[著名的双流模型，发表于2014年的NIPS：Two-Stream Convolutional Networks for Action Recognition in Videos 空间流处理静态图像，使用在ImageNet上预训练的ConvNet 时间流处理连续多帧稠密光流，得到运动信息。由于用于时间流训练的数据集小，文中提出一个multi-task learning 两个流经softmax输出的score进行平均或使用multi-class linear SVM进行融合 Two-stream architecture for video recognition 使用同样结构的ConvNet分别对一张静态帧和L张光流进行处理，最后对双流经softmax输出的score进行平均或使用multi-class linear SVM进行融合 空间流网络就直接使用在ImageNet上大放异彩的网络，并使用预训练的参数 注：这里双流只是结构一样，具体的参数值肯定不一样，一个是提取空间信息，一个是时间信息 Optical flow ConvNets 细节还没仔细看 最后是下采样得到224*224*2L送入网络 Multi-task learning 空间流网络可以在ImageNet上预训练，但时间流网络的训练集相对而言就比较小了。为了减小由于训练集小而带来的过拟合问题，若把使用的两个数据集并成一个则会很麻烦 使用multi-task learning: ConvNet旨在学习一个general的video representation，对于两个数据集，在CNN后面有两个不同的分类器，分别用于输出UCF-101和HMDB-51数据集的score，而总loss就是两个分类器的loss相加 Implementation detailsConvNets Configuration 对于这个网络结构，和引用的[3]还有[31]比较类似，可以去查看这两个网络的细节 每一层都使用了Relu、3*3 stride=2的max-pooling、使用AlexNet提出的Local Response Normalisation(现在已经不用了) 空间流和时间流的区别就在于把时间流中的第二个归一化层去掉了(看上面的图) Training 训练主要参考了AlexNet那篇文章的细节 使用mini-batch stochastic gradient descent, momentum=0.9 mini-batch_size=256个video，里面的帧是随机挑选的 从原始帧中随机提取224224(区别于AlexNet中先从原始分辨率中提取center的256256，再提取224224，这里直接从原始分辨率中随机提取224224，这也是作者认为在ILSVRC-2012准确率更高的原因)，并经历random horizontal flipping和RGB jittering 初始学习率是10^-2，随后的变化遵循一套固定的schedule：对于从头训练的ConvNet，在50K次迭代后学习率变成10^-3，在70K次迭代后变成10^-4，在80K次迭代后停止；对于fine-tuning的情况，学习率在14K次迭代后变为10^-3，在20K次迭代后停止训练 Testing 对于一个视频，我们提取固定数量的帧(这里是25)，这些帧在时间上等间隔。对于每一帧，我们通过数据增强都能获得10个不同的input 整个video的score是对所有选取的帧的score的平均 Pre-training on ImageNet ILSVRC-2012 在ImageNet上对空间流网络进行预训练时，同样要使用上面说的数据增强技术，并发现结果比[31]中更好，作者认为的原因是：在这里，他们是对图片从原始分辨率直接提取224*224 Optical Flow 是在训练前调用OpenCV得到的 存储方面，为了减少对于float的存储，把光流数据rescaled到[0, 255]，并使用JPEG进行压缩 Evaluation 作者还尝试了slow fusion，发现slow fusion只有56.4%准确率，远不如双流好 在后面的实验中，空间流使用的是training the last layer on top of a pre-trained ConvNet Multi-task learning of temporal ConvNets 因为对于时间流的训练较难，尤其是在HMDB-51数据集上（数据量小），所以尝试不同的方案，发现multi-task learning最好，因为这种方案利用了最多的数据 若是对于HMDB-51的训练，那么在multi-task learning的过程中，可以把UCF-101的全部数据都用于训练 Two-Stream ConvNets 空间流和时间流网络互补，两个加在一起可以大幅提升准确率 使用SVM做fusion更好 使用bi-directional flow在这里没有提升 对时间流使用multi-task learning可以提升效果 Comparison with the state of the art 注：下表是对数据集的3个split求了平均，而上表则是split 1的结果 Conclusions and directions for improvement Training a temporal ConvNet on optical flow (as here) is significantly better than training on raw stacked frames Extra training data is beneficial for our temporal ConvNet There still remain some essential ingredients of the state-of-the-art shallow representation, which are missed in our current architecture.]]></content>
+    <content type="text"><![CDATA[著名的双流模型，发表于2014年的NIPS：Two-Stream Convolutional Networks for Action Recognition in Videos 空间流处理静态图像，使用在ImageNet上预训练的ConvNet 时间流处理连续多帧稠密光流，得到运动信息。由于用于时间流训练的数据集小，文中提出一个multi-task learning 两个流经softmax输出的score进行平均或使用multi-class linear SVM进行融合 Two-stream architecture for video recognition 使用同样结构的ConvNet分别对一张静态帧和L张光流进行处理，最后对双流经softmax输出的score进行平均或使用multi-class linear SVM进行融合 空间流网络就直接使用在ImageNet上大放异彩的网络，并使用预训练的参数 注：这里双流只是结构一样，具体的参数值肯定不一样，一个是提取空间信息，一个是时间信息 Optical flow ConvNets 细节还没仔细看 最后是下采样得到224*224*2L送入网络 Multi-task learning 空间流网络可以在ImageNet上预训练，但时间流网络的训练集相对而言就比较小了。为了减小由于训练集小而带来的过拟合问题，若把使用的两个数据集并成一个则会很麻烦 使用multi-task learning: ConvNet旨在学习一个general的video representation，对于两个数据集，在CNN后面有两个不同的分类器，分别用于输出UCF-101和HMDB-51数据集的score，而总loss就是两个分类器的loss相加 Implementation detailsConvNets Configuration 对于这个网络结构，和引用的[3]还有[31]比较类似，可以去查看这两个网络的细节 每一层都使用了Relu、3/*3 stride=2的max-pooling、使用AlexNet提出的Local Response Normalisation(现在已经不用了) 空间流和时间流的区别就在于把时间流中的第二个归一化层去掉了(看上面的图) Training 训练主要参考了AlexNet那篇文章的细节 使用mini-batch stochastic gradient descent, momentum=0.9 mini-batch_size=256个video，里面的帧是随机挑选的 从原始帧中随机提取224/224(区别于AlexNet中先从原始分辨率中提取center的256/256，再提取224/224，这里直接从原始分辨率中随机提取224/224，这也是作者认为在ILSVRC-2012准确率更高的原因)，并经历random horizontal flipping和RGB jittering 初始学习率是10^-2，随后的变化遵循一套固定的schedule：对于从头训练的ConvNet，在50K次迭代后学习率变成10^-3，在70K次迭代后变成10^-4，在80K次迭代后停止；对于fine-tuning的情况，学习率在14K次迭代后变为10^-3，在20K次迭代后停止训练 Testing 对于一个视频，我们提取固定数量的帧(这里是25)，这些帧在时间上等间隔。对于每一帧，我们通过数据增强都能获得10个不同的input 整个video的score是对所有选取的帧的score的平均 Pre-training on ImageNet ILSVRC-2012 在ImageNet上对空间流网络进行预训练时，同样要使用上面说的数据增强技术，并发现结果比[31]中更好，作者认为的原因是：在这里，他们是对图片从原始分辨率直接提取224/*224 Optical Flow 是在训练前调用OpenCV得到的 存储方面，为了减少对于float的存储，把光流数据rescaled到[0, 255]，并使用JPEG进行压缩 Evaluation 作者还尝试了slow fusion，发现slow fusion只有56.4%准确率，远不如双流好 在后面的实验中，空间流使用的是training the last layer on top of a pre-trained ConvNet Multi-task learning of temporal ConvNets 因为对于时间流的训练较难，尤其是在HMDB-51数据集上（数据量小），所以尝试不同的方案，发现multi-task learning最好，因为这种方案利用了最多的数据 若是对于HMDB-51的训练，那么在multi-task learning的过程中，可以把UCF-101的全部数据都用于训练 Two-Stream ConvNets 空间流和时间流网络互补，两个加在一起可以大幅提升准确率 使用SVM做fusion更好 使用bi-directional flow在这里没有提升 对时间流使用multi-task learning可以提升效果 Comparison with the state of the art 注：下表是对数据集的3个split求了平均，而上表则是split 1的结果 Conclusions and directions for improvement Training a temporal ConvNet on optical flow (as here) is significantly better than training on raw stacked frames Extra training data is beneficial for our temporal ConvNet There still remain some essential ingredients of the state-of-the-art shallow representation, which are missed in our current architecture.]]></content>
       <categories>
         <category>计算机视觉</category>
       </categories>
       <tags>
         <tag>计算机视觉</tag>
+        <tag>Action Recognition</tag>
         <tag>深度学习</tag>
         <tag>论文阅读</tag>
-        <tag>Action Recognition</tag>
       </tags>
   </entry>
   <entry>
@@ -48,9 +48,9 @@
       </categories>
       <tags>
         <tag>计算机视觉</tag>
-        <tag>图像处理</tag>
         <tag>深度学习</tag>
         <tag>论文阅读</tag>
+        <tag>图像处理</tag>
       </tags>
   </entry>
   <entry>
@@ -85,9 +85,9 @@
       </categories>
       <tags>
         <tag>计算机视觉</tag>
+        <tag>Action Recognition</tag>
         <tag>深度学习</tag>
         <tag>论文阅读</tag>
-        <tag>Action Recognition</tag>
       </tags>
   </entry>
   <entry>
@@ -99,9 +99,9 @@
       </categories>
       <tags>
         <tag>计算机视觉</tag>
+        <tag>Action Recognition</tag>
         <tag>深度学习</tag>
         <tag>论文阅读</tag>
-        <tag>Action Recognition</tag>
       </tags>
   </entry>
   <entry>
