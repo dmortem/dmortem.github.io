@@ -438,7 +438,7 @@
 <p><strong>本文的idea*</strong>：</p>
 <ul>
 <li>根据之前3D-ConvNets的缺点(1. 参数多；2. 无法利用在ImageNet上预训练过的2D网络)，提出一种benefit from ImageNet 2D ConvNet design and their learned parameters的方法，并探究了在时间维度上的感受野要如何设置</li>
-<li>吸收了之前state-of-the-art的模型，把双流的思想加到3D-ConvNet当中来，取得优异的效果</li>
+<li>吸收了之前state-of-the-art的模型，把双流的思想加到3D-ConvNet当中来，取得优异的效果（作者认为既然现在有了大数据集，那么3D ConvNet原先因为参数多而难训练的缺陷可以被大幅度改进。因此作者使用了3D ConvNet，同时双流这个思想还是很有用，因此这个新模型使用双流+3D ConvNet）</li>
 <li>验证了视频模型的迁移学习同样有效，即在Kinetics上进行预训练能够提升模型效果</li>
 </ul>
 <a id="more"></a>
@@ -474,28 +474,28 @@
 </li>
 </ul>
 <h3 id="ConvNet-LSTM"><a href="#ConvNet-LSTM" class="headerlink" title="ConvNet + LSTM"></a>ConvNet + LSTM</h3><ul>
-<li>由于图像分类网络效果特别好，因此人们总想尽可能原封不动地把模型应用到视频上，但这样就会导致模型忽视了时序结构（如不能分辨开门与关门）</li>
+<li>由于图像分类网络效果特别好，因此人们总想尽可能原封不动地把模型应用到视频上，如Karpathy做的那篇early/late/slow fusion的文章，但这样就会导致模型忽视了时序结构（如不能分辨开门与关门）</li>
 <li>因此，可以在模型后面加上LSTM来处理时序问题</li>
-<li>模型细节：把LSTM和BN加在Inception v1的最后一个average pooling层后面，有512个节点。在模型最顶部加一个全连接层用于分类。输入帧是在25帧/s的视频流中每5帧取1帧</li>
+<li>模型细节：把LSTM和BN加在Inception v1的最后一个average pooling层后面（即分类器之前），有512个节点。在模型最顶部加一个全连接层用于分类；The model is trained using cross-entropy losses on the outputs at all time steps. During testing we consider only the output on the last frame；输入帧是在25帧/s的视频流中每5帧取1帧，根据表1给出的信息，作者应该是从数据集的video中选取了5s的视频片段，所以总共是5s * 25帧/s * 1/5 = 25张rgb图像</li>
 </ul>
 <h3 id="3D-ConvNet"><a href="#3D-ConvNet" class="headerlink" title="3D ConvNet"></a>3D ConvNet</h3><ul>
 <li>3D ConvNet看上去是一种很自然的方法，能够直接对于时空数据创建高层表征</li>
 <li><p>但这个模型有两个问题：</p>
 <blockquote>
-<p>相比于2D，<strong>参数更多</strong>，也就更难训练<br>由于都是三维的核，<strong>无法直接用在ImageNet上预训练过的网络</strong>，因此只能在video数据集上train from scratch。由于之前的数据集量都太小，因此效果不是太有竞争力。但这种方法可能会比较适用于本文的大数据集</p>
+<p>相比于2D，<strong>参数更多</strong>，也就更难训练（因为数据量不足），所以之前3D ConvNet用的都是<strong>浅层</strong>的架构<br>由于都是三维的核，<strong>无法直接用在ImageNet上预训练过的网络</strong>，因此只能在video数据集上train from scratch。由于之前的数据集量都太小，因此效果不是太有竞争力。但<strong>这种方法可能会比较适用于大数据集</strong></p>
 </blockquote>
 </li>
-<li><p>模型细节：是原论文中C3D的变种。8层卷积、5层pooling、2层全连接，卷积和全连接层后面加BN。输入是16帧，每帧1112*112</p>
+<li><p>模型细节：是原论文中C3D的变种。8层卷积、5层pooling、2层全连接。与C3D的区别在于这里的卷积和全连接层后面加BN；且在第一个pooling层使用stride=2，这样使得batch_size可以更大。输入是16帧，每帧112*112。</p>
 </li>
 </ul>
 <h3 id="Two-Stream-Networks"><a href="#Two-Stream-Networks" class="headerlink" title="Two-Stream Networks"></a>Two-Stream Networks</h3><ul>
 <li><strong>LSTM缺点</strong>：能model高层变化却不能捕捉低层运动(因为在低层，每个帧都是独立地被CNN提取特征)，有些低层运动可能是重要的；训练很昂贵</li>
-<li><p><strong>Two-Stream Networks</strong>: 将单独的一张RGB图片和一叠计算得到的光流帧分别送入在ImageNet上预训练的ConvNet中，再把两个通道的预测取平均</p>
+<li><p><strong>Two-Stream Networks</strong>: 将单独的一张RGB图片和一叠计算得到的光流帧分别送入在ImageNet上预训练的ConvNet中，再把两个通道的score取平均</p>
 <blockquote>
 <p>这种方法在现在的数据集上效果很好<br>训练和测试都十分经济</p>
 </blockquote>
 </li>
-<li><p>一个改进(<strong>Fused Two-Stream</strong>): 在最后一层卷积层之后，把空间流和时间流<strong>融合</strong></p>
+<li><p>一个改进(<strong>Fused Two-Stream</strong>): 在最后一层卷积层之后，使用3D ConvNet把空间流和时间流<strong>融合</strong>（相比于传统双流是在softmax后才做fusion，把softmax输出的score进行平均）</p>
 <blockquote>
 <p>在HMDB数据集上提升了效果，测试时间也更短</p>
 </blockquote>
@@ -539,12 +539,14 @@
 <li>在UCF-101和HMDB-51上，I3D取得的效果也要好于之前的。这十分有趣，因为UCF-101和HMDB-51数据集本身比较小，而I3D模型参数非常多，按道理来说训练效果应该不会太好。这说明在ImageNet上预训练的效果可以扩展到3D</li>
 <li>在UCF-101上效果最好，miniKinetics次之，HMDB-51最差，这和数据本身的难度、数据量大小都有关系</li>
 <li>LSTM和3D-ConvNet在miniKinetics上表现的更有竞争力，这是因为这两种方法对数据量的需求比较大</li>
+<li>在miniKinetics上，光流要比RGB流效果差，而在其他两个数据集上则相反，这是由于miniKinetics数据集本身有许多相机抖动</li>
+<li>相比于其他模型，I3D模型似乎从光流中获益最大，这有可能是因为I3D的时间长度更大(有64帧)</li>
 </ul>
 <h2 id="Experimental-Evaluation-of-Features-用在迁移学习中，即把各种模型先在Kinetics数据集上做预训练，预训练得到的网络作为特征提取器，再去别的数据集上训练与测试"><a href="#Experimental-Evaluation-of-Features-用在迁移学习中，即把各种模型先在Kinetics数据集上做预训练，预训练得到的网络作为特征提取器，再去别的数据集上训练与测试" class="headerlink" title="Experimental Evaluation of Features (用在迁移学习中，即把各种模型先在Kinetics数据集上做预训练，预训练得到的网络作为特征提取器，再去别的数据集上训练与测试)"></a>Experimental Evaluation of Features (用在迁移学习中，即把各种模型先在Kinetics数据集上做预训练，预训练得到的网络作为特征提取器，再去别的数据集上训练与测试)</h2><ul>
 <li>固定预训练的参数，在新数据集上只重新训练一个分类器</li>
 <li><p>整个网络在新数据集上fine-tuning</p>
 <blockquote>
-<p>预训练后的结果都得到大幅提升，尤其是<strong>I3D和3D ConvNet</strong></p>
+<p>固定预训练的参数，在新数据集上只重新训练一个分类器的做法在I3D和3D ConvNet上也有不少提升，但在其他几种方法上几乎没有变化<br>整个网络在新数据集上fine-tuning的结果都得到大幅提升，尤其是<strong>I3D和3D ConvNet</strong><br>迁移学习对于I3D影响最大，这也可能是因为I3D的时间长度更大，在大数据集上预训练就可以学到更好的时间结构<br>而迁移学习对于没有使用3D ConvNet结构的影响不大，这可能是因为那些方法的输入都是离散的帧而不是连续的帧，而那些2D方法都用了ImageNet预训练的参数，这些独立的帧其实更像是image而不是video，所以已经在image的数据集上预训练过的结构在video的大数据上进一步pre-train不一定有明显提升</p>
 </blockquote>
 <img src="/2018/03/07/Qua-Vadis-Action-Recognition-A-New-Model-and-the-Kinetics-Dataset/5.png">
 <img src="/2018/03/07/Qua-Vadis-Action-Recognition-A-New-Model-and-the-Kinetics-Dataset/6.png"></li>
@@ -678,7 +680,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
