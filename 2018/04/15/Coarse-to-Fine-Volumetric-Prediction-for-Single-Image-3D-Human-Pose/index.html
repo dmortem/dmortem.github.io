@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="计算机视觉,Human Pose Estimation,深度学习,论文阅读," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="CVPR 2017的文章：Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose  提出一种对于物体周围的3D空间进行精细离散化的表示，并使用ConvNet来预测每个关节在每个voxel的可能性。相比于直接回归，这种方法提升了性能 提出一种coarse-to-fine的渐进优化预测的模式。这种方法解决了维度增加的问题，">
+<meta name="keywords" content="计算机视觉,Human Pose Estimation,深度学习,论文阅读">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose">
 <meta property="og:url" content="dmortem.github.io/2018/04/15/Coarse-to-Fine-Volumetric-Prediction-for-Single-Image-3D-Human-Pose/index.html">
 <meta property="og:site_name" content="Chiyu Wu">
+<meta property="og:description" content="CVPR 2017的文章：Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose  提出一种对于物体周围的3D空间进行精细离散化的表示，并使用ConvNet来预测每个关节在每个voxel的可能性。相比于直接回归，这种方法提升了性能 提出一种coarse-to-fine的渐进优化预测的模式。这种方法解决了维度增加的问题，">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-15T04:22:20.860Z">
+<meta property="og:updated_time" content="2018-04-14T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose">
+<meta name="twitter:description" content="CVPR 2017的文章：Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose  提出一种对于物体周围的3D空间进行精细离散化的表示，并使用ConvNet来预测每个关节在每个voxel的可能性。相比于直接回归，这种方法提升了性能 提出一种coarse-to-fine的渐进优化预测的模式。这种方法解决了维度增加的问题，">
 
 
 
@@ -358,12 +362,34 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-04-15T12:22:20+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2018-04-15T00:00:00+08:00">
                 2018-04-15
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -397,7 +423,13 @@
       
 
       
-        
+        <p>CVPR 2017的文章：<a href="http://openaccess.thecvf.com/content_cvpr_2017/papers/Pavlakos_Coarse-To-Fine_Volumetric_Prediction_CVPR_2017_paper.pdf" target="_blank" rel="noopener">Coarse-to-Fine Volumetric Prediction for Single-Image 3D Human Pose</a></p>
+<ul>
+<li>提出一种对于物体周围的3D空间进行精细离散化的表示，并使用ConvNet来预测每个关节在每个voxel的可能性。相比于直接回归，这种方法提升了性能</li>
+<li>提出一种coarse-to-fine的渐进优化预测的模式。这种方法解决了维度增加的问题，允许了迭代优化和图像特征的重复处理</li>
+</ul>
+<a id="more"></a>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2>
       
     </div>
     
@@ -411,6 +443,18 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机视觉/" rel="tag"># 计算机视觉</a>
+          
+            <a href="/tags/Human-Pose-Estimation/" rel="tag"># Human Pose Estimation</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/论文阅读/" rel="tag"># 论文阅读</a>
+          
+        </div>
       
 
       
@@ -481,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -523,7 +576,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -580,6 +633,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
