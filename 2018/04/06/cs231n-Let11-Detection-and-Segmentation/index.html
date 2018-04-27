@@ -483,6 +483,7 @@
 </ul>
 <h3 id="Human-Pose-Estimation"><a href="#Human-Pose-Estimation" class="headerlink" title="Human Pose Estimation"></a>Human Pose Estimation</h3> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/9.png">
 <h2 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h2><ul>
+<li>优质介绍资源：<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650741534&amp;idx=1&amp;sn=02dc164ffcedbf22124b97841ba67fe5&amp;chksm=871adf60b06d567690fa2328b161c012a464687768e50f812a51b5533a7d68b99af1cf8f02b8&amp;scene=0#rd" target="_blank" rel="noopener">链接</a></li>
 <li>相比于Classification + Localization，Object Detection的每张输入图像都对应不同数量的output，即每张图片里有若干数量未知的待测物体</li>
 </ul>
 <h3 id="Object-Detection-as-Regression"><a href="#Object-Detection-as-Regression" class="headerlink" title="Object Detection as Regression"></a>Object Detection as Regression</h3><ul>
@@ -507,7 +508,8 @@
 </li>
 </ul>
 <h4 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h4><ul>
-<li>既然对2000个ROI都训练ConvNet太耗时间，那么我们可以考虑把ROI提取放在feature map上，即先对input image用ConvNet进行特征提取，随后在提取的特征图上再做ROI提取，这样相当于只需要训练一个ConvNet就可以了，大大减少运行时间与其他资源<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/12.png"> </li>
+<li>既然对2000个ROI都训练ConvNet太耗时间，那么我们可以考虑把ROI提取放在feature map上，即先对input image用ConvNet进行特征提取，随后在提取的特征图上再做ROI提取，这样相当于只需要训练一个ConvNet就可以了，大大减少运行时间与其他资源</li>
+<li>同时，Fast R-CNN使用softmax分类器代替了R-CNN中的SVM分类器<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/12.png"> </li>
 <li>*但具体做的时候，其实ROI提取的步骤还是在input image上执行的，只是把提取的ROI根据卷积操作的空间对应性映射到feature map上<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/13.png"> 
 </li>
 </ul>
@@ -521,8 +523,12 @@
 <li>Faster R-CNN速度慢，但更准确；SSD更快但没那么准确<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/16.png"> 
 </li>
 </ul>
-<h2 id="Instance-Segmentation"><a href="#Instance-Segmentation" class="headerlink" title="Instance Segmentation"></a>Instance Segmentation</h2><h3 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h3> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/17.png"> 
- <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/18.png">  
+<h2 id="Instance-Segmentation"><a href="#Instance-Segmentation" class="headerlink" title="Instance Segmentation"></a>Instance Segmentation</h2><h3 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h3><ul>
+<li>在Faster R-CNN中加了一个类似语义分割里的全卷积网络，用来做像素级的分类</li>
+<li>使用ROI Align取代了ROI Pooling，因为RPN在像素级分类中不够精准<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/17.png"> 
+<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/18.png">  </li>
+</ul>
+
       
     </div>
     
