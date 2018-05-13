@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="计算机视觉,Action Recognition,深度学习,论文阅读," />
+  <meta name="keywords" content="计算机视觉,深度学习,论文阅读,Action Recognition," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="CVPR 2017的一篇文章: Qua Vadis, Action Recognition? A New Model and the Kinetics Dataset  在一个规模更大的新video数据集Kinetics上，重新评估了当下state-of-the-art的模型结构，并和在小数据集上训练的结构进行比较 提出一个新模型I3D，在Kinetics上预训练后，在HMDB-51数据集上取得了">
-<meta name="keywords" content="计算机视觉,Action Recognition,深度学习,论文阅读">
+<meta name="keywords" content="计算机视觉,深度学习,论文阅读,Action Recognition">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qua Vadis, Action Recognition? A New Model and the Kinetics Dataset">
 <meta property="og:url" content="dmortem.github.io/2018/03/07/Qua-Vadis-Action-Recognition-A-New-Model-and-the-Kinetics-Dataset/index.html">
@@ -507,6 +507,7 @@
 </ul>
 <h3 id="New-Two-Stream-Inflated-3D-ConvNets"><a href="#New-Two-Stream-Inflated-3D-ConvNets" class="headerlink" title="New*: Two-Stream Inflated 3D ConvNets"></a>New*: Two-Stream Inflated 3D ConvNets</h3><ul>
 <li>结论：3D ConvNets可以受益于在ImageNet上训练过的2D ConvNet模型，并有选择性的使用相应的预训练参数；虽然3D ConvNets可以直接从RGB流中学习到时序信息，但是使用光流还是可以提升效率</li>
+<li>区别于之前的几种双流，光流数是RGB帧数的2L倍，这里光流和RGB帧都使用了64帧</li>
 </ul>
 <h4 id="Inflating-2D-ConvNets-into-3D"><a href="#Inflating-2D-ConvNets-into-3D" class="headerlink" title="Inflating 2D ConvNets into 3D"></a>Inflating 2D ConvNets into 3D</h4><ul>
 <li>把一些很成功的2D模型转移成3D，通过把所有卷积核以及pooling核增加时间的一维</li>
@@ -530,6 +531,7 @@
 </ul>
 <h3 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h3><ul>
 <li>见原文</li>
+<li>注：在训练时都是从原始video采样的，而test的时候是把全部的帧都送入网络。实现细节也可以看代码</li>
 </ul>
 <h2 id="The-Kinetics-Human-Action-Video-Dataset"><a href="#The-Kinetics-Human-Action-Video-Dataset" class="headerlink" title="The Kinetics Human Action Video Dataset"></a>The Kinetics Human Action Video Dataset</h2><ul>
 <li>数据集细节参见另一篇提出这个数据集的文章 <a href="https://arxiv.org/abs/1705.06950" target="_blank" rel="noopener">The Kinetics Human Action Video Dataset</a></li>
@@ -570,11 +572,11 @@
           
             <a href="/tags/计算机视觉/" rel="tag"># 计算机视觉</a>
           
-            <a href="/tags/Action-Recognition/" rel="tag"># Action Recognition</a>
-          
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
             <a href="/tags/论文阅读/" rel="tag"># 论文阅读</a>
+          
+            <a href="/tags/Action-Recognition/" rel="tag"># Action Recognition</a>
           
         </div>
       
