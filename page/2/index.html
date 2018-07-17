@@ -313,6 +313,332 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/03/07/Qua-Vadis-Action-Recognition-A-New-Model-and-the-Kinetics-Dataset/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chiyu Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/image.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chiyu Wu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/07/Qua-Vadis-Action-Recognition-A-New-Model-and-the-Kinetics-Dataset/" itemprop="url">Qua Vadis, Action Recognition? A New Model and the Kinetics Dataset</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-07T08:13:34-05:00">
+                2018-03-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-03-13T12:00:00-04:00">
+                2018-03-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>CVPR 2017的一篇文章: <a href="http://openaccess.thecvf.com/content_cvpr_2017/papers/Carreira_Quo_Vadis_Action_CVPR_2017_paper.pdf" target="_blank" rel="noopener">Qua Vadis, Action Recognition? A New Model and the Kinetics Dataset</a></p>
+<ul>
+<li>在一个规模更大的新video数据集Kinetics上，重新评估了当下state-of-the-art的模型结构，并和在小数据集上训练的结构进行比较</li>
+<li>提出一个新模型I3D，在Kinetics上预训练后，在HMDB-51数据集上取得了80.2%的准确率，在UCF-101上取得了97.9%的准确率</li>
+</ul>
+<p><strong>本文的idea*</strong>：</p>
+<ul>
+<li>根据之前3D-ConvNets的缺点(1. 参数多；2. 无法利用在ImageNet上预训练过的2D网络)，提出一种benefit from ImageNet 2D ConvNet design and their learned parameters的方法，并探究了在时间维度上的感受野要如何设置</li>
+<li>吸收了之前state-of-the-art的模型，把双流的思想加到3D-ConvNet当中来，取得优异的效果（作者认为既然现在有了大数据集，那么3D ConvNet原先因为参数多而难训练的缺陷可以被大幅度改进。因此作者使用了3D ConvNet，同时双流这个思想还是很有用，因此这个新模型使用双流+3D ConvNet）</li>
+<li>验证了视频模型的迁移学习同样有效，即在Kinetics上进行预训练能够提升模型效果</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/07/Qua-Vadis-Action-Recognition-A-New-Model-and-the-Kinetics-Dataset/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/03/05/数值分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chiyu Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/image.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chiyu Wu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/05/数值分析/" itemprop="url">数值分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-05T00:26:42-05:00">
+                2018-03-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-05-12T12:00:00-04:00">
+                2018-05-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数值分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数值分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>ZJU 数值分析课程笔记</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/05/数值分析/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/17/资源汇总/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -344,7 +670,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-17T20:00:58+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-17T20:00:58-05:00">
                 2018-02-17
               </time>
             
@@ -360,8 +686,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-04-27T00:00:00+08:00">
-                2018-04-27
+              <time title="Post modified" itemprop="dateModified" datetime="2018-07-16T00:00:00-04:00">
+                2018-07-16
               </time>
             
           </span>
@@ -502,7 +828,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-16T14:57:17+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-16T01:57:17-05:00">
                 2018-02-16
               </time>
             
@@ -518,8 +844,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-16T00:00:00+08:00">
-                2018-02-16
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-15T11:00:00-05:00">
+                2018-02-15
               </time>
             
           </span>
@@ -666,7 +992,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-14T20:58:55+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-14T07:58:55-05:00">
                 2018-02-14
               </time>
             
@@ -682,8 +1008,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-14T00:00:00+08:00">
-                2018-02-14
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-13T11:00:00-05:00">
+                2018-02-13
               </time>
             
           </span>
@@ -824,7 +1150,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-12T21:50:36+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-12T08:50:36-05:00">
                 2018-02-12
               </time>
             
@@ -840,8 +1166,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-12T00:00:00+08:00">
-                2018-02-12
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-11T11:00:00-05:00">
+                2018-02-11
               </time>
             
           </span>
@@ -959,7 +1285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/11/深度学习/cs231n学习笔记/">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/10/深度学习/cs231n学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chiyu Wu">
@@ -978,7 +1304,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/11/深度学习/cs231n学习笔记/" itemprop="url">cs231n学习笔记</a></h1>
+                <a class="post-title-link" href="/2018/02/10/深度学习/cs231n学习笔记/" itemprop="url">cs231n学习笔记</a></h1>
         
 
         <div class="post-meta">
@@ -990,8 +1316,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-11T00:20:55+08:00">
-                2018-02-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-10T11:20:55-05:00">
+                2018-02-10
               </time>
             
 
@@ -1006,8 +1332,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-21T00:00:00+08:00">
-                2018-02-21
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-20T11:00:00-05:00">
+                2018-02-20
               </time>
             
           </span>
@@ -1071,7 +1397,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/11/深度学习/cs231n学习笔记/#more" rel="contents">
+            <a class="btn" href="/2018/02/10/深度学习/cs231n学习笔记/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1122,7 +1448,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/10/深度学习/Daily-Reading/">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/09/深度学习/Pytorch学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chiyu Wu">
@@ -1141,7 +1467,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/10/深度学习/Daily-Reading/" itemprop="url">Daily Reading</a></h1>
+                <a class="post-title-link" href="/2018/02/09/深度学习/Pytorch学习/" itemprop="url">Pytorch学习</a></h1>
         
 
         <div class="post-meta">
@@ -1153,8 +1479,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-10T20:25:43+08:00">
-                2018-02-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-09T22:40:00-05:00">
+                2018-02-09
               </time>
             
 
@@ -1169,166 +1495,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-04-25T00:00:00+08:00">
-                2018-04-25
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>记录一下每天看的公众号和知乎相关内容</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/深度学习/Daily-Reading/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/10/深度学习/Pytorch学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chiyu Wu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/image.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chiyu Wu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/深度学习/Pytorch学习/" itemprop="url">Pytorch学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-10T11:40:00+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Post modified&#58;</span>
-              
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-21T00:00:00+08:00">
-                2018-02-21
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-20T11:00:00-05:00">
+                2018-02-20
               </time>
             
           </span>
@@ -1392,7 +1560,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/深度学习/Pytorch学习/#more" rel="contents">
+            <a class="btn" href="/2018/02/09/深度学习/Pytorch学习/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1443,7 +1611,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/09/随笔/Welcome-to-my-blog/">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/02/08/随笔/Welcome-to-my-blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chiyu Wu">
@@ -1462,7 +1630,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/09/随笔/Welcome-to-my-blog/" itemprop="url">Welcome to my blog</a></h1>
+                <a class="post-title-link" href="/2018/02/08/随笔/Welcome-to-my-blog/" itemprop="url">Welcome to my blog</a></h1>
         
 
         <div class="post-meta">
@@ -1474,8 +1642,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-09T00:00:00+08:00">
-                2018-02-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-08T11:00:00-05:00">
+                2018-02-08
               </time>
             
 
@@ -1490,8 +1658,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-02-10T00:00:00+08:00">
-                2018-02-10
+              <time title="Post modified" itemprop="dateModified" datetime="2018-02-09T11:00:00-05:00">
+                2018-02-09
               </time>
             
           </span>
@@ -1550,7 +1718,7 @@
           <p>一直想搞个博客，但是一直懒得搞，拖延癌晚期/(ㄒoㄒ)/~~。。之前搞过一个jekyll的，这次想了想还是换hexo了</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/09/随笔/Welcome-to-my-blog/#more" rel="contents">
+            <a class="btn" href="/2018/02/08/随笔/Welcome-to-my-blog/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1642,7 +1810,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1664,7 +1832,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

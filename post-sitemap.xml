@@ -7,8 +7,8 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/2018/03/05/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/</loc>
-        <lastmod>2018-05-12T16:00:00.000Z</lastmod>
+        <loc>dmortem.github.io/2018/07/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Daily-Reading/</loc>
+        <lastmod>2018-07-16T04:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,15 +16,23 @@
 
     <url>
         <loc>dmortem.github.io/2018/02/17/%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/</loc>
-        <lastmod>2018-04-26T16:00:00.000Z</lastmod>
+        <lastmod>2018-07-16T04:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>dmortem.github.io/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Daily-Reading/</loc>
-        <lastmod>2018-04-24T16:00:00.000Z</lastmod>
+        <loc>dmortem.github.io/2018/06/16/Realtime-Multi-Person-2D-Pose-Estimation-using-Part-Affinity-Fields/</loc>
+        <lastmod>2018-06-16T04:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>dmortem.github.io/2018/03/05/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/</loc>
+        <lastmod>2018-05-12T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -47,7 +55,7 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/2018/04/06/cs231n-Let11-Detection-and-Segmentation/</loc>
+        <loc>dmortem.github.io/2018/04/05/cs231n-Let11-Detection-and-Segmentation/</loc>
         <lastmod>2018-04-05T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -103,7 +111,7 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/2018/02/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+        <loc>dmortem.github.io/2018/02/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Pytorch%E5%AD%A6%E4%B9%A0/</loc>
         <lastmod>2018-02-20T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -111,7 +119,7 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Pytorch%E5%AD%A6%E4%B9%A0/</loc>
+        <loc>dmortem.github.io/2018/02/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/cs231n%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2018-02-20T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -143,7 +151,7 @@
     </url>
 
     <url>
-        <loc>dmortem.github.io/2018/02/09/%E9%9A%8F%E7%AC%94/Welcome-to-my-blog/</loc>
+        <loc>dmortem.github.io/2018/02/08/%E9%9A%8F%E7%AC%94/Welcome-to-my-blog/</loc>
         <lastmod>2018-02-09T16:00:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

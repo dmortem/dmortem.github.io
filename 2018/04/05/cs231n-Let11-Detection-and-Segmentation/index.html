@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机视觉,深度学习,公开课," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Lecture 11 Detection and Segmentation slides video">
+<meta name="keywords" content="计算机视觉,深度学习,公开课">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n Let11 Detection and Segmentation">
+<meta property="og:url" content="dmortem.github.io/2018/04/05/cs231n-Let11-Detection-and-Segmentation/index.html">
+<meta property="og:site_name" content="Chiyu Wu">
+<meta property="og:description" content="Lecture 11 Detection and Segmentation slides video">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/1.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/2.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/3.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/4.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/5.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/6.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/7.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/8.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/9.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/10.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/11.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/12.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/13.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/14.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/15.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/16.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/17.png">
+<meta property="og:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/18.png">
+<meta property="og:updated_time" content="2018-04-05T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cs231n Let11 Detection and Segmentation">
+<meta name="twitter:description" content="Lecture 11 Detection and Segmentation slides video">
+<meta name="twitter:image" content="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="dmortem.github.io/2018/04/05/cs231n-Let11-Detection-and-Segmentation/"/>
+
+
+
+
+
+  <title>cs231n Let11 Detection and Segmentation | Chiyu Wu</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?44f4925176b4eb14cc21af08b3c64555";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chiyu Wu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dmortem.github.io/2018/04/05/cs231n-Let11-Detection-and-Segmentation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chiyu Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/image.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chiyu Wu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cs231n Let11 Detection and Segmentation</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-05T13:16:39-04:00">
+                2018-04-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-04-05T12:00:00-04:00">
+                2018-04-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Lecture-11-Detection-and-Segmentation"><a href="#Lecture-11-Detection-and-Segmentation" class="headerlink" title="Lecture 11 Detection and Segmentation"></a>Lecture 11 Detection and Segmentation</h1><ul>
+<li><a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" target="_blank" rel="noopener">slides</a></li>
+<li><a href="https://www.youtube.com/watch?v=nDPWywWRIRo&amp;index=11&amp;t=0s&amp;list=PLFeNv0PW-fo5dSXiv2Xlsjvtb43S8m38b" target="_blank" rel="noopener">video</a></li>
+</ul>
+<a id="more"></a>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/1.png">
+<h2 id="Semantic-Segmentation"><a href="#Semantic-Segmentation" class="headerlink" title="Semantic Segmentation"></a>Semantic Segmentation</h2><ul>
+<li>图片中每个像素点都有一个label</li>
+<li>不区分instances。如下图有多只牛，不同牛位置的pixel相应的label都是cow，并不会作区分。而Instance Segmentation则会对具体的object做区分<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/2.png">
+</li>
+</ul>
+<h3 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a>Sliding Window</h3><ul>
+<li><p>在原始图像中逐像素提取patch，把这些patch一一扔进CNN架构中进行分类。这些patch都是以当前用来分类的像素点作为中心，即该patch的label是基于中心点像素的</p>
+<blockquote>
+<p>效率很低；而且从相邻的两个像素提取的patch几乎长的一样，最后训练得到的network权重也基本一样，这部分可以考虑shared，不需要重新去训练</p>
+</blockquote>
+<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/3.png">
+</li>
+</ul>
+<h3 id="全卷积-Fully-Convolutional"><a href="#全卷积-Fully-Convolutional" class="headerlink" title="全卷积(Fully Convolutional)"></a>全卷积(Fully Convolutional)</h3><ul>
+<li><p>由于逐像素效率低，那么就直接把一整张图片送入网络，同时对所有像素点进行分类，最后输出一张C*H*W的分类图，每个像素点都有C个类别的score，这样还做到了上面所说的相邻像素可以直接使用shared feature</p>
+<blockquote>
+<p>在原始分辨率下做卷积比较昂贵，内存占用等都会很大，尤其是当每一层的feature map数也很多的时候</p>
+</blockquote>
+<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/4.png">
+</li>
+</ul>
+<h3 id="改进的Fully-Convolutional"><a href="#改进的Fully-Convolutional" class="headerlink" title="改进的Fully Convolutional"></a>改进的Fully Convolutional</h3><ul>
+<li>既然在原始分辨率下做卷积代价高，那么就进行降维，随后再upsampling恢复原来的分辨率，得到具有原始分辨率的label图<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/5.png"></li>
+<li>Unsampling<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/6.png"> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/7.png">
+</li>
+</ul>
+<h2 id="Classification-Localization"><a href="#Classification-Localization" class="headerlink" title="Classification + Localization"></a>Classification + Localization</h2> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/8.png">
+<ul>
+<li>一些trick<blockquote>
+<p>同时做分类与回归bounding box？————有些人可能会对不同的类分别做bounding box的回归(因为类别不同可能影响到物体的位置与大小识别，相当于回归的loss会因为类别的识别错误而大大增加)，然后取ground truth对应的两个loss相加<br>两个loss相加时的权重怎么看？————当作超参数进行训练</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Human-Pose-Estimation"><a href="#Human-Pose-Estimation" class="headerlink" title="Human Pose Estimation"></a>Human Pose Estimation</h3> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/9.png">
+<h2 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h2><ul>
+<li>优质介绍资源：<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650741534&amp;idx=1&amp;sn=02dc164ffcedbf22124b97841ba67fe5&amp;chksm=871adf60b06d567690fa2328b161c012a464687768e50f812a51b5533a7d68b99af1cf8f02b8&amp;scene=0#rd" target="_blank" rel="noopener">链接</a></li>
+<li>相比于Classification + Localization，Object Detection的每张输入图像都对应不同数量的output，即每张图片里有若干数量未知的待测物体</li>
+</ul>
+<h3 id="Object-Detection-as-Regression"><a href="#Object-Detection-as-Regression" class="headerlink" title="Object Detection as Regression"></a>Object Detection as Regression</h3><ul>
+<li>若使用类似Classification + Localization的方法，那么由于每张图片中有不同的输出，若使用某个固定的网络，输出数量只能是一定的，因此无法简单的进行regression<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/10.png"> 
+</li>
+</ul>
+<h3 id="Object-Detection-as-Classification-Sliding-Window"><a href="#Object-Detection-as-Classification-Sliding-Window" class="headerlink" title="Object Detection as Classification: Sliding Window"></a>Object Detection as Classification: Sliding Window</h3><ul>
+<li>使用Semantic Segmentation中提到的idea，使用sliding window后，就是对每一个window过一次网络，因此就不用担心每张图片有不同的输出了。因为这样做的话，对于一张图片，其经过k次网络，也就有k个output了，k是window的个数<blockquote>
+<p>window的大小、每次移动的位置都无法直接确定，而只能不断尝试，通过最后网络训练得到的结果进行判断。那么这种做法需要进行大量的训练，代价太大</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Region-Based-Methods"><a href="#Region-Based-Methods" class="headerlink" title="Region Based Methods"></a>Region Based Methods</h3><ul>
+<li>由于用Sliding Window有太多的candidate window了，所以计算代价太大，那么我们可以考虑使用算法来直接找到一些出现object概率比较大的candidate区域，减小搜索范围（如可以先找edge，然后再找有没有形成闭合回路的edge，若有那么这些闭合的曲线很有可能就是object，可以作为candidate region</li>
+</ul>
+<h4 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h4><ul>
+<li><p>先在input image上提取2000个ROI(ROI是固定算法)，随后把ROI warp成一样的size，再送入ConvNet，分别用SVM进行分类以及做线性回归(回归的是bounding box基于ROI的offset)。其中，在正式训练前，还需要对ConvNet进行微调，这时候是使用softmax进行微调</p>
+<blockquote>
+<p>由于仍然有2000个ROI，训练耗时还是很久，而且占用磁盘、内存资源；且测试速度也慢，无法做到实时性；ROI不能通过学习进行改进，可能算法本身的识别会有误差</p>
+</blockquote>
+<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/11.png"> 
+</li>
+</ul>
+<h4 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h4><ul>
+<li>既然对2000个ROI都训练ConvNet太耗时间，那么我们可以考虑把ROI提取放在feature map上，即先对input image用ConvNet进行特征提取，随后在提取的特征图上再做ROI提取，这样相当于只需要训练一个ConvNet就可以了，大大减少运行时间与其他资源</li>
+<li>同时，Fast R-CNN使用softmax分类器代替了R-CNN中的SVM分类器<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/12.png"> </li>
+<li>*但具体做的时候，其实ROI提取的步骤还是在input image上执行的，只是把提取的ROI根据卷积操作的空间对应性映射到feature map上<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/13.png"> 
+</li>
+</ul>
+<h4 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h4><ul>
+<li>Fast R-CNN的测试时间主要是花在ROI的提取上了。而且ROI提取是固定算法，无法通过训练加以改进，可能本身的识别存在一些问题。因此，Faster R-CNN把ROI改进成RPN(Region Proposal Network)，在这里Region Proposal的提取都是可以通过学习得到。模型具体的detail比较复杂，还得去看看paper<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/14.png"> 
+</li>
+</ul>
+<h4 id="R-CNN-gt-Fast-R-CNN-gt-Faster-R-CNN"><a href="#R-CNN-gt-Fast-R-CNN-gt-Faster-R-CNN" class="headerlink" title="R-CNN -&gt; Fast R-CNN -&gt; Faster R-CNN"></a>R-CNN -&gt; Fast R-CNN -&gt; Faster R-CNN</h4> <img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/15.png"> 
+<h3 id="Detection-without-Proposals-Methods-YOLO-SSD"><a href="#Detection-without-Proposals-Methods-YOLO-SSD" class="headerlink" title="Detection without Proposals Methods: YOLO/SSD"></a>Detection without Proposals Methods: YOLO/SSD</h3><ul>
+<li>相比于Region based method对于每个region都要做一次独立的处理，YOLO和SSD直接使用一个很大的CNN对所有潜在的region做预测</li>
+<li>Faster R-CNN速度慢，但更准确；SSD更快但没那么准确<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/16.png"> 
+</li>
+</ul>
+<h2 id="Instance-Segmentation"><a href="#Instance-Segmentation" class="headerlink" title="Instance Segmentation"></a>Instance Segmentation</h2><h3 id="Mask-R-CNN"><a href="#Mask-R-CNN" class="headerlink" title="Mask R-CNN"></a>Mask R-CNN</h3><ul>
+<li>在Faster R-CNN中加了一个类似语义分割里的全卷积网络，用来做像素级的分类</li>
+<li>使用ROI Align取代了ROI Pooling，因为RPN在像素级分类中不够精准<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/17.png"> 
+<img src="/2018/04/06/cs231n-Let11-Detection-and-Segmentation/18.png">  </li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机视觉/" rel="tag"># 计算机视觉</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/公开课/" rel="tag"># 公开课</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/机器学习及应用/" rel="next" title="机器学习及应用">
+                <i class="fa fa-chevron-left"></i> 机器学习及应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/11/Two-Stream-Convolutional-Networks-for-Action-Recognition-in-Videos/" rel="prev" title="Two-Stream Convolutional Networks for Action Recognition in Videos">
+                Two-Stream Convolutional Networks for Action Recognition in Videos <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/image.jpg"
+                alt="Chiyu Wu" />
+            
+              <p class="site-author-name" itemprop="name">Chiyu Wu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dmortem" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cywu@zju.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://seanshum.cn/" title="Shen Dong" target="_blank">Shen Dong</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://yao-zou.github.io/" title="Zou Yao" target="_blank">Zou Yao</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-11-Detection-and-Segmentation"><span class="nav-number">1.</span> <span class="nav-text">Lecture 11 Detection and Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-Segmentation"><span class="nav-number">1.2.</span> <span class="nav-text">Semantic Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sliding-Window"><span class="nav-number">1.2.1.</span> <span class="nav-text">Sliding Window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全卷积-Fully-Convolutional"><span class="nav-number">1.2.2.</span> <span class="nav-text">全卷积(Fully Convolutional)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改进的Fully-Convolutional"><span class="nav-number">1.2.3.</span> <span class="nav-text">改进的Fully Convolutional</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classification-Localization"><span class="nav-number">1.3.</span> <span class="nav-text">Classification + Localization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Human-Pose-Estimation"><span class="nav-number">1.3.1.</span> <span class="nav-text">Human Pose Estimation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-Detection"><span class="nav-number">1.4.</span> <span class="nav-text">Object Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-Detection-as-Regression"><span class="nav-number">1.4.1.</span> <span class="nav-text">Object Detection as Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-Detection-as-Classification-Sliding-Window"><span class="nav-number">1.4.2.</span> <span class="nav-text">Object Detection as Classification: Sliding Window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Region-Based-Methods"><span class="nav-number">1.4.3.</span> <span class="nav-text">Region Based Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#R-CNN"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fast-R-CNN"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">Fast R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Faster-R-CNN"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">Faster R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R-CNN-gt-Fast-R-CNN-gt-Faster-R-CNN"><span class="nav-number">1.4.3.4.</span> <span class="nav-text">R-CNN -&gt; Fast R-CNN -&gt; Faster R-CNN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Detection-without-Proposals-Methods-YOLO-SSD"><span class="nav-number">1.4.4.</span> <span class="nav-text">Detection without Proposals Methods: YOLO/SSD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instance-Segmentation"><span class="nav-number">1.5.</span> <span class="nav-text">Instance Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mask-R-CNN"><span class="nav-number">1.5.1.</span> <span class="nav-text">Mask R-CNN</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chiyu Wu</span>
+
+  
+  
+    
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
