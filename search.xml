@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields]]></title>
+    <url>%2F2018%2F07%2F26%2FRealtime-Multi-Person-2D-Pose-Estimation-using-Part-Affinity-Fields%2F</url>
+    <content type="text"><![CDATA[CVPR 2017 oral：Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields Abstract 提出一种多人实时2d姿态估计的方法 通过两个branch的网络，分别学习关节位置，和使用Parts Affinity Fields来学习关节之间的联系 再使用贪婪的bottom-top的做法实现姿态估计，复杂度与人数无关 Introduction 目前多人实时姿态估计有三个难点 人数未知、位置未知、大小未知 人们之间存在交互，如交流、遮挡 随着人数增多，运行时间也会增大，难以做到realtime 目前常用的方法是top-down做法：先检测人，再在单人上估计pose。但这种方法有两个问题 当检测人失败时，算法就失效了 算法复杂度随着人数增长而增长 因此，bottom-top算法开始受到更多关注，这个算法正好能够解决top-down算法的两个问题 但事实上，由于final parse需要复杂的global inference，所以之前使用bottom-top的算法并没有提升效率 本文提出了一种多人实时2d姿态估计的方法 We present the first bottom-up representation of association scores via Part Affinity Fields (PAFs), a set of 2D vector fields that encode the location and orientation of limbs over the image domain. We demonstrate that simultaneously inferring these bottom-up representations of detection and association encode global context sufficiently well to allow a greedy parse to achieve high-quality results, at a fraction of the computational cost. Method 输入是一张 w*h 的彩色图像 (a)，输出是图中每个人的2d关节点坐标 (e) 前馈网络根据一张输入图像，同时预测关节2D位置的 Confidence Map S (b) 和表示关节关联度的 2D vector fields L (c) S = (S1, S2, …, SJ)，Sj 表示所有关节 j 的 heatmap 图，大小为 w*h（一个关节一张 heatmap，所以有 J 张 heatmap） L = (L1, L2, …, LC)，Lc 表示所有 limb 的矢量图，大小为 w*h*2 最后，贪婪解析 Confidence Map 和 Affinity Fields (d) ，输出图片中所有人的2D关节点 (e) Simultaneous Detection and Association（整体网络框架） 网络分为2个 branch，上侧的 branch 预测 confidence map，下侧的 branch 预测 affinity field。每个 branch 都反复迭代预测，且在每个 stage 使用中间监督 (intermediate supervision) 输入图像先经过一个 fine-tuned 的10层 vgg-19，得到 feature map F，作为两个 branch 的输入 在第一个 stage 和第 t 个 stage，confidence map 和 part affinity fields 的计算如下，ρ 和 φ 表示两个CNN网络： 从下图可以看到，随着迭代的进行，在后面的stage可以很好地分辨出“左右”关系，误判的情况也好了很多 使用预测的 heatmap 和 groundtruth map 之间的 L2 loss 来计算损失函数 由于部分数据集并没有把图片上所有人都标注出来，因此在计算loss的时候，加了一个权重 W(p) 其中，W 是一个 binary mask，若在 p 位置没有标注时，W(p)=0。所以，从上面的 loss function 可以看出，stage t 的损失函数值为：对于每一个 joint 对应的 heatmap，逐像素计算预测值与标签值的差距（heatmap 只有关节处附近为正值，其余都为0），在缺乏标签处设置 W=0 使用 intermediate supervision 来防止梯度消失 Overall objective: Confidence Maps for Part Detection（branch 1介绍） 数据集给出的是关节点的坐标，因此要把这些 annotated 2D keypoints 转化为 heatmap，对每个人 k，其关节 j 的 heatmap 如下： 其中，x(j,k) 是坐标标签，S(j,k) 表示关节 j，人 k 在位置 p 的响应值 由于不同人之间可能存在遮挡，所以对于关节 j 的 heatmap，对不同人的响应取 max： 若是取 average，那么就不能很好地反应关节点的位置，如下图，使用 average 的话就找不到两个峰值了，也就无法找到关节点了 在测试时，在获得 heatmap 后，使用非极大值抑制（non-maximum suppression）来得到具体位置 Part Affinity Fields for Part Association（branch 2介绍）]]></content>
+      <categories>
+        <category>计算机视觉</category>
+      </categories>
+      <tags>
+        <tag>计算机视觉</tag>
+        <tag>深度学习</tag>
+        <tag>论文阅读</tag>
+        <tag>人体姿态估计</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[机器学习及应用]]></title>
     <url>%2F2018%2F07%2F17%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8F%8A%E5%BA%94%E7%94%A8%2F</url>
     <content type="text"><![CDATA[ZJU 机器学习及应用课程 深度学习简介 深度学习是由在计算机上模拟人类神经回路的“神经元网络”技术发展而来 神经元网络是在计算机上把虚拟的神经元排列成层状，模拟真正的神经细胞之间的电信号。借此实现大脑从各式各样的数据中提取本质概念的功能 人工神经网络通过模拟生物神经网络（大脑）的结构和功能，由大量的节点（或称“神经元”，或“单元”）和之间相互联接构成，可以用来对数据之间的复杂关系进行建模 所谓“深度”是指网络层数大于1。通常是把神经元“深化”到4-9层，实现接近于大脑的性能 深度学习革命 语音识别：可以使得词错误率从 1/4下降到1/8 计算机视觉：目标识别、图像分类等 自然语言处理：分布式表示、机器翻译、问题回答等 深度学习难点 参数过多，影响训练 非凸优化问题：即存在局部最优而非全局最优解，影响迭代下层参数比较难调 参数解释起来比较困难 深度学习需求 计算资源要大 数据要多 算法效率要好：即收敛快 背景知识机器学习 机器学习主要是研究如何使计算机从给定的数据中学习规律，即从观测数据（样本）中寻找规律，并利用学习到的规律（模型）对未知或无法观测的数据进行预测。目前，主流的机器学习算法是基于统计的方法，也叫统计机器学习 狭义地讲，机器学习是给定一些训练样本 (xi, yi), 1&lt;=i&lt;=N（其中 xi 是输入，yi 是需要预测的目标），让计算机自动寻找一个决策函数 f (.) 来建立 x 和 y 之间的关系: 这里，ŷ 是模型输出，θ 为决策函数的参数，ϕ(x) 表示样本 x 对应的特征表示。因为 x 不一定都是数值型的输入，因此需要通过 ϕ(x) 将 x 转换为数值型的输入。如果我们假设 x 是已经处理好的标量或向量，公式也可以直接写为: 损失函数 我们还要建立一些准则来衡量决策函数的好坏。在很多机器学习算法中，一般是定义一个损失函数 L(y,f(x,θ))，然后在所有的训练样本上来评价决策函数的风险: 这里，风险函数 R(θ) 是在已知的训练样本（经验数据）上计算得来的，因此被称之为经验风险。用对参数求经验风险来逐渐逼近理想的期望风险的最小值，就是我们常说的经验风险最小化原则（Empirical Risk Minimization）。这样，我们的目标就是变成了找到一个参数 θ* 使得经验风险最小: 过拟合 因为用来训练的样本往往是真实数据的一个很小的子集或者包含一定的噪声数据，不能很好地反映全部数据的真实分布 经验风险最小化原则很容易导致模型在训练集上错误率很低，但是在未知数据上错误率很高。这就是所谓的过拟合。过拟合问题往往是由于训练数据少和噪声等原因造成的 和过拟合相对应的一个概念是泛化错误 结构风险最小化原则 为了解决过拟合问题，一般在经验风险最小化的原则上上加参数的正则化（Regularization），也叫结构风险最小化原则（Structure Risk Minimization） 这里，||θ||2 是L2 范数的正则化项，用来减少参数空间，避免过拟合。用来控制正则化的强度。正则化项也可以使用其它函数，比如 L1 范数。L1 范数的引入通常会使得参数有一定稀疏性，因此在很多算法中也经常使用。在Bayes 估计的角度来讲，正则化是假设了参数的先验分布，不完全依赖训练数据 损失函数实例 0-1 损失函数（0-1 loss function）： 平方损失函数（quadratic loss function）： 交叉熵损失函数： 对于分类问题，预测目标 y 为离散的类别，模型输出 f(x,θ) 为每个类的条件概率。假设 y ∈ {1, ···, C}，模型预测的第 i 个类的条件概率 P(y=i|x)=fi(x,θ)，则 f(x,θ) 满足 fy(x,θ) 可以看作真实类别 y 的似然函数。参数可以直接用最大似然估计来优化。考虑到计算问题，我们经常使用最小化负对数似然，也就是负对数似然损失函数（Negative Log Likelihood function）: 如果我们用one-hot向量 y 来表示目标类别c，其中只有yc = 1，其余的向量元素都为0。负对数似然函数也可以写为： yi 也可以看成是真实类别的分布，这样上式恰好是交叉熵的形式。因此，负对数似然损失函数也常叫做交叉熵损失函数（Cross Entropy Loss function） Hinge 损失函数：对于两类分类问题，y 的取值为{-1, +1}，f(x,θ) 的取值为[-1, 1] 机器学习算法类型有监督学习 有监督学习是利用一组已知输入 x 和输出 y 的数据来学习模型的参数，使得模型预测的输出标记和真实标记尽可能的一致。有监督学习根据输出类型又可以分为回归和分类两类。 回归（Regression） 如果输出 y 是连续值（实数或连续整数），f (x) 的输出也是连续值。这种类型的问题就是回归问题。对于所有已知或未知的 (x,y)，使得 f(x,θ) 和 y 尽可能地一致。损失函数通常定义为平方误差。 分类（Classification） 如果输出 y 是离散的类别标记（符号），就是分类问题。损失函数有一般用 0-1 损失函数或负对数似然函数等。在分类问题中，通过学习得到的决策函数 f(x,θ) 也叫分类器。 无监督学习 无监督学习是用来学习的数据不包含输出目标，需要学习算法自动学习到一些有价值的信息。一个典型的无监督学习问题就是聚类（Clustering） 增强学习 增强学习也叫强化学习，强调如何基于环境做出一系列的动作，以取得最大化的累积收益。每做出一个动作，并不一定立刻得到收益。增强学习和有监督学习的不同在于增强学习不需要显式地以输入/输出对的方式给出训练样本，是一种在线的学习机制 参数估计 梯度下降法 梯度下降是求得所有样本上的风险函数最小值，叫做批量梯度下降法。若样本个数 N 很大，输入 x 的维数也很大时，那么批量梯度下降法每次迭代要处理所有的样本，效率会较低。为此，有一种改进的方法即随机梯度下降法。 随机梯度下降法（Stochastic Gradient Descent，SGD）也叫增量梯度下降，每个样本都进行更新 x(t), y(t) 是第 t 次迭代选取的样本 Early-Stop 在梯度下降训练的过程中，由于过拟合的原因，在训练样本上收敛的参数，并不一定在测试集上最优。因此，我们使用一个验证集（Validation Dataset）（也叫开发集（Development Dataset））来测试每一次迭代的参数在验证集上是否最优。如果在验证集上的错误率不再下降，就停止迭代。这种策略叫Early-Stop。如果没有验证集，可以在训练集上进行交叉验证 学习率设置 动量法（Momentum Method）[Rumelhart et al., 1988]： 对当前迭代的更新中加入上一次迭代的更新。在第 t 次迭代时， 其中，ρ 为动量因子，通常设为0.9。这样，在迭代初期，使用前一次的梯度进行加速。在迭代后期的收敛值附近，因为两次更新方向基本相反，增加稳定性 AdaGrad（Adaptive Gradient）算法 [Duchi et al., 2011]： 借鉴 L2 正则化的思想。在第 t 次迭代时， 其中，ρ 是初始的学习率，gτ 是第 τ 次迭代时的梯度。随着迭代次数的增加，梯度逐渐缩小 AdaDelta 算法 [Zeiler, 2012]： 用指数衰减的移动平均来累积历史的梯度信息。第 t 次迭代的梯度的期望 E 为 本次迭代的更新为 其中，E(∇θ^2) 为前一次迭代时 ∇θ^2 的移动平均，ɛ 为常数累计更新本次迭代 ∇θ^2 的移动平均 最后更新参数]]></content>
@@ -8,8 +22,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>机器学习</tag>
         <tag>ZJU课程</tag>
+        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
@@ -22,20 +36,6 @@
       <tags>
         <tag>深度学习</tag>
         <tag>论文阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields]]></title>
-    <url>%2F2018%2F06%2F16%2FRealtime-Multi-Person-2D-Pose-Estimation-using-Part-Affinity-Fields%2F</url>
-    <content type="text"><![CDATA[CVPR 2017 oral：Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields Abstract 提出一种多人实时2d姿态估计的方法 先使用Parts Affinity Fields来 再使用bottom-top的做法 Introduction 目前多人实时姿态估计有三个难点 人数未知、位置未知、大小未知 人们之间存在交互，如交流、遮挡 随着人数增多，运行时间也会增大，难以做到realtime 目前常用的方法是top-down做法：先检测人，再在单人上估计pose。但这种方法有两个问题 当检测人失败时，算法就失效了 算法复杂度随着人数增长而增长 因此，bottom-top算法开始受到更多关注，这个算法正好能够解决top-down算法的两个问题 但事实上，由于final parse需要复杂的global inference，所以使用bottom-top算法并不能提升效率 本文提出了一种多人实时2d姿态估计的方法 We present the first bottom-up representation of association scores via Part Affinity Fields (PAFs), a set of 2D vector fields that encode the location and orientation of limbs over the image domain. We demonstrate that simultaneously inferring these bottom-up representations of detection and association encode global context sufficiently well to allow a greedy parse to achieve high-quality results, at a fraction of the computational cost. Method 输入是一张w*h的彩色图像，输出是图中每个人的2d关节点坐标]]></content>
-      <categories>
-        <category>计算机视觉</category>
-      </categories>
-      <tags>
-        <tag>计算机视觉</tag>
-        <tag>深度学习</tag>
-        <tag>论文阅读</tag>
-        <tag>人体姿态估计</tag>
       </tags>
   </entry>
   <entry>
@@ -152,8 +152,8 @@
         <category>数值分析</category>
       </categories>
       <tags>
-        <tag>ZJU课程</tag>
         <tag>数值分析</tag>
+        <tag>ZJU课程</tag>
       </tags>
   </entry>
   <entry>
