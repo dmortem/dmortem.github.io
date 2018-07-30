@@ -3,6 +3,127 @@
   
     
     <entry>
+      <title><![CDATA[2D/3D Pose Estimation and Action Recognition using Multitask Deep Learning]]></title>
+      <url>/2018/07/29/2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning/</url>
+      <content type="html"><![CDATA[<p>CVPR 2018：<a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Luvizon_2D3D_Pose_Estimation_CVPR_2018_paper.pdf" target="_blank" rel="noopener">2D/3D Pose Estimation and Action Recognition using Multitask Deep Learning</a></p>
+<ul>
+<li>第一篇 end-to-end pose based action recognition</li>
+</ul>
+<a id="more"></a>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>使用 multitask 的框架同时做 2d 和 3d 人体姿态估计以及 action recognition，都能达到 state-of-the-art 的结果，而且是 end-to-end 训练</li>
+<li>用的数据集有 MPII、Human3.6M、Penn Action、NTU</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>目前已经有人用 pose 来提升行为识别的准确率，但还没有人用一个网络同时解决这几个任务</li>
+<li>一般的姿态估计都是得到 heatmap，但是从 heatmap 到关节坐标是不可导的，没法 end2end 训练。为此，这篇文章使用 Soft-argmax 来解决 heatmap-&gt;joints 不可导的问题</li>
+<li>文章贡献：<blockquote>
+<ol>
+<li>the proposed pose estimation method achieves state-of-the-art results on 3D pose estimation and the most accurate results among regression methods for 2D pose estimation</li>
+<li>the proposed pose estimation method is based on still images, so it benefits from images “in the wild” for both 2D and 3D predictions. This have been proven a very efficient way to learn visual features, which is also very important for action recognition</li>
+<li>our action recognition approach is based only on RGB images, from which we extract pose and visual information. Despite that, we reached state-of-the-art results on both 2D and 3D scenarios, even when compared with methods using ground-truth poses</li>
+<li>the pose estimation method can be trained with multiple types of datasets simultaneously, which makes it able to generalize 3D predictions from 2D annotated data</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>两篇分别关于 <a href="https://www.sciencedirect.com/science/article/pii/S0262885617300343" target="_blank" rel="noopener">action recognition</a> 和 <a href="https://www.sciencedirect.com/science/article/pii/S1077314216301369" target="_blank" rel="noopener">pose estimation</a> 的综述。其中，action recognition 的综述见<a href="https://dmortem.github.io/2018/03/09/Action-Recognition-Survey/#more">博文</a></li>
+</ul>
+<h3 id="Human-pose-estimation"><a href="#Human-pose-estimation" class="headerlink" title="Human pose estimation"></a>Human pose estimation</h3><h4 id="2D-pose-estimation"><a href="#2D-pose-estimation" class="headerlink" title="2D pose estimation"></a>2D pose estimation</h4><ul>
+<li><p>Detection based：预测 heatmap。[7, 18] 最早用这个方法，后来 [33] 提出的 stack hourglasses 网络效果超级好，再后来出现了各种 stack hourglass 的变种 [16, 56]，现在还有用 GAN 的 [15, 13]</p>
+<blockquote>
+<p>这种方法用的比较多，但是 heatmap-&gt;joints 这一步用 argmax，不可导</p>
+</blockquote>
+</li>
+<li><p>Regression based：直接回归关节坐标。最早是14年的工作 [52]，后来是16年的 [9]。直接回归是 sub-optimal 的，所以 [28] 提出 Soft-argmax 来把 heatmap 可导地转成 joints 坐标，这就意味着 pose estimation 的输出可以直接作为下一个网络的输入并端到端训练了</p>
+</li>
+</ul>
+<h4 id="3D-pose-estimation"><a href="#3D-pose-estimation" class="headerlink" title="3D pose estimation"></a>3D pose estimation</h4><ul>
+<li>介绍了一堆方法，其中17年那篇 coarse-to-fine 的问题在于参数太多了</li>
+<li>在本文的方法中，主要也是借鉴了 coarse-to-fine 那篇文章的做法，也使用了 an intermediate volumetric representation for 3D poses，但 resolution 要低不少（为了减轻参数过多的问题）。最后结果也能达到 state-of-the-art，因为它们的方法是 based on a continuous regression function</li>
+</ul>
+<h3 id="Action-Recognition"><a href="#Action-Recognition" class="headerlink" title="Action Recognition"></a>Action Recognition</h3><h4 id="2D-action-recognition（video-based）"><a href="#2D-action-recognition（video-based）" class="headerlink" title="2D action recognition（video based）"></a>2D action recognition（video based）</h4><ul>
+<li>一种方法是使用 3d cnn，比如 i3D，但是参数太多了，所以就 cannot benefit from the abundant still images for training，相比较于参数来说，数据量显得不够多了；一种方法是用 attention model；剩下一种是双流模型</li>
+<li>现在的 2d action recognition 都只是使用 joint 信息来做 attention 机制。他们都只是用关节信息，所以必须依赖有骨架信息的数据集。本文的方法自己就可以产生关节坐标，对数据集没有额外要求</li>
+</ul>
+<h4 id="3D-action-recognition-skeleton-based"><a href="#3D-action-recognition-skeleton-based" class="headerlink" title="3D action recognition (skeleton based)"></a>3D action recognition (skeleton based)</h4><ul>
+<li>由于 depth 传感器的出现，3d 骨架信息获取变得容易，但是大多局限于室内。而且 have a low range precision and not robust to occlusions，骨架信息并不是很准确。因此，很多文章都会处理这种 noisy skeleton 的问题</li>
+<li>除了单纯使用骨架的方法，有些方法是同时用 RGB-D 信息，即同时使用关节坐标和原始图像的信息</li>
+</ul>
+<h3 id="Human-pose-estimation-1"><a href="#Human-pose-estimation-1" class="headerlink" title="Human pose estimation"></a>Human pose estimation</h3><h4 id="Regression-based-approach"><a href="#Regression-based-approach" class="headerlink" title="Regression-based approach"></a>Regression-based approach</h4><ul>
+<li>使用 regression method 来估计 pose，输入 W*H*3，输出N<sub>j</sub>*D</li>
+</ul>
+<h5 id="Network-architecture"><a href="#Network-architecture" class="headerlink" title="Network architecture"></a>Network architecture</h5><ul>
+<li>先用 Inception-v4 来获取 visual features，随后用了 K 个 prediction blocks 来反复估计 pose<img src="/2018/07/29/2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning/1.png">
+</li>
+</ul>
+<h5 id="The-Soft-argmax-layer"><a href="#The-Soft-argmax-layer" class="headerlink" title="The Soft-argmax layer"></a>The Soft-argmax layer</h5> <img src="/2018/07/29/2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning/2.png">
+<h5 id="Joint-visibility"><a href="#Joint-visibility" class="headerlink" title="Joint visibility"></a>Joint visibility</h5><ul>
+<li>图片中某个关节是否可见的概率可以通过在 heatmap 上用 sigmoid 函数计算得到，然后就可以得到一个 N<sub>j</sub>*1 的 joint visibility 向量</li>
+</ul>
+<h4 id="Unified-2D-3D-pose-estimation"><a href="#Unified-2D-3D-pose-estimation" class="headerlink" title="Unified 2D/3D pose estimation"></a>Unified 2D/3D pose estimation</h4><ul>
+<li>对 3d pose 的提取用了类似那篇 coarse-to-fine 的结构，定义了 N<sub>d</sub> 张 2D heatmap，N<sub>d</sub> 就表示深度。对于 3d pose，(x, y) 就是在所有heatmap平均上用 2d soft-argmax，而 (z) 就是把每张 heatmap 平均成一个值后，用 1d soft-argmax。（他这里是把 (x, y) 和 z 分开来做了，也可以一起做，文章说分开来做可以 maintain 2D heatmap as a byproduct，那我觉得一起做也可以维持吧）<img src="/2018/07/29/2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning/3.png">
+</li>
+</ul>
+<h3 id="Human-action-recognition"><a href="#Human-action-recognition" class="headerlink" title="Human action recognition"></a>Human action recognition</h3> <img src="/2018/07/29/2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning/6.png">
+<h4 id="Pose-based-recognition"><a href="#Pose-based-recognition" class="headerlink" title="Pose-based recognition"></a>Pose-based recognition</h4><ul>
+<li>把时间维度作为纵轴，关节数作为横轴，关节坐标维度作为 channel，然后使用 FCN 来提取特征，并生成 action 的 heatmap。作者认为，action 只依赖于极少量的关节，而用全连接的话会对很多不相关的关节之间也进行建模，增加了难度</li>
+<li>在 heatmap 后加 max+min pooling-&gt;softmax 来获取概率图。整个 pose-based recognition 还借鉴了姿态估计网络的思想，用了 stacked 的结构<img src="/2018/07/29/2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning/4.png">
+</li>
+</ul>
+<h4 id="Appearance-based-recognition"><a href="#Appearance-based-recognition" class="headerlink" title="Appearance-based recognition"></a>Appearance-based recognition</h4><ul>
+<li>appearance-based recognition 的网络结构和 pose-based 是一样，区别在于输入不同（但也非常相似）</li>
+<li>输入：把 visual feature F<sub>t</sub> 和 M<sub>t</sub> 相乘，结果维度为 W<sub>f</sub>*H<sub>f</sub>*N<sub>j</sub>*N<sub>f</sub>，把空间维度通过 sum 压缩，得到对于每个时间 t，尺度为 N<sub>j</sub>*N<sub>f</sub><img src="/2018/07/29/2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning/7.png"> 
+</li>
+</ul>
+<h4 id="Action-aggregation"><a href="#Action-aggregation" class="headerlink" title="Action aggregation"></a>Action aggregation</h4><ul>
+<li>最后是把 feature map 合并，使用全连接进行分类</li>
+</ul>
+<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><h4 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h4><ul>
+<li>在 MPII 和 Human3.6M 上分别评估 2D 和 3D pose estimation，在 Penn Action 和 NTU RGB+D 上评估 action recognition</li>
+</ul>
+<h4 id="Implementation-details"><a href="#Implementation-details" class="headerlink" title="Implementation details"></a>Implementation details</h4><ul>
+<li><p>对于 pose estimation 任务，loss function 定义如下，由一范数和二范数相加：</p>
+<img src="/2018/07/29/2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning/5.png">  
+<blockquote>
+<p>在训练时，作者 crop bounding boxes centered on the target person，如果某个 joint 在 bounding box 以外，那么这个关节的 visibility flag 就设置为0。而在评估效果（测试）时，分别使用了 single-crop 和 multi-crop，single-crop 就是只使用一张 centered 图像来做预测，multi-crop 就是对那一张 centered 图像进一步做平移、翻转，把这些图片都作为输入，最后取平均</p>
+</blockquote>
+</li>
+<li><p>对于 action recognition 任务，使用交叉熵作为损失函数</p>
+<blockquote>
+<p>在训练时，从一个 video 里随机选择长度为 T 帧的固定片段；在测试时，分别使用了 single-clip 和 multi-clip：single-clip 就是从视频中间 crop 了一个片段；multi-crop 就是每隔 T/2 帧 crop 一个片段，最后把这些片段的结果取个平均</p>
+</blockquote>
+</li>
+<li><p>此外，训练时可以根据 label 确定 bounding box 需要多大，但测试时一个人在图像中占比多少是不知道的，需要想办法估计。文中是先对 clip 的 第一帧、中间帧、最后一帧的 full image 做了 pose estimation，最后选取了能够包围这些 pose 最大的 bounding box</p>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> 计算机视觉 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 计算机视觉 </tag>
+            
+            <tag> 人体姿态估计 </tag>
+            
+            <tag> Action Recognition </tag>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> 论文阅读 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields]]></title>
       <url>/2018/07/27/Realtime-Multi-Person-2D-Pose-Estimation-using-Part-Affinity-Fields/</url>
       <content type="html"><![CDATA[<p>CVPR 2017 oral：<a href="http://openaccess.thecvf.com/content_cvpr_2017/papers/Cao_Realtime_Multi-Person_2D_CVPR_2017_paper.pdf" target="_blank" rel="noopener">Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields</a></p>
@@ -167,11 +288,11 @@
             
             <tag> 计算机视觉 </tag>
             
+            <tag> 人体姿态估计 </tag>
+            
             <tag> 深度学习 </tag>
             
             <tag> 论文阅读 </tag>
-            
-            <tag> 人体姿态估计 </tag>
             
         </tags>
         
